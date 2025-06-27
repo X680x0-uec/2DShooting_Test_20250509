@@ -56,5 +56,15 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "2DShooting_Test_20250509.sln"
+    "files.associations": {
+        "*.asset": "yaml",
+        "*.meta": "yaml",
+        "*.prefab": "yaml",
+        "*.unity": "yaml",
+    },
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.sln": "*.csproj",
+    },
+    "dotnet.defaultSolution": "2DShooting.sln"
 }
