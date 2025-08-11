@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - damage
-  - Damage
-  - Ground
+  - zako
+  - zako bullet
   layers:
   - Default
   - TransparentFX
