@@ -1,27 +1,12 @@
 using UnityEngine;
 
-public class EnemyFollow : MonoBehaviour
+public class EnemyMovement : MonoBehaviour
 {
-    public float speed = 3.0f;
-    private Transform target;
-
-    void Start()
-    {
-        // タグを使ってプレイヤーを探す
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null)
-        {
-            target = player.transform;
-        }
-    }
+    public float moveSpeed = 2f;
 
     void Update()
     {
-        if (target != null)
-        {
-            // プレイヤーの方向に移動
-            Vector3 direction = (target.position - transform.position).normalized;
-            transform.position += direction * speed * Time.deltaTime;
-        }
+        // 左（-X方向）に進む
+        transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
     }
 }
