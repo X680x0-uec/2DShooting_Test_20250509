@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     //移動速度
     public float moveSpeed = 10.0f;
     public float slowMoveSpeed = 3.0f;
-    public float hitboxRadius = 0.15f;
+    public float hitboxRadius = 0.01f;
     public CircleCollider2D hitboxCollider;
     public GameObject hitboxVisual;
 
