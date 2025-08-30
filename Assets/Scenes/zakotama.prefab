@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8963290199884090538}
   m_Layer: 0
   m_Name: zakotama
-  m_TagString: damage
+  m_TagString: Damage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
