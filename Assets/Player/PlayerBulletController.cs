@@ -5,7 +5,7 @@ public class PlayerBulletController : MonoBehaviour
     // 弾の速度
     public float speed = 15f;
     // 弾が自動で消えるまでの時間
-    private float lifeTime = 3f;
+    private float lifeTime = 2f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

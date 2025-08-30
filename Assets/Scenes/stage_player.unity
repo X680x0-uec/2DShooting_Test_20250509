@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &139340613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 139340614}
+  m_Layer: 0
+  m_Name: FirePoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &139340614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139340613}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8, y: -0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1106718133}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &350081716
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,11 +803,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea891d198238fd047848d598aac68107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitboxRadius: 0.01
+  screenEdgeDistance: 0.3
+  hitboxCollider: {fileID: 1088418677}
+  blinkInterval: 0.1
+  bulletPrefab: {fileID: 1264366309223929868, guid: 02df45f4990ac9a45859a75f1881d424, type: 3}
+  firePoints:
+  - {fileID: 1425369657}
+  - {fileID: 139340614}
+  fireRate: 0.1
   moveSpeed: 12
   slowMoveSpeed: 5
-  hitboxRadius: 0.01
-  hitboxCollider: {fileID: 1088418677}
-  hitboxVisual: {fileID: 1394682114}
+  life: 5
+  currentSkill: 1
+  supecialSkillUsesLeft: 3
+  invincibilityDuration: 2
+  controlLockDuration: 0.5
+  laserPrefab: {fileID: 2908415319152122103, guid: 1d568591d322362429a8115f8933e669, type: 3}
+  laserDuration: 4
 --- !u!50 &1106718132
 Rigidbody2D:
   serializedVersion: 5
@@ -819,6 +863,8 @@ Transform:
   m_Children:
   - {fileID: 1620504750}
   - {fileID: 1088418675}
+  - {fileID: 1425369657}
+  - {fileID: 139340614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1287700181
@@ -1222,6 +1268,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1425369656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1425369657}
+  m_Layer: 0
+  m_Name: FirePoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1425369657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425369656}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.8, y: 0.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1106718133}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1620504749
 GameObject:
   m_ObjectHideFlags: 0
