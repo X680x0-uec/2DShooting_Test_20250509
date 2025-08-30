@@ -9,6 +9,14 @@ public class Laser : MonoBehaviour
     //private System.Collections.Generic.List<EnemyHealth> enemiesInRange = new System.Collections.Generic.List<EnemyHealth>();
     private float nextDamageTime;
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Zako"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
+
     // Update is called once per frame
     /*
     void Update()
