@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public bool canSpawn = true;
     public GameObject enemyPrefab;
     public float spawnInterval = 5f;
     
