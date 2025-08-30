@@ -2,10 +2,13 @@
 using  UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
- 
+
 //　スキルのタイプ
-public enum SkillType {
-	HP
+public enum SkillType
+{
+	HP,
+	Attack,
+	Speed
 };
  
 public class SkillSystem : MonoBehaviour {
