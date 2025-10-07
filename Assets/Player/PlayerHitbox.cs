@@ -18,11 +18,6 @@ public class PlayerHitbox : MonoBehaviour
     {
         if (other.CompareTag("Zako") || other.CompareTag("EnemyBullet"))
         {
-            //弾消し(弾側の処理とする可能性が高いためのちに削除予定)
-            if (other.CompareTag("Zako"))
-            {
-                Destroy(other.gameObject);
-            }
             //被弾時の処理を後で追加
             if (playerController != null)
             {

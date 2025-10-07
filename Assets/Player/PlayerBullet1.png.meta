@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0b541400e2aa59b47b65a069c24fcb03
+guid: 28c8dd2aa03613f4fbdafe6f0f80f041
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1075993247170539406
-    second: cat_0
+      213: -1318715391375339437
+    second: PlayerBullet1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,8 +49,8 @@ TextureImporter:
   spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 0
-  spritePivot: {x: 0.5, y: 0.5}
+  alignment: 9
+  spritePivot: {x: 0.5, y: 0.55}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: cat_0
+      name: PlayerBullet1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 130
-        width: 1000
-        height: 741
+        y: 11
+        width: 32
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e8fa15e4822beee00800000000000000
-      internalID: 1075993247170539406
+      spriteID: 3509b31a65bf2bde0800000000000000
+      internalID: -1318715391375339437
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      cat_0: 1075993247170539406
+      PlayerBullet1_0: -1318715391375339437
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
