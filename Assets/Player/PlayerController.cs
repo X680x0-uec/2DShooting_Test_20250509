@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     [Header("各スキル用")]
     public GameObject laserPrefab;
     public float laserDuration = 4.0f;
+    public float laserDurationMultiplier = 1.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -114,6 +115,31 @@ public class PlayerController : MonoBehaviour
         foreach (Transform point in firePoints)
         {
             Instantiate(bulletPrefab, point.position, point.rotation);
+        }
+    }
+
+    public void GetSkill(string category, int id, int level)
+    {
+        switch (category)
+        {
+            case "special":
+                switch (id)
+                {
+                    case 0:
+                        switch (level)
+                        {
+                        case 0:
+                            currentSkill = SpecialSkillType.Laser;
+                        case 1:
+                            laserDurationMultiplier = 1.5f;
+                        }
+                }
+            case "attack":
+                switch (level)
+                {
+                    case 0:
+                        
+                }
         }
     }
 
