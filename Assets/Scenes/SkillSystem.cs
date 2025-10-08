@@ -6,9 +6,13 @@ using UnityEngine.UI;
 //　スキルのタイプ
 public enum SkillType
 {
-	HP,
-	Attack,
-	Speed,
+	HP1,
+	HP2,
+	HP3,
+	Attack1,
+	Attack2,
+	Speed1,
+	Speed2,
 	special
 };
 
@@ -44,6 +48,11 @@ public class SkillSystem : MonoBehaviour
 	{
 		return skills[(int)type];
 	}
+	//スキルポイントを取得する
+	public void TakeSkillPoint(int point)
+	{
+		skillPoint += point;
+	}	
 	//　スキルポイントを減らす
 	public void SetSkillPoint(int point)
 	{
