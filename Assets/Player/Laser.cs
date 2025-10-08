@@ -30,7 +30,7 @@ public class Laser : MonoBehaviour
     {
         if (other.CompareTag("Zako"))
         {
-            zakoHP = other.GetComponent<ZakoHP>();
+            ZakoHP zakoHP = other.GetComponent<ZakoHP>();
             if (zakoHP != null && !enemiesInRange.Contains(zakoHP))
             {
                 enemiesInRange.Add(zakoHP); // リストに追加
