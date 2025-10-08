@@ -13,9 +13,10 @@ public class SkillSystemOnOff : MonoBehaviour {
  
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown ("s")) {
-			skillSystem.SetActive (!skillSystem.activeSelf);
-			EventSystem.current.SetSelectedGameObject (firstSelect);
+		if (Input.GetKeyDown("q"))
+		{
+			skillSystem.SetActive(!skillSystem.activeSelf);
+			EventSystem.current.SetSelectedGameObject(firstSelect);
 		}
 	}
 }
