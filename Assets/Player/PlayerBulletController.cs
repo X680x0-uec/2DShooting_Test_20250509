@@ -27,7 +27,15 @@ public class PlayerBulletController : MonoBehaviour
     {
         if (other.CompareTag("Zako"))
         {
-            Destroy(other.gameObject);
+            ZakoHP zakoHP = other.gameObject.GetComponent<ZakoHP>();
+            if (zakoHP != null)
+            {
+                zakoHP.TakeDamage(2.0f);
+            }
+            else
+            {
+                Debug.LogWarning($"オブジェクト '{other.gameObject.name}' にはZakoHPスクリプトがありません。");
+            }
 
             Destroy(gameObject);
         }
