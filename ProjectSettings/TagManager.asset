@@ -4,7 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Damage
+  - Ground
+  - PlayerBullet
+  - Zako
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
