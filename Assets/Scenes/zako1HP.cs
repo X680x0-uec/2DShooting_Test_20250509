@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ZakoHP : MonoBehaviour
 {
+    public SkillSystem skillSystem;
     public float maxHP = 100;
     private float currentHP;
     public int pointValue = 100;
@@ -25,8 +26,7 @@ public class ZakoHP : MonoBehaviour
     // 敵が死ぬときの処理
     void Die()
     {
-        
-        SkillSystem.TakeSkillPoint(pointValue);
+        skillSystem.TakeSkillPoint(pointValue);
         Destroy(gameObject);
     }
 }

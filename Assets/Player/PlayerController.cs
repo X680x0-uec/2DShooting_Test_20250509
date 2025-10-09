@@ -15,7 +15,6 @@ public enum SpecialSkillType
 public class PlayerController : MonoBehaviour
 {
     [Header("ビジュアル")]
-    public float hitboxRadius = 0.01f;
     public float screenEdgeDistance = 0.3f;
     public CircleCollider2D hitboxCollider;
     public float blinkInterval = 0.1f; //点滅間隔
@@ -31,6 +30,7 @@ public class PlayerController : MonoBehaviour
     [Header("ゲーム用パラメータ")]
     public float moveSpeed = 10.0f;
     public float slowMoveSpeed = 3.0f;
+    public float attackMultiplier = 1.0f;
     public int life = 5;
     public SpecialSkillType currentSkill = SpecialSkillType.Empty; //セット中のスキル
     public int supecialSkillUsesLeft = 0;
@@ -40,9 +40,10 @@ public class PlayerController : MonoBehaviour
     private bool isControllLocked = false;
     public float controlLockDuration = 0.2f; //被弾時操作不能時間の長さ
 
-    [Header("各スキル用")]
+    [Header("特殊スキル用")]
     public GameObject laserPrefab;
     public float laserDuration = 4.0f;
+    public float laserDurationMultiplier = 1.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -57,11 +58,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             Debug.LogWarning("Playerの子オブジェクトに'Visual'が見つかりません。");
-        }
-        if (hitboxCollider != null)
-        {
-            // コライダーの半径を設定
-            hitboxCollider.radius = hitboxRadius;
         }
     }
 
@@ -110,10 +106,46 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-
         foreach (Transform point in firePoints)
         {
             Instantiate(bulletPrefab, point.position, point.rotation);
+        }
+    }
+
+    public void GetSkill(string category, int id, int level)
+    {
+        switch (category)
+        {
+            case "special":
+                switch (id)
+                {
+                    case 0:
+                        switch (level)
+                        {
+                            case 0:
+                                currentSkill = SpecialSkillType.Laser;
+                                break;
+                            case 1:
+                                laserDurationMultiplier = 1.5f;
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case "attack":
+                switch (level)
+                {
+                    case 1:
+                        attackMultiplier = 1.2f;
+                        break;
+                    case 2:
+                        attackMultiplier = 1.3f;
+                        break;
+                    case 3:
+                        attackMultiplier = 1.5f;
+                        break;
+                }
+                break;
         }
     }
 
@@ -137,7 +169,7 @@ public class PlayerController : MonoBehaviour
 
         laserObject.transform.SetParent(this.transform); //レーザーをプレイヤーの子オブジェクト化
 
-        yield return new WaitForSeconds(laserDuration); //持続時間待機
+        yield return new WaitForSeconds(laserDuration * laserDurationMultiplier); //持続時間待機
 
         Destroy(laserObject);
         isUsingSpecialSkill = false;

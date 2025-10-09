@@ -6,42 +6,34 @@ public class Laser : MonoBehaviour
     public float damageInterval = 0.1f;
 
     // このレーザーに触れている敵を管理するリスト
-    //private System.Collections.Generic.List<EnemyHealth> enemiesInRange = new System.Collections.Generic.List<EnemyHealth>();
+    private System.Collections.Generic.List<ZakoHP> enemiesInRange = new System.Collections.Generic.List<ZakoHP>();
     private float nextDamageTime;
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Zako"))
-        {
-            Destroy(other.gameObject);
-        }
-    }
-
     // Update is called once per frame
-    /*
     void Update()
     {
-        if (Time.time >= nextDamageTime)
+        if (enemiesInRange.Count >= 1 && Time.time >= nextDamageTime)
         {
             foreach (var enemy in enemiesInRange)
             {
                 if (enemy != null)
                 {
-                    //敵にダメージを与える処理
+                    enemy.TakeDamage(damage);
                 }
             }
+            nextDamageTime = Time.time + damageInterval;
         }
     }
 
     // 敵がレーザーの当たり判定に入った時
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Zako"))
         {
-            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-            if (enemyHealth != null && !enemiesInRange.Contains(enemyHealth))
+            ZakoHP zakoHP = other.GetComponent<ZakoHP>();
+            if (zakoHP != null && !enemiesInRange.Contains(zakoHP))
             {
-                enemiesInRange.Add(enemyHealth); // リストに追加
+                enemiesInRange.Add(zakoHP); // リストに追加
             }
         }
     }
@@ -49,14 +41,13 @@ public class Laser : MonoBehaviour
     // 敵がレーザーの当たり判定から出た時
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Zako"))
         {
-            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
+            ZakoHP zakoHP = other.GetComponent<ZakoHP>();
+            if (zakoHP != null)
             {
-                enemiesInRange.Remove(enemyHealth); // リストから削除
+                enemiesInRange.Remove(zakoHP); // リストから削除
             }
         }
     }
-    */
 }
