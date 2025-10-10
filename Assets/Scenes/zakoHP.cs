@@ -9,6 +9,18 @@ public class ZakoHP : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
+
+        if (skillSystem == null)
+        {
+            skillSystem = FindFirstObjectByType<SkillSystem>(FindObjectsInactive.Include); // 非アクティブも対象にする
+
+
+            if (skillSystem == null)
+            {
+                Debug.LogError("SkillSystem が見つかりません");
+            }
+        }
+        
     }
 
     // ダメージを受ける関数
