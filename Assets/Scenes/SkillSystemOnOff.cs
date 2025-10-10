@@ -15,6 +15,7 @@ public class SkillSystemOnOff : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown("q"))
 		{
+			skillSystem.GetComponent<SkillSystem>().SetText();
 			skillSystem.SetActive(!skillSystem.activeSelf);
 			EventSystem.current.SetSelectedGameObject(firstSelect);
 		}
