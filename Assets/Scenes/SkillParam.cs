@@ -42,6 +42,19 @@ public class SkillParam : MonoBehaviour {
 			skillSystem.LearnSkill (type, spendPoint);
  
 			ChangeButtonColor (new Color(0f, 0f, 1f, 1f));
+
+			switch (type)
+			{
+				case SkillType.HP1: skillSystem.player.GetSkill("HP", 0, 1); break;
+				case SkillType.HP2: skillSystem.player.GetSkill("HP", 0, 2); break;
+				case SkillType.HP3: skillSystem.player.GetSkill("HP", 0, 3); break;
+				case SkillType.Attack1: skillSystem.player.GetSkill("Attack", 0, 1); break;
+				case SkillType.Attack2: skillSystem.player.GetSkill("Attack", 0, 2); break;
+				case SkillType.Speed1: skillSystem.player.GetSkill("Speed", 0, 1); break;
+				case SkillType.Speed2: skillSystem.player.GetSkill("Speed", 0, 2); break;
+				case SkillType.Special1: skillSystem.player.GetSkill("Special", 0, 1); break;
+			}
+			
  
 			text.text = skillTitle + "を覚えた";
 		} else {

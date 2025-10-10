@@ -13,7 +13,8 @@ public enum SkillType
 	Attack2,
 	Speed1,
 	Speed2,
-	special
+	Special1,
+	Junior1
 };
 
 public class SkillSystem : MonoBehaviour
