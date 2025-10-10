@@ -53,7 +53,7 @@ public class SkillSystem : MonoBehaviour
 	public void TakeSkillPoint(int point)
 	{
 		skillPoint += point;
-	}	
+	}
 	//　スキルポイントを減らす
 	public void SetSkillPoint(int point)
 	{
@@ -83,7 +83,7 @@ public class SkillSystem : MonoBehaviour
 		}
 	}
 
-	void SetText()
+	public void SetText()
 	{
 		skillText.text = "スキルポイント：" + skillPoint;
 	}
