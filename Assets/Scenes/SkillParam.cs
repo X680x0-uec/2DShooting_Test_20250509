@@ -53,6 +53,7 @@ public class SkillParam : MonoBehaviour {
 				case SkillType.Speed1: skillSystem.player.GetSkill("Speed", 0, 1); break;
 				case SkillType.Speed2: skillSystem.player.GetSkill("Speed", 0, 2); break;
 				case SkillType.Special1: skillSystem.player.GetSkill("Special", 0, 1); break;
+				case SkillType.Junior1: skillSystem.player.GetSkill("Junior", 0, 1); break;
 			}
 			
  

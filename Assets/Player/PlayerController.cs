@@ -70,10 +70,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             //任意の処理を割り込ませる用
-            GetSkill("junior", 0, 0);
+            GetSkill("Junior", 0, 1);
         }
         if (!isControllLocked)
         {
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         switch (category)
         {
-            case "special":
+            case "Special":
                 switch (id)
                 {
                     case 0:
@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
                         break;
                 }
                 break;
-            case "attack":
+            case "Attack":
                 switch (level)
                 {
                     case 1:
@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
                         break;
                 }
                 break;
-            case "junior":
+            case "Junior":
                 switch (id)
                 {
                     case 0:

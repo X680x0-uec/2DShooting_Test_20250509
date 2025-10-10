@@ -2970,11 +2970,11 @@ MonoBehaviour:
   screenEdgeDistance: 0.3
   hitboxCollider: {fileID: 1988208496}
   blinkInterval: 0.1
-  bulletPrefab: {fileID: 1264366309223929868, guid: 02df45f4990ac9a45859a75f1881d424, type: 3}
+  normalMainOptionPrefab: {fileID: 0}
+  normalOptionPrefab: {fileID: 0}
   firePoints:
   - {fileID: 1870941406}
   - {fileID: 1920699044}
-  fireRate: 0.1
   moveSpeed: 10
   slowMoveSpeed: 4
   attackMultiplier: 1
@@ -4937,7 +4937,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1493831134
 MonoBehaviour:
   m_ObjectHideFlags: 0
