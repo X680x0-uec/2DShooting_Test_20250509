@@ -5,7 +5,7 @@ public class CountdownTimer : MonoBehaviour
     public float timeLimit = 60f;               // 制限時間（秒）
     public GameObject bossPrefab;               // 出現させたいボスのプレハブ
     public Vector2 bossSpawnPosition = new Vector2(0, 5); // ボスの出現位置
-    public EnemySpawner[] enemySpawners;        // 雑魚スポナー（任意）
+    public EnemySpawner[] enemySpawners;        // 雑魚スポナー
 
     private float remainingTime;
     private bool isTimeUp = false;

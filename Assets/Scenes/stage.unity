@@ -4130,7 +4130,7 @@ GameObject:
   - component: {fileID: 1594260888}
   m_Layer: 0
   m_Name: Timer
-  m_TagString: Zako
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4147,9 +4147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438d13ae519d12349813c65a33ce162c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 9
-  bossPrefab: {fileID: 7709099648349364924, guid: b42ef42359ca3c44fa9249b0e4ed9e88, type: 3}
-  bossSpawnPosition: {x: 87, y: 0}
+  timeLimit: 20
+  bossPrefab: {fileID: 1325983007289264143, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+  bossSpawnPosition: {x: 6, y: 0}
   enemySpawners:
   - {fileID: 748803946}
   - {fileID: 1724975767}
