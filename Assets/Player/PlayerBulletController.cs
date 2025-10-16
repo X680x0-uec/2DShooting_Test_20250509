@@ -40,5 +40,21 @@ public class PlayerBulletController : MonoBehaviour
 
             Destroy(gameObject);
         }
+        /* 次のプッシュ時に追加
+        else if (other.CompareTag("Boss"))
+        {
+            BossHP bossHP = other.gameObject.GetComponent<BossHP>();
+            if (bossHP != null)
+            {
+                bossHP.TakeDamage(finalDamage);
+            }
+            else
+            {
+                Debug.LogWarning($"オブジェクト '{other.gameObject.name}' にはBossHPスクリプトがありません。");
+            }
+
+            Destroy(gameObject);
+        }
+        */
     }
 }

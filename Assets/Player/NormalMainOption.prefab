@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1915804420994396175}
   m_Layer: 0
   m_Name: NormalMainOption
-  m_TagString: Untagged
+  m_TagString: MainOption
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1264366309223929868, guid: 02df45f4990ac9a45859a75f1881d424, type: 3}
   fireRate: 0.2
+  fireRateMultiplier: 1

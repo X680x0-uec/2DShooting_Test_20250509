@@ -10,6 +10,7 @@ TagManager:
   - EnemyBullet
   - Damage
   - Boss
+  - MainOption
   layers:
   - Default
   - TransparentFX

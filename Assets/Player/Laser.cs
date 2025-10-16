@@ -107,6 +107,16 @@ public class Laser : MonoBehaviour
                 enemiesInRange.Add(zakoHP); // リストに追加
             }
         }
+        /* 次のプッシュ時に追加
+        else if (other.CompareTag("Boss"))
+        {
+            BossHP bossHP = other.GetComponent<BossHP>();
+            if (bossHP != null && !enemiesInRange.Contains(bossHP))
+            {
+                enemiesInRange.Add(bossHP); // リストに追加
+            }
+        }
+        */
     }
 
     // 敵がレーザーの当たり判定から出た時
@@ -120,5 +130,15 @@ public class Laser : MonoBehaviour
                 enemiesInRange.Remove(zakoHP); // リストから削除
             }
         }
+        /* 次のプッシュ時に追加
+        else if (other.CompareTag("Boss"))
+        {
+            BossHP bossHP = other.GetComponent<BossHP>();
+            if (bossHP != null)
+            {
+                enemiesInRange.Remove(bossHP); // リストから削除
+            }
+        }
+        */
     }
 }

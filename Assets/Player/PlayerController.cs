@@ -73,7 +73,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             //任意の処理を割り込ませる用
-            GetSkill("Junior", 0, 1);
+            GetSkill("Shot", 0, 1);
+            Debug.Log("pressed P");
         }
         if (!isControllLocked)
         {
@@ -156,6 +157,19 @@ public class PlayerController : MonoBehaviour
                         break;
                 }
                 break;
+            case "Shot":
+                switch (id)
+                {
+                    case 0:
+                        switch (level)
+                        {
+                            case 1:
+                                ChangeOptionFireRateMultiplierByTag("MainOption", 0.5f);
+                                break;
+                        }
+                        break;
+                }
+                break;
             case "Junior":
                 switch (id)
                 {
@@ -210,6 +224,17 @@ public class PlayerController : MonoBehaviour
 
         firePoints.Clear();
         Debug.Log("子機を全消去しました。");
+    }
+
+    public void ChangeOptionFireRateMultiplierByTag(string tagName, float rate)
+    {
+        foreach (FirePointController point in firePoints)
+        {
+            if (point.CompareTag(tagName))
+            {
+                point.SetFireRateMultiplier(rate);
+            }
+        }
     }
 
     void UseSpecialSkill()
