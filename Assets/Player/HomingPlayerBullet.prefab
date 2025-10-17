@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 4499424888341383231}
   - component: {fileID: 6434844231463645104}
   - component: {fileID: 4696282409209011522}
+  - component: {fileID: -4176880127315714050}
+  - component: {fileID: -7316794669982439922}
   m_Layer: 0
-  m_Name: PlayerBullet
+  m_Name: HomingPlayerBullet
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 1818101395
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 28c8dd2aa03613f4fbdafe6f0f80f041, type: 3}
+  m_Sprite: {fileID: -3453655208228064252, guid: 9be08e7a4f84f3443a4fbae4398b568c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -166,5 +168,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be030b5aa8b5d5a428d38d3d2282e953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  baseDamage: 1
+  baseDamage: 10
+--- !u!114 &-4176880127315714050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264366309223929868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1ff6bb80f8efb445a1acf3ef15a9797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  rotateSpeed: 200
+  searchRadius: 10
+  enemyTag1: Zako
+  enemyTag2: Boss
+--- !u!114 &-7316794669982439922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264366309223929868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a46fda6da81a94c9c76da35f8ac076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  margin: 3

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class HomingBullet : MonoBehaviour
+public class HomingBulletMovement : MonoBehaviour
 {
     public float speed = 10f;
     public float rotateSpeed = 200f;
