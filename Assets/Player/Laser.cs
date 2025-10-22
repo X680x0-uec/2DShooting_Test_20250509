@@ -7,6 +7,7 @@ public class Laser : MonoBehaviour
     public float damageInterval = 0.1f;
     public float appearDuration = 0.1f;
     public float disappearDuration = 0.15f;
+    public GameObject debrisSpawnerPrefab;
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
@@ -85,9 +86,14 @@ public class Laser : MonoBehaviour
     {
         if (enemiesInRange.Count >= 1 && Time.time >= nextDamageTime)
         {
-            foreach (var enemy in enemiesInRange)
+            for (int i = enemiesInRange.Count - 1; i >= 0; i--)
             {
-                if (enemy != null)
+                var enemy = enemiesInRange[i];
+                if (enemy == null)
+                {
+                    enemiesInRange.RemoveAt(i);
+                }
+                else
                 {
                     enemy.TakeDamage(damage);
                 }
@@ -96,10 +102,15 @@ public class Laser : MonoBehaviour
         }
     }
 
-    // 敵がレーザーの当たり判定に入った時
+    // 敵または敵弾がレーザーの当たり判定に入った時
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Zako"))
+        if (other.CompareTag("EnemyBullet"))
+        {
+            Instantiate(debrisSpawnerPrefab, other.transform.position, Quaternion.identity);
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("Zako"))
         {
             ZakoHP zakoHP = other.GetComponent<ZakoHP>();
             if (zakoHP != null && !enemiesInRange.Contains(zakoHP))

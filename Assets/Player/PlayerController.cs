@@ -27,6 +27,13 @@ public class PlayerController : MonoBehaviour
 
     //サブショット
     public GameObject normalOptionPrefab;
+    public GameObject homingOptionPrefab;
+    public GameObject spreadOptionPrefab;
+    public GameObject burstOptionPrefab;
+    public GameObject orbitOptionPrefab;
+
+    //その他プレハブ
+    public Transform orbitPivot;
 
     public List<FirePointController> firePoints = new List<FirePointController>(); //発射地点のリスト
 
@@ -47,6 +54,11 @@ public class PlayerController : MonoBehaviour
     public GameObject laserPrefab;
     public float laserDuration = 4.0f;
     public float laserDurationMultiplier = 1.0f;
+    public GameObject debrisSpawnerPrefab;
+    public float vanishDamage = 1000f;
+    public float vanishShakeDuration = 0.5f;
+    public float vanishShakeMagnitude = 0.1f;
+    private CameraShaker cameraShaker;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -63,6 +75,16 @@ public class PlayerController : MonoBehaviour
             Debug.LogWarning("Playerの子オブジェクトに'Visual'が見つかりません。");
         }
 
+        //カメラにアクセス
+        if (Application.isPlaying)
+        {
+            cameraShaker = CameraShaker.Instance;
+            if (cameraShaker == null)
+            {
+                Debug.LogWarning("CameraShaker.Instance が見つかりませんでした");
+            }
+        }
+
         //初期メインショット
         AddOption(normalMainOptionPrefab, new Vector2(0f, 0f));
     }
@@ -72,15 +94,21 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            //任意の処理を割り込ませる用
-            GetSkill("Shot", 0, 1);
+            //任意の処理を割り込ませる用(Pキー)
+            GetSkill("Junior", 3, 1);
             Debug.Log("pressed P");
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            //任意の処理を割り込ませる用(Lキー)
+            GetSkill("Junior", 4, 1);
+            Debug.Log("pressed L");
         }
         if (!isControllLocked)
         {
-            //シフト低速移動
+            //低速移動
             float currentSpeed;
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            if (Input.GetButton("Slow"))
             {
                 currentSpeed = slowMoveSpeed;
             }
@@ -102,13 +130,13 @@ public class PlayerController : MonoBehaviour
             transform.position = newPosition;
 
             //弾の発射
-            if (Input.GetKey(KeyCode.Z))
+            if (Input.GetButton("Shoot"))
             {
                 Shoot();
             }
 
             //スキル発動
-            if (Input.GetKey(KeyCode.X) && supecialSkillUsesLeft > 0 && !isUsingSpecialSkill && currentSkill != SpecialSkillType.Empty)
+            if (Input.GetButtonDown("Special") && supecialSkillUsesLeft > 0 && !isUsingSpecialSkill && currentSkill != SpecialSkillType.Empty)
             {
                 UseSpecialSkill();
             }
@@ -138,6 +166,14 @@ public class PlayerController : MonoBehaviour
                                 break;
                             case 2:
                                 laserDurationMultiplier = 1.5f;
+                                break;
+                        }
+                        break;
+                    case 1:
+                        switch (level)
+                        {
+                            case 1:
+                                currentSkill = SpecialSkillType.Vanish;
                                 break;
                         }
                         break;
@@ -182,16 +218,58 @@ public class PlayerController : MonoBehaviour
                                 break;
                         }
                         break;
+                    case 1:
+                        switch (level)
+                        {
+                            case 1:
+                                AddOption(homingOptionPrefab, new Vector2(-1.0f, 0.6f));
+                                AddOption(homingOptionPrefab, new Vector2(-1.0f, -0.6f));
+                                break;
+                        }
+                        break;
+                    case 2:
+                        switch (level)
+                        {
+                            case 1:
+                                AddOption(spreadOptionPrefab, new Vector2(0f, 0.8f));
+                                AddOption(spreadOptionPrefab, new Vector2(0f, -0.8f));
+                                break;
+                            case 2:
+                                ChangeSpreadOption(5, 50);
+                                break;
+                        }
+                        break;
+                    case 3:
+                        switch (level)
+                        {
+                            case 1:
+                                AddOption(burstOptionPrefab, new Vector2(1f, 0f));
+                                break;
+                        }
+                        break;
+                    case 4:
+                        switch (level)
+                        {
+                            case 1:
+                                AddOption(orbitOptionPrefab, new Vector2(1.5f, 0f), orbitPivot);
+                                AddOption(orbitOptionPrefab, new Vector2(-1.5f, 0f), orbitPivot);
+                                break;
+                        }
+                        break;
                 }
                 break;
         }
     }
 
-    public void AddOption(GameObject optionPrefab, Vector2 relativePosition)
+    public void AddOption(GameObject optionPrefab, Vector2 relativePosition, Transform parentTransform = null)
     {
+        if (parentTransform == null)
+        {
+            parentTransform = this.transform;
+        }
         Vector3 spawnPosition = transform.position + (Vector3)relativePosition;
         GameObject newOption = Instantiate(optionPrefab, spawnPosition, transform.rotation);
-        newOption.transform.SetParent(this.transform);
+        newOption.transform.SetParent(parentTransform);
 
         FirePointController newFirePoint = newOption.GetComponent<FirePointController>();
         if (newFirePoint != null)
@@ -237,6 +315,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ChangeSpreadOption(int way, float angle)
+    {
+        foreach (FirePointController point in firePoints)
+        {
+            if (point.CompareTag("SpreadOption"))
+            {
+                point.SetSpreadSetting(way, angle);
+            }
+        }
+    }
+
     void UseSpecialSkill()
     {
         isUsingSpecialSkill = true;
@@ -246,6 +335,9 @@ public class PlayerController : MonoBehaviour
         {
             case SpecialSkillType.Laser:
                 StartCoroutine(LaserCoroutine());
+                break;
+            case SpecialSkillType.Vanish:
+                StartCoroutine(VanishCoroutine());
                 break;
         }
     }
@@ -269,6 +361,37 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(laserDuration * laserDurationMultiplier); //持続時間待機
 
         laserScript.StartDisappearAnimation();
+        isUsingSpecialSkill = false;
+    }
+
+    private IEnumerator VanishCoroutine()
+    {
+        if (cameraShaker != null)
+        {
+            cameraShaker.ShakeCamera(vanishShakeDuration, vanishShakeMagnitude);
+        }
+
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject bullet in enemyBullets)
+        {
+            Instantiate(debrisSpawnerPrefab, bullet.transform.position, Quaternion.identity);
+            Destroy(bullet);
+        }
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zako");
+        foreach (GameObject enemy in enemies)
+        {
+            Instantiate(debrisSpawnerPrefab, enemy.transform.position, Quaternion.identity);
+
+            ZakoHP zakoHP = enemy.GetComponent<ZakoHP>();
+            if (zakoHP != null)
+            {
+                zakoHP.TakeDamage(vanishDamage);
+            }
+        }
+
+        yield return new WaitForSeconds(vanishShakeDuration);
+
         isUsingSpecialSkill = false;
     }
 

@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 6316739213452763609}
   - component: {fileID: 4499424888341383231}
   - component: {fileID: 6434844231463645104}
-  - component: {fileID: 4696282409209011522}
-  - component: {fileID: -4176880127315714050}
+  - component: {fileID: -7788963863185588717}
+  - component: {fileID: 969298625105300393}
   - component: {fileID: -7316794669982439922}
   m_Layer: 0
-  m_Name: HomingPlayerBullet
+  m_Name: BurstPlayerBullet
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.48, y: -2.52, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,12 +81,12 @@ SpriteRenderer:
   m_SortingLayerID: 1818101395
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9be08e7a4f84f3443a4fbae4398b568c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1afff01c22acf8449149e1a1a57b78b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -137,14 +137,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264366309223929868}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -156,7 +156,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4696282409209011522
+--- !u!114 &-7788963863185588717
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,11 +165,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1264366309223929868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be030b5aa8b5d5a428d38d3d2282e953, type: 3}
+  m_Script: {fileID: 11500000, guid: cda133c5beae06d4081379fa490db93f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 1.5
---- !u!114 &-4176880127315714050
+  baseDamage: 10
+  burstedBulletPrefab: {fileID: 1264366309223929868, guid: 237a979aca3765a439904fa29199902f, type: 3}
+  wayCount: 16
+  randomOffsetRange: 1
+--- !u!114 &969298625105300393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -178,13 +181,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1264366309223929868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1ff6bb80f8efb445a1acf3ef15a9797, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a25dab2930da6241a4c26fd4dc778f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 12
-  enemyTag1: Zako
-  enemyTag2: Boss
-  trackingDuration: 4
+  initialSpeed: 1
+  acceleration: 15
 --- !u!114 &-7316794669982439922
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1459,6 +1459,11 @@ MonoBehaviour:
   blinkInterval: 0.1
   normalMainOptionPrefab: {fileID: 6678330168011035037, guid: 9aa158171f3f1254796f648e99b8b71f, type: 3}
   normalOptionPrefab: {fileID: 6678330168011035037, guid: ef880af2fbca4ea44a4f2872d84eeaa5, type: 3}
+  homingOptionPrefab: {fileID: 6678330168011035037, guid: d4e29af5a24fe944fbd1a6f5a4f77a7f, type: 3}
+  spreadOptionPrefab: {fileID: 6678330168011035037, guid: dd450af6ea9dcec4bb0c6c991536146d, type: 3}
+  burstOptionPrefab: {fileID: 6678330168011035037, guid: 8a5a7beec73f940448c61e2fdbd0f3c6, type: 3}
+  orbitOptionPrefab: {fileID: 6678330168011035037, guid: 93ccd7abd96d79a4f9e8d044f786d350, type: 3}
+  orbitPivot: {fileID: 911248614}
   firePoints: []
   moveSpeed: 10
   slowMoveSpeed: 4
@@ -1471,6 +1476,10 @@ MonoBehaviour:
   laserPrefab: {fileID: 2908415319152122103, guid: 1d568591d322362429a8115f8933e669, type: 3}
   laserDuration: 4
   laserDurationMultiplier: 1
+  debrisSpawnerPrefab: {fileID: 7503992474654738393, guid: 8ea62176f3c74c94bb056476bf55f52d, type: 3}
+  vanishDamage: 1000
+  vanishShakeDuration: 0.5
+  vanishShakeMagnitude: 0.1
 --- !u!50 &516817822
 Rigidbody2D:
   serializedVersion: 5
@@ -1513,6 +1522,7 @@ Transform:
   m_Children:
   - {fileID: 71897597}
   - {fileID: 1363857335}
+  - {fileID: 911248614}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
@@ -1528,6 +1538,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420034}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1667,6 +1678,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillSystem: {fileID: 733994002}
   firstSelect: {fileID: 0}
+--- !u!114 &519420034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51a460488098ff4c977e458c22e076e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &533246562
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,6 +2353,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 794182355}
   m_CullTransparentMesh: 1
+--- !u!1 &911248613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 911248614}
+  - component: {fileID: 911248615}
+  m_Layer: 0
+  m_Name: OrbitPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &911248614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911248613}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 516817823}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &911248615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911248613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdbfe5406c2e63489117ba8733d59cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 1000
 --- !u!1 &922623133
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,12 +3512,12 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 4.8, y: 2.7}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!4 &1325516981
 Transform:
   m_ObjectHideFlags: 0
@@ -4010,7 +4078,7 @@ GameObject:
   - component: {fileID: 1594260888}
   m_Layer: 0
   m_Name: Timer
-  m_TagString: Zako
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4027,7 +4095,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438d13ae519d12349813c65a33ce162c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 9
+  timeLimit: 20
   bossPrefab: {fileID: 1325983007289264143, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
   bossSpawnPosition: {x: 6, y: 0}
   enemySpawners:

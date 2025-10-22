@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5876766381814946358}
   - component: {fileID: 1915804420994396175}
   m_Layer: 0
-  m_Name: NormalOption
+  m_Name: OrbitOption
   m_TagString: NormalOption
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c16370b3177d7e43884456df17444b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1264366309223929868, guid: 02df45f4990ac9a45859a75f1881d424, type: 3}
-  fireRate: 0.1
+  bulletPrefab: {fileID: 1264366309223929868, guid: a470e9ce94e043c4eb9db8018c972c5e, type: 3}
+  fireRate: 0.05
   fireRateMultiplier: 1
-  wayCount: 1
-  spreadAngle: 30
+  wayCount: 2
+  spreadAngle: 90

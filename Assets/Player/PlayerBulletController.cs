@@ -1,17 +1,18 @@
 using UnityEngine;
 
+//継承を想定して設計済み
 public class PlayerBulletController : MonoBehaviour
 {
     // 弾の速度
     public float baseDamage = 10f;
-    private float finalDamage;
+    protected float finalDamage;
 
-    public void Initialize(float playerAttackMultiplier)
+    public virtual void Initialize(float playerAttackMultiplier)
     {
         finalDamage = baseDamage * playerAttackMultiplier;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Zako"))
         {

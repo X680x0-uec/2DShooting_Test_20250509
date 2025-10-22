@@ -11,6 +11,10 @@ TagManager:
   - Damage
   - Boss
   - MainOption
+  - NormalOption
+  - HomingOption
+  - SpreadOption
+  - BurstOption
   layers:
   - Default
   - TransparentFX
