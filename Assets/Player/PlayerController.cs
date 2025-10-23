@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
 public enum SpecialSkillType
 {
@@ -10,6 +11,17 @@ public enum SpecialSkillType
     Bomb,
     TimeStop,
     CounterAttack
+}
+
+public enum PassiveAbility
+{
+    FastAttack
+}
+
+public enum AttackBuffSource
+{
+    Normal,
+    FastAttack
 }
 
 public class PlayerController : MonoBehaviour
@@ -40,9 +52,10 @@ public class PlayerController : MonoBehaviour
     [Header("ゲーム用パラメータ")]
     public float moveSpeed = 10.0f;
     public float slowMoveSpeed = 3.0f;
-    public float attackMultiplier = 1.0f;
+    private Dictionary<AttackBuffSource, float> _attackMultipliers = new Dictionary<AttackBuffSource, float>();
     public int life = 5;
     public SpecialSkillType currentSkill = SpecialSkillType.Empty; //セット中のスキル
+    public HashSet<PassiveAbility> passiveAbilities = new HashSet<PassiveAbility>();
     public int supecialSkillUsesLeft = 0;
     private bool isUsingSpecialSkill = false;
     private bool isInvincible = false;
@@ -95,7 +108,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             //任意の処理を割り込ませる用(Pキー)
-            GetSkill("Junior", 3, 1);
+            GetSkill("Passive", 0, 1);
             Debug.Log("pressed P");
         }
         if (Input.GetKeyDown(KeyCode.L))
@@ -111,10 +124,18 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButton("Slow"))
             {
                 currentSpeed = slowMoveSpeed;
+                if (passiveAbilities.Contains(PassiveAbility.FastAttack))
+                {
+                    _attackMultipliers.Remove(AttackBuffSource.FastAttack);
+                }
             }
             else
             {
                 currentSpeed = moveSpeed;
+                if (passiveAbilities.Contains(PassiveAbility.FastAttack))
+                {
+                    _attackMultipliers[AttackBuffSource.FastAttack] = 2.0f;
+                }
             }
             // 左右入力の取得
             float moveX = Input.GetAxisRaw("Horizontal");
@@ -183,13 +204,26 @@ public class PlayerController : MonoBehaviour
                 switch (level)
                 {
                     case 1:
-                        attackMultiplier = 1.2f;
+                        _attackMultipliers[AttackBuffSource.Normal] = 1.15f;
                         break;
                     case 2:
-                        attackMultiplier = 1.3f;
+                        _attackMultipliers[AttackBuffSource.Normal] = 1.3f;
                         break;
                     case 3:
-                        attackMultiplier = 1.5f;
+                        _attackMultipliers[AttackBuffSource.Normal] = 1.5f;
+                        break;
+                }
+                break;
+            case "Passive":
+                switch (id)
+                {
+                    case 0:
+                        switch (level)
+                        {
+                            case 1:
+                                passiveAbilities.Add(PassiveAbility.FastAttack);
+                                break;
+                        }
                         break;
                 }
                 break;
@@ -324,6 +358,12 @@ public class PlayerController : MonoBehaviour
                 point.SetSpreadSetting(way, angle);
             }
         }
+    }
+
+    public float GetAttackMultiplier()
+    {
+        float finalMultiplier = _attackMultipliers.Values.Aggregate(1.0f, (acc, val) => acc * val);
+        return finalMultiplier;
     }
 
     void UseSpecialSkill()

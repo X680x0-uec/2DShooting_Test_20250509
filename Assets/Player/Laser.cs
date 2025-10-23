@@ -8,6 +8,7 @@ public class Laser : MonoBehaviour
     public float appearDuration = 0.1f;
     public float disappearDuration = 0.15f;
     public GameObject debrisSpawnerPrefab;
+    private PlayerController playerController;
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
@@ -19,6 +20,9 @@ public class Laser : MonoBehaviour
 
     private IEnumerator Start()
     {
+        playerController = GetComponentInParent<PlayerController>();
+        damage *= playerController.GetAttackMultiplier();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
         originalScale = transform.localScale;

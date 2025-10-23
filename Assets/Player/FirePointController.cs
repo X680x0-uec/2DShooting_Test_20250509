@@ -50,7 +50,7 @@ public class FirePointController : MonoBehaviour
                 PlayerBulletController bulletScript = newBullet.GetComponent<PlayerBulletController>();
                 if (bulletScript != null && playerController != null)
                 {
-                    bulletScript.Initialize(playerController.attackMultiplier);
+                    bulletScript.Initialize(playerController.GetAttackMultiplier());
                 }
             }
         }
