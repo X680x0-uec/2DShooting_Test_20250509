@@ -77,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -3985927
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -180,5 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillSystem: {fileID: 0}
-  maxHP: 20
+  maxHP: 4
   pointValue: 100
+  scorePopupPrefab: {fileID: 4604594199771147335, guid: ee4c5f22f2751f942bb690f0d191654b, type: 3}
+  uiCanvas: {fileID: 0}
