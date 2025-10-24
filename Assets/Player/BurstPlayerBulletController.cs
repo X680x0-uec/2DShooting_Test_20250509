@@ -31,7 +31,6 @@ public class BurstPlayerBulletController : PlayerBulletController
 
             Destroy(gameObject);
         }
-        /* 次のプッシュ時に追加
         else if (other.CompareTag("Boss"))
         {
             BossHP bossHP = other.gameObject.GetComponent<BossHP>();
@@ -47,7 +46,6 @@ public class BurstPlayerBulletController : PlayerBulletController
 
             Destroy(gameObject);
         }
-        */
     }
 
     private void Burst()

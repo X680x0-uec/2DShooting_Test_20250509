@@ -218,12 +218,7 @@ public class PlayerController : MonoBehaviour
                 switch (id)
                 {
                     case 0:
-                        switch (level)
-                        {
-                            case 1:
-                                passiveAbilities.Add(PassiveAbility.FastAttack);
-                                break;
-                        }
+                        passiveAbilities.Add(PassiveAbility.FastAttack);
                         break;
                 }
                 break;
