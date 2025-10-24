@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5876766381814946358}
   - component: {fileID: 1915804420994396175}
   m_Layer: 0
-  m_Name: NormalOption
-  m_TagString: NormalOption
+  m_Name: HomingOption
+  m_TagString: HomingOption
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c16370b3177d7e43884456df17444b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1264366309223929868, guid: 02df45f4990ac9a45859a75f1881d424, type: 3}
-  fireRate: 0.1
+  bulletPrefab: {fileID: 1264366309223929868, guid: 67acddfab88bd4243941ec627513af39, type: 3}
+  fireRate: 0.3
   fireRateMultiplier: 1
   wayCount: 1
   spreadAngle: 30
