@@ -108,12 +108,14 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             //任意の処理を割り込ませる用(Pキー)
-            GetSkill("Passive", 0, 1);
+            GetSkill("Junior", 1, 1);
+            GetSkill("Junior", 3, 1);
             Debug.Log("pressed P");
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
             //任意の処理を割り込ませる用(Lキー)
+            GetSkill("Junior", 2, 1);
             GetSkill("Junior", 4, 1);
             Debug.Log("pressed L");
         }

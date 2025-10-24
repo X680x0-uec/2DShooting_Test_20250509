@@ -15,7 +15,8 @@ public class Laser : MonoBehaviour
     private Vector3 originalScale;
 
     // このレーザーに触れている敵を管理するリスト
-    private System.Collections.Generic.List<ZakoHP> enemiesInRange = new System.Collections.Generic.List<ZakoHP>();
+    private System.Collections.Generic.List<ZakoHP> zakosInRange = new System.Collections.Generic.List<ZakoHP>();
+    private System.Collections.Generic.List<BossHP> bossesInRange = new System.Collections.Generic.List<BossHP>();
     private float nextDamageTime;
 
     private IEnumerator Start()
@@ -88,14 +89,30 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemiesInRange.Count >= 1 && Time.time >= nextDamageTime)
+        if (zakosInRange.Count >= 1 && Time.time >= nextDamageTime)
         {
-            for (int i = enemiesInRange.Count - 1; i >= 0; i--)
+            for (int i = zakosInRange.Count - 1; i >= 0; i--)
             {
-                var enemy = enemiesInRange[i];
+                var enemy = zakosInRange[i];
                 if (enemy == null)
                 {
-                    enemiesInRange.RemoveAt(i);
+                    zakosInRange.RemoveAt(i);
+                }
+                else
+                {
+                    enemy.TakeDamage(damage);
+                }
+            }
+            nextDamageTime = Time.time + damageInterval;
+        }
+        else if (bossesInRange.Count >= 1 && Time.time >= nextDamageTime)
+        {
+            for (int i = bossesInRange.Count - 1; i >= 0; i--)
+            {
+                var enemy = bossesInRange[i];
+                if (enemy == null)
+                {
+                    bossesInRange.RemoveAt(i);
                 }
                 else
                 {
@@ -117,17 +134,17 @@ public class Laser : MonoBehaviour
         else if (other.CompareTag("Zako"))
         {
             ZakoHP zakoHP = other.GetComponent<ZakoHP>();
-            if (zakoHP != null && !enemiesInRange.Contains(zakoHP))
+            if (zakoHP != null && !zakosInRange.Contains(zakoHP))
             {
-                enemiesInRange.Add(zakoHP); // リストに追加
+                zakosInRange.Add(zakoHP); // リストに追加
             }
         }
         else if (other.CompareTag("Boss"))
         {
             BossHP bossHP = other.GetComponent<BossHP>();
-            if (bossHP != null && !enemiesInRange.Contains(bossHP))
+            if (bossHP != null && !bossesInRange.Contains(bossHP))
             {
-                enemiesInRange.Add(bossHP); // リストに追加
+                bossesInRange.Add(bossHP); // リストに追加
             }
         }
     }
@@ -140,7 +157,7 @@ public class Laser : MonoBehaviour
             ZakoHP zakoHP = other.GetComponent<ZakoHP>();
             if (zakoHP != null)
             {
-                enemiesInRange.Remove(zakoHP); // リストから削除
+                zakosInRange.Remove(zakoHP); // リストから削除
             }
         }
         else if (other.CompareTag("Boss"))
@@ -148,7 +165,7 @@ public class Laser : MonoBehaviour
             BossHP bossHP = other.GetComponent<BossHP>();
             if (bossHP != null)
             {
-                enemiesInRange.Remove(bossHP); // リストから削除
+                bossesInRange.Remove(bossHP); // リストから削除
             }
         }
     }

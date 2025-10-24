@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5395264677763948492}
   - component: {fileID: 2379427655563717707}
   - component: {fileID: 1333853148750643159}
+  - component: {fileID: -1348775087283153077}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -250,6 +251,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 1
   frequency: 1
+--- !u!114 &-1348775087283153077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325983007289264143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb48747a2c04b0747a3ce3bf8428e273, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillSystem: {fileID: 0}
+  maxHP: 5000
+  pointValue: 100
 --- !u!1 &1443088904025980944
 GameObject:
   m_ObjectHideFlags: 0
