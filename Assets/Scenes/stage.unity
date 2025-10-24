@@ -3460,7 +3460,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.004, y: -0.0264, z: 0}
-  m_LocalScale: {x: 3.852258, y: 3.7495737, z: 1}
+  m_LocalScale: {x: 4.699668, y: 3.7495737, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4010,7 +4010,7 @@ GameObject:
   - component: {fileID: 1594260888}
   m_Layer: 0
   m_Name: Timer
-  m_TagString: Zako
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4027,9 +4027,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438d13ae519d12349813c65a33ce162c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 9
-  bossPrefab: {fileID: 7709099648349364924, guid: b42ef42359ca3c44fa9249b0e4ed9e88, type: 3}
-  bossSpawnPosition: {x: 87, y: 0}
+  timeLimit: 20
+  bossPrefab: {fileID: 1325983007289264143, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+  bossSpawnPosition: {x: 6, y: 0}
   enemySpawners:
   - {fileID: 748803946}
   - {fileID: 1724975767}
@@ -4300,6 +4300,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682108520}
   m_CullTransparentMesh: 1
+--- !u!1 &1694545971
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1694545973}
+  - component: {fileID: 1694545972}
+  m_Layer: 0
+  m_Name: meteor spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1694545972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694545971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55caa1ccef23ea84fbc3210a1af87772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canSpawn: 1
+  enemyPrefab: {fileID: 8518096576828694939, guid: de15c8c9db5be264791230b8b8b9ff4c, type: 3}
+  spawnInterval: 10
+  minY: -5
+  maxY: 5
+  fixedX: 9
+  fixedZ: 0
+--- !u!4 &1694545973
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694545971}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.771219, y: -5.487789, z: -0.06483668}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1724975766
 GameObject:
   m_ObjectHideFlags: 0
@@ -6170,3 +6221,4 @@ SceneRoots:
   - {fileID: 1546991198}
   - {fileID: 733994007}
   - {fileID: 516817823}
+  - {fileID: 1694545973}

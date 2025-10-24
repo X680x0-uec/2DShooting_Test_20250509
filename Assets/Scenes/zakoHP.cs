@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class ZakoHP : MonoBehaviour
 {
@@ -6,6 +8,8 @@ public class ZakoHP : MonoBehaviour
     public float maxHP = 100;
     private float currentHP;
     public int pointValue = 100;
+    [SerializeField] private GameObject scorePopupPrefab;
+    [SerializeField] private Canvas uiCanvas;
     void Start()
     {
         currentHP = maxHP;
@@ -20,6 +24,8 @@ public class ZakoHP : MonoBehaviour
                 Debug.LogError("SkillSystem が見つかりません");
             }
         }
+
+        uiCanvas = FindFirstObjectByType<Canvas>();
         
     }
 
@@ -40,5 +46,29 @@ public class ZakoHP : MonoBehaviour
     {
         skillSystem.TakeSkillPoint(pointValue);
         Destroy(gameObject);
+        ShowScorePopup();
     }
+    
+    private void ShowScorePopup()
+    {
+        if (scorePopupPrefab != null && uiCanvas != null)
+        {
+            // 敵のワールド座標をスクリーン座標に変換
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+
+            // Canvas上にインスタンス生成
+            GameObject popup = Instantiate(scorePopupPrefab, uiCanvas.transform);
+
+            // 表示位置を設定（anchoredPositionにスクリーン座標を使う）
+            RectTransform rect = popup.GetComponent<RectTransform>();
+            rect.position = screenPos;
+
+            // テキストを設定
+            popup.GetComponent<ScorePopupUI>().SetText($"+{pointValue}P");
+        }
+    }
+
+
+        
 }
+

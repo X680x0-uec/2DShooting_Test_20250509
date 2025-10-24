@@ -180,5 +180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillSystem: {fileID: 0}
-  maxHP: 20
+  maxHP: 4
   pointValue: 100
+  scorePopupPrefab: {fileID: 4604594199771147335, guid: ee4c5f22f2751f942bb690f0d191654b, type: 3}
+  uiCanvas: {fileID: 0}
