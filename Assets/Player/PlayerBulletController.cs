@@ -4,8 +4,10 @@ public class PlayerBulletController : MonoBehaviour
 {
     // 弾の速度
     public float speed = 15f;
+    public float baseDamage = 10f;
     // 弾が自動で消えるまでの時間
-    private float lifeTime = 2f;
+    private float lifeTime = 3f;
+    private float finalDamage;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -17,10 +19,9 @@ public class PlayerBulletController : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize(float playerAttackMultiplier)
     {
-
+        finalDamage = baseDamage * playerAttackMultiplier;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -30,7 +31,7 @@ public class PlayerBulletController : MonoBehaviour
             ZakoHP zakoHP = other.gameObject.GetComponent<ZakoHP>();
             if (zakoHP != null)
             {
-                zakoHP.TakeDamage(2.0f);
+                zakoHP.TakeDamage(finalDamage);
             }
             else
             {

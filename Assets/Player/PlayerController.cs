@@ -22,10 +22,13 @@ public class PlayerController : MonoBehaviour
     private Vector2 screenBounds; //画面端の位置
 
     [Header("自機弾関連")]
-    public GameObject bulletPrefab;
-    public Transform[] firePoints; //発射位置
-    public float fireRate = 0.15f;
-    private float nextFireTime = 0.0f;
+    //メインショット
+    public GameObject normalMainOptionPrefab;
+
+    //サブショット
+    public GameObject normalOptionPrefab;
+
+    public List<FirePointController> firePoints = new List<FirePointController>(); //発射地点のリスト
 
     [Header("ゲーム用パラメータ")]
     public float moveSpeed = 10.0f;
@@ -59,11 +62,19 @@ public class PlayerController : MonoBehaviour
         {
             Debug.LogWarning("Playerの子オブジェクトに'Visual'が見つかりません。");
         }
+
+        //初期メインショット
+        AddOption(normalMainOptionPrefab, new Vector2(0f, 0f));
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            //任意の処理を割り込ませる用
+            GetSkill("Junior", 0, 1);
+        }
         if (!isControllLocked)
         {
             //シフト低速移動
@@ -90,9 +101,8 @@ public class PlayerController : MonoBehaviour
             transform.position = newPosition;
 
             //弾の発射
-            if (Input.GetKey(KeyCode.Z) && Time.time >= nextFireTime)
+            if (Input.GetKey(KeyCode.Z))
             {
-                nextFireTime = Time.time + fireRate;
                 Shoot();
             }
 
@@ -106,9 +116,9 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        foreach (Transform point in firePoints)
+        foreach (FirePointController point in firePoints)
         {
-            Instantiate(bulletPrefab, point.position, point.rotation);
+            point.Fire();
         }
     }
 
@@ -116,23 +126,23 @@ public class PlayerController : MonoBehaviour
     {
         switch (category)
         {
-            case "special":
+            case "Special":
                 switch (id)
                 {
                     case 0:
                         switch (level)
                         {
-                            case 0:
+                            case 1:
                                 currentSkill = SpecialSkillType.Laser;
                                 break;
-                            case 1:
+                            case 2:
                                 laserDurationMultiplier = 1.5f;
                                 break;
                         }
                         break;
                 }
                 break;
-            case "attack":
+            case "Attack":
                 switch (level)
                 {
                     case 1:
@@ -146,7 +156,60 @@ public class PlayerController : MonoBehaviour
                         break;
                 }
                 break;
+            case "Junior":
+                switch (id)
+                {
+                    case 0:
+                        switch (level)
+                        {
+                            case 1:
+                                AddOption(normalOptionPrefab, new Vector2(1.0f, 0.4f));
+                                AddOption(normalOptionPrefab, new Vector2(1.0f, -0.4f));
+                                break;
+                        }
+                        break;
+                }
+                break;
         }
+    }
+
+    public void AddOption(GameObject optionPrefab, Vector2 relativePosition)
+    {
+        Vector3 spawnPosition = transform.position + (Vector3)relativePosition;
+        GameObject newOption = Instantiate(optionPrefab, spawnPosition, transform.rotation);
+        newOption.transform.SetParent(this.transform);
+
+        FirePointController newFirePoint = newOption.GetComponent<FirePointController>();
+        if (newFirePoint != null)
+        {
+            firePoints.Add(newFirePoint);
+        }
+    }
+
+    public void RemoveOption(FirePointController optionToRemove)
+    {
+        if (firePoints.Contains(optionToRemove))
+        {
+            firePoints.Remove(optionToRemove);
+
+            Destroy(optionToRemove.gameObject);
+
+            Debug.Log($"子機 {optionToRemove.name} を削除しました。");
+        }
+    }
+
+    public void RemoveAllOptions()
+    {
+        for (int i = firePoints.Count - 1; i >= 0; i--)
+        {
+            if (firePoints[i] != null)
+            {
+                Destroy(firePoints[i].gameObject);
+            }
+        }
+
+        firePoints.Clear();
+        Debug.Log("子機を全消去しました。");
     }
 
     void UseSpecialSkill()
@@ -169,9 +232,18 @@ public class PlayerController : MonoBehaviour
 
         laserObject.transform.SetParent(this.transform); //レーザーをプレイヤーの子オブジェクト化
 
+        Laser laserScript = laserObject.GetComponent<Laser>();
+        if (laserScript == null)
+        {
+            Debug.LogError("Laserスクリプトにアクセスできません");
+            Destroy(laserObject);
+            isUsingSpecialSkill = false;
+            yield break;
+        }
+
         yield return new WaitForSeconds(laserDuration * laserDurationMultiplier); //持続時間待機
 
-        Destroy(laserObject);
+        laserScript.StartDisappearAnimation();
         isUsingSpecialSkill = false;
     }
 
