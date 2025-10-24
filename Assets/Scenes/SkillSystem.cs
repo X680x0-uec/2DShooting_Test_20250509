@@ -11,10 +11,19 @@ public enum SkillType
 	HP3,
 	Attack1,
 	Attack2,
-	Speed1,
-	Speed2,
+	Attack3,
+	Shot1,
+	Shot2,
 	Special1,
-	Junior1
+	Special2,
+	Special3,
+	Junior1,
+	Junior2,
+	Junior3,
+	Junior4,
+	Junior5,
+	Junior6,
+	Passive1
 };
 
 public class SkillSystem : MonoBehaviour
