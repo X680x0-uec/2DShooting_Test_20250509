@@ -9,6 +9,7 @@ TagManager:
   - Zako
   - EnemyBullet
   - Damage
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -46,8 +47,20 @@ TagManager:
   - name: Background
     uniqueID: 2719955797
     locked: 0
+  - name: BackSide
+    uniqueID: 1818101395
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: FrontSide
+    uniqueID: 4290981369
+    locked: 0
+  - name: ForeGround
+    uniqueID: 1020136989
+    locked: 0
+  - name: UI
+    uniqueID: 3967683095
     locked: 0
   m_RenderingLayers:
   - Default
