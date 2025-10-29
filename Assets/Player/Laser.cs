@@ -7,17 +7,23 @@ public class Laser : MonoBehaviour
     public float damageInterval = 0.1f;
     public float appearDuration = 0.1f;
     public float disappearDuration = 0.15f;
+    public GameObject debrisSpawnerPrefab;
+    private PlayerController playerController;
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
     private Vector3 originalScale;
 
     // このレーザーに触れている敵を管理するリスト
-    private System.Collections.Generic.List<ZakoHP> enemiesInRange = new System.Collections.Generic.List<ZakoHP>();
+    private System.Collections.Generic.List<ZakoHP> zakosInRange = new System.Collections.Generic.List<ZakoHP>();
+    private System.Collections.Generic.List<BossHP> bossesInRange = new System.Collections.Generic.List<BossHP>();
     private float nextDamageTime;
 
     private IEnumerator Start()
     {
+        playerController = GetComponentInParent<PlayerController>();
+        damage *= playerController.GetAttackMultiplier();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
         originalScale = transform.localScale;
@@ -83,11 +89,32 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (enemiesInRange.Count >= 1 && Time.time >= nextDamageTime)
+        if (zakosInRange.Count >= 1 && Time.time >= nextDamageTime)
         {
-            foreach (var enemy in enemiesInRange)
+            for (int i = zakosInRange.Count - 1; i >= 0; i--)
             {
-                if (enemy != null)
+                var enemy = zakosInRange[i];
+                if (enemy == null)
+                {
+                    zakosInRange.RemoveAt(i);
+                }
+                else
+                {
+                    enemy.TakeDamage(damage);
+                }
+            }
+            nextDamageTime = Time.time + damageInterval;
+        }
+        else if (bossesInRange.Count >= 1 && Time.time >= nextDamageTime)
+        {
+            for (int i = bossesInRange.Count - 1; i >= 0; i--)
+            {
+                var enemy = bossesInRange[i];
+                if (enemy == null)
+                {
+                    bossesInRange.RemoveAt(i);
+                }
+                else
                 {
                     enemy.TakeDamage(damage);
                 }
@@ -96,15 +123,28 @@ public class Laser : MonoBehaviour
         }
     }
 
-    // 敵がレーザーの当たり判定に入った時
+    // 敵または敵弾がレーザーの当たり判定に入った時
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Zako"))
+        if (other.CompareTag("EnemyBullet"))
+        {
+            Instantiate(debrisSpawnerPrefab, other.transform.position, Quaternion.identity);
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("Zako"))
         {
             ZakoHP zakoHP = other.GetComponent<ZakoHP>();
-            if (zakoHP != null && !enemiesInRange.Contains(zakoHP))
+            if (zakoHP != null && !zakosInRange.Contains(zakoHP))
             {
-                enemiesInRange.Add(zakoHP); // リストに追加
+                zakosInRange.Add(zakoHP); // リストに追加
+            }
+        }
+        else if (other.CompareTag("Boss"))
+        {
+            BossHP bossHP = other.GetComponent<BossHP>();
+            if (bossHP != null && !bossesInRange.Contains(bossHP))
+            {
+                bossesInRange.Add(bossHP); // リストに追加
             }
         }
     }
@@ -117,7 +157,15 @@ public class Laser : MonoBehaviour
             ZakoHP zakoHP = other.GetComponent<ZakoHP>();
             if (zakoHP != null)
             {
-                enemiesInRange.Remove(zakoHP); // リストから削除
+                zakosInRange.Remove(zakoHP); // リストから削除
+            }
+        }
+        else if (other.CompareTag("Boss"))
+        {
+            BossHP bossHP = other.GetComponent<BossHP>();
+            if (bossHP != null)
+            {
+                bossesInRange.Remove(bossHP); // リストから削除
             }
         }
     }

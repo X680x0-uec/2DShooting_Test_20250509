@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 4499424888341383231}
   - component: {fileID: 6434844231463645104}
   - component: {fileID: 4696282409209011522}
+  - component: {fileID: 4345658475931516141}
+  - component: {fileID: -7316794669982439922}
   m_Layer: 0
-  m_Name: PlayerBullet
+  m_Name: SpreadPlayerBullet
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: 1818101395
   m_SortingLayer: -1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 28c8dd2aa03613f4fbdafe6f0f80f041, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a2b9350abfa0302499a9aa8b88d2c54d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -125,7 +127,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.35, y: 0.15}
+  m_Size: {x: 0.35, y: 0.1}
   m_Direction: 1
 --- !u!50 &6434844231463645104
 Rigidbody2D:
@@ -166,5 +168,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be030b5aa8b5d5a428d38d3d2282e953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  baseDamage: 1
+  baseDamage: 0.5
+--- !u!114 &4345658475931516141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264366309223929868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518045204dc75ba4296d34f91ff0398a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 15
+--- !u!114 &-7316794669982439922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264366309223929868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a46fda6da81a94c9c76da35f8ac076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  margin: 3

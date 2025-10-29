@@ -179,3 +179,4 @@ MonoBehaviour:
   damageInterval: 0.1
   appearDuration: 0.1
   disappearDuration: 0.4
+  debrisSpawnerPrefab: {fileID: 7503992474654738393, guid: 8ea62176f3c74c94bb056476bf55f52d, type: 3}

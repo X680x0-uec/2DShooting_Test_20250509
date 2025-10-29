@@ -16,7 +16,7 @@ public class PlayerHitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Zako") || other.CompareTag("EnemyBullet"))
+        if (other.CompareTag("Zako") || other.CompareTag("EnemyBullet") || other.CompareTag("Boss"))
         {
             //被弾時の処理を後で追加
             if (playerController != null)
