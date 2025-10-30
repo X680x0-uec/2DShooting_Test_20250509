@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("ビジュアル")]
     public float screenEdgeDistance = 0.3f;
+    public float uiAreaHeight = 2.0f;
     public CircleCollider2D hitboxCollider;
     public float blinkInterval = 0.1f; //点滅間隔
     private SpriteRenderer playerSpriteRenderer;
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour
     public List<FirePointController> firePoints = new List<FirePointController>(); //発射地点のリスト
 
     [Header("ゲーム用パラメータ")]
+    public static bool isGameover = false;
+    public GameObject gameoverUI;
     public float moveSpeed = 10.0f;
     public float slowMoveSpeed = 3.0f;
     private Dictionary<AttackBuffSource, float> _attackMultipliers = new Dictionary<AttackBuffSource, float>();
@@ -148,7 +151,7 @@ public class PlayerController : MonoBehaviour
             Vector3 newPosition = transform.position + (Vector3)(moveDirection * currentSpeed * Time.deltaTime);
 
             newPosition.x = Mathf.Clamp(newPosition.x, -screenBounds.x + screenEdgeDistance, screenBounds.x - screenEdgeDistance);
-            newPosition.y = Mathf.Clamp(newPosition.y, -screenBounds.y + screenEdgeDistance, screenBounds.y - screenEdgeDistance);
+            newPosition.y = Mathf.Clamp(newPosition.y, -screenBounds.y + uiAreaHeight + screenEdgeDistance, screenBounds.y - screenEdgeDistance);
 
             transform.position = newPosition;
 
@@ -367,6 +370,7 @@ public class PlayerController : MonoBehaviour
     {
         isUsingSpecialSkill = true;
         supecialSkillUsesLeft--;
+        InformationUIController.Instance.UpdateSpecialsDisplay(supecialSkillUsesLeft);
 
         switch (currentSkill)
         {
@@ -466,5 +470,13 @@ public class PlayerController : MonoBehaviour
         {
             hitboxCollider.enabled = true;
         }
+    }
+
+    public void Gameover()
+    {
+        isGameover = true;
+        Time.timeScale = 0;
+        gameoverUI.SetActive(true);
+        Debug.Log("Gameover");
     }
 }
