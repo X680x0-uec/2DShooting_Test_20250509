@@ -11,8 +11,8 @@ public class SkillNode : MonoBehaviour
     private Button button;
     private Image image;
 
-    [Header("選択中の枠")]
-    public Image highlightFrame; // 枠用のImage（Inspectorで設定）
+    [Header("スキル情報")]
+    public SkillParam skillParam; 
 
     private void Awake()
     {
@@ -23,11 +23,17 @@ public class SkillNode : MonoBehaviour
     public void Select()
     {
         image.color = Color.blue; // ハイライト
+
+        if (skillParam != null)
+            skillParam.SetText();
     }
 
     public void Deselect()
     {
         image.color = Color.white;
+
+        if (skillParam != null)
+            skillParam.ResetText();
     }
 
     public SkillNode GetNextNode(Vector2Int direction)
@@ -41,10 +47,7 @@ public class SkillNode : MonoBehaviour
 
     public void Press()
     {
-        if (button != null)
-        {
-            button.onClick.Invoke(); // ボタンのクリックイベントを呼び出す
-            Debug.Log($"{gameObject.name} のスキルが選択されました");
-        }
+        if (skillParam != null)
+            skillParam.OnClick();
     }
 }

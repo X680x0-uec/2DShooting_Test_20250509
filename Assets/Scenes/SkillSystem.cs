@@ -81,6 +81,34 @@ public class SkillSystem : MonoBehaviour
 		{
 			return false;
 		}
+		if (type == SkillType.Attack2)
+		{
+			return skills[(int)SkillType.Attack1];
+		}
+		else if (type == SkillType.Attack3)
+		{
+			return skills[(int)SkillType.Attack2];
+		}
+		else if (type == SkillType.HP3)
+		{
+			return skills[(int)SkillType.HP2];
+		}
+		else if (type == SkillType.HP2)
+		{
+			return skills[(int)SkillType.HP1];
+		}
+		else if (type == SkillType.Shot2)
+		{
+			return skills[(int)SkillType.Shot1];
+		}
+		else if (type == SkillType.Special2)
+		{
+			return skills[(int)SkillType.Special1];
+		}
+		else if (type == SkillType.Junior4)
+		{
+			return skills[(int)SkillType.Junior3];
+		}
 		return true;
 	}
 	//　スキル毎にボタンのオン・オフをする処理を実行させる
