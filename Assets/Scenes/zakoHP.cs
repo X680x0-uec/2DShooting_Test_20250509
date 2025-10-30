@@ -4,32 +4,49 @@ using TMPro;
 
 public class ZakoHP : MonoBehaviour
 {
-    public SkillSystem skillSystem;
-    public float maxHP = 100;
+    [Header("HP設定")]
+    public float maxHP = 100f;
     private float currentHP;
+
+    [Header("スコア設定")]
     public int pointValue = 100;
     [SerializeField] private GameObject scorePopupPrefab;
+
+    [Header("Canvas")]
     [SerializeField] private Canvas uiCanvas;
+
+    [Header("敵破壊条件")]
+    public float destroyX = -10f;
+
+    [Header("スキルシステム")]
+    public SkillSystem skillSystem;
+
     void Start()
     {
         currentHP = maxHP;
 
+        // SkillSystem が未設定なら自動取得
         if (skillSystem == null)
         {
-            skillSystem = FindFirstObjectByType<SkillSystem>(FindObjectsInactive.Include); // 非アクティブも対象にする
-
-
+            skillSystem = FindFirstObjectByType<SkillSystem>(FindObjectsInactive.Include);
             if (skillSystem == null)
-            {
                 Debug.LogError("SkillSystem が見つかりません");
-            }
         }
 
-        uiCanvas = FindFirstObjectByType<Canvas>();
-        
+        // Canvas を保証
+        EnsureCanvas();
     }
 
-    // ダメージを受ける関数
+    void Update()
+    {
+        // 敵が画面外に行ったら破壊
+        if (transform.position.x < destroyX)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    // ダメージを受ける
     public void TakeDamage(float damage)
     {
         currentHP -= damage;
@@ -41,34 +58,68 @@ public class ZakoHP : MonoBehaviour
         }
     }
 
-    // 敵が死ぬときの処理
+    // 敵死亡時
     void Die()
     {
-        skillSystem.TakeSkillPoint(pointValue);
-        Destroy(gameObject);
+        // 先にスコアポップアップ表示
         ShowScorePopup();
+
+        // スキルポイント付与
+        if (skillSystem != null)
+            skillSystem.TakeSkillPoint(pointValue);
+
+        Destroy(gameObject);
     }
-    
+
+    // スコアポップアップ表示
     private void ShowScorePopup()
     {
-        if (scorePopupPrefab != null && uiCanvas != null)
+        if (scorePopupPrefab == null || uiCanvas == null)
+            return;
+
+        // 敵のワールド座標 → スクリーン座標
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+
+        // Canvas 上に生成
+        GameObject popup = Instantiate(scorePopupPrefab, uiCanvas.transform);
+
+        // 位置設定
+        RectTransform rect = popup.GetComponent<RectTransform>();
+        Vector2 localPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            uiCanvas.transform as RectTransform,
+            screenPos,
+            uiCanvas.worldCamera,
+            out localPos
+        );
+        rect.localPosition = localPos;
+
+        // テキスト設定
+        ScorePopupUI popupUI = popup.GetComponent<ScorePopupUI>();
+        if (popupUI != null)
         {
-            // 敵のワールド座標をスクリーン座標に変換
-            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-
-            // Canvas上にインスタンス生成
-            GameObject popup = Instantiate(scorePopupPrefab, uiCanvas.transform);
-
-            // 表示位置を設定（anchoredPositionにスクリーン座標を使う）
-            RectTransform rect = popup.GetComponent<RectTransform>();
-            rect.position = screenPos;
-
-            // テキストを設定
-            popup.GetComponent<ScorePopupUI>().SetText($"+{pointValue}P");
+            popupUI.SetText($"+{pointValue}P");
         }
+
+        // 任意：自動で消える
+        Destroy(popup, 1.5f);
     }
 
-
-        
+    // Canvas を自動生成する
+    private void EnsureCanvas()
+    {
+        if (uiCanvas == null)
+        {
+            uiCanvas = FindObjectOfType<Canvas>();
+            if (uiCanvas == null)
+            {
+                GameObject canvasGO = new GameObject("ScorePopupCanvas");
+                uiCanvas = canvasGO.AddComponent<Canvas>();
+                canvasGO.AddComponent<CanvasScaler>();
+                canvasGO.AddComponent<GraphicRaycaster>();
+                uiCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+                Debug.Log("Canvas がなかったので自動生成しました");
+            }
+        }
+    }
 }
-

@@ -688,7 +688,7 @@ GameObject:
   - component: {fileID: 171292222}
   - component: {fileID: 171292221}
   m_Layer: 0
-  m_Name: zako3spawner
+  m_Name: sinspawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -709,8 +709,8 @@ MonoBehaviour:
   canSpawn: 1
   enemyPrefab: {fileID: 9068652259859495959, guid: 018e23af14ee80643a539680c7b5d270, type: 3}
   spawnInterval: 2
-  minY: -3
-  maxY: 3
+  minY: 0
+  maxY: 2
   fixedX: 9
   fixedZ: 0
 --- !u!4 &171292222
@@ -2420,7 +2420,7 @@ GameObject:
   - component: {fileID: 748803947}
   - component: {fileID: 748803946}
   m_Layer: 0
-  m_Name: zako1spawner
+  m_Name: taretspawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2441,7 +2441,7 @@ MonoBehaviour:
   canSpawn: 1
   enemyPrefab: {fileID: 8518096576828694939, guid: 44934512b7ec0fe48a8d53e38b1d2240, type: 3}
   spawnInterval: 5
-  minY: -3
+  minY: -1
   maxY: 3
   fixedX: 9
   fixedZ: 0
@@ -4341,6 +4341,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126749737}
   m_CullTransparentMesh: 1
+--- !u!1 &1162383344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1162383346}
+  - component: {fileID: 1162383345}
+  m_Layer: 0
+  m_Name: tossinspawner 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1162383345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162383344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55caa1ccef23ea84fbc3210a1af87772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canSpawn: 1
+  enemyPrefab: {fileID: 9068652259859495959, guid: 3cfbd71c3c742d74da47b8a8fdb2027b, type: 3}
+  spawnInterval: 2
+  minY: 0
+  maxY: 3
+  fixedX: 9
+  fixedZ: 0
+--- !u!4 &1162383346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1162383344}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.5270448, y: -1.9544816, z: -0.03908109}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1197251183
 GameObject:
   m_ObjectHideFlags: 0
@@ -6930,6 +6981,8 @@ MonoBehaviour:
   - {fileID: 748803946}
   - {fileID: 1724975767}
   - {fileID: 171292221}
+  - {fileID: 1884338033}
+  - {fileID: 1162383345}
 --- !u!4 &1594260889
 Transform:
   m_ObjectHideFlags: 0
@@ -7273,7 +7326,7 @@ GameObject:
   - component: {fileID: 1724975768}
   - component: {fileID: 1724975767}
   m_Layer: 0
-  m_Name: zako2spawner
+  m_Name: zako spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7294,8 +7347,8 @@ MonoBehaviour:
   canSpawn: 1
   enemyPrefab: {fileID: 897482044735212471, guid: 396073350095d7744b66a3871face2a2, type: 3}
   spawnInterval: 5
-  minY: -3
-  maxY: 3
+  minY: -1
+  maxY: 5
   fixedX: 9
   fixedZ: 0
 --- !u!4 &1724975768
@@ -8429,6 +8482,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865739300}
   m_CullTransparentMesh: 1
+--- !u!1 &1884338032
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1884338034}
+  - component: {fileID: 1884338033}
+  m_Layer: 0
+  m_Name: tossinspawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1884338033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884338032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55caa1ccef23ea84fbc3210a1af87772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canSpawn: 1
+  enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+  spawnInterval: 2.1
+  minY: 0
+  maxY: 3
+  fixedX: 9
+  fixedZ: 0
+--- !u!4 &1884338034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884338032}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.5270448, y: -1.9544816, z: -0.03908109}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1939712154
 GameObject:
   m_ObjectHideFlags: 0
@@ -9144,3 +9248,5 @@ SceneRoots:
   - {fileID: 1694545973}
   - {fileID: 1211856875}
   - {fileID: 1613474973}
+  - {fileID: 1884338034}
+  - {fileID: 1162383346}

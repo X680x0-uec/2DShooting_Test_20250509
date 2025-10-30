@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.9018, y: 0.9802, z: 0}
-  m_LocalScale: {x: 0.31735778, y: 0.321579, z: 1}
+  m_LocalScale: {x: 2.7862833, y: 2.0960584, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -105,7 +105,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delaySec: 0.001
+  destroyX: -10
 --- !u!58 &8509845068926968906
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -164,5 +165,5 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.011317186, y: 0.0047390265}
-  m_Radius: 0.036369734
+  m_Offset: {x: -0.0033639988, y: 0.0062493845}
+  m_Radius: 0.028037738
