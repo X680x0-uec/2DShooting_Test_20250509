@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class DestroyBulletOutsideScreen : MonoBehaviour
 {
-    public float margin = 3f; 
+    public float margin = 3f;
+    public float uiAreaHeight = 2f;
 
     private Vector2 screenBounds;
 
@@ -19,8 +20,13 @@ public class DestroyBulletOutsideScreen : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (currentPosition.y > screenBounds.y + margin)
+        {
+            Destroy(gameObject);
+        }
         
-        if (Mathf.Abs(currentPosition.y) > screenBounds.y + margin)
+        if (currentPosition.y < -screenBounds.y + uiAreaHeight - margin)
         {
             Destroy(gameObject);
         }
