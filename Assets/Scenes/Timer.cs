@@ -43,20 +43,32 @@ public class CountdownTimer : MonoBehaviour
         }
 
         // 任意：既に出現している雑魚を全て消す
-        ClearAllEnemies();
-
         void SpawnBoss()
         {
             Instantiate(bossPrefab, bossSpawnPosition, Quaternion.identity);
         }
+        ClearAllEnemies();
+        ClearAllBullets();
+    }
 
-        void ClearAllEnemies()
+        
+    void ClearAllBullets()
+    {
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject bullet in bullets)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zako");
-            foreach (GameObject enemy in enemies)
-            {
-                Destroy(enemy);
-            }
+            Destroy(bullet);
         }
     }
+
+    void ClearAllEnemies()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zako");
+        foreach (GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+    }    
+
+    
 }
