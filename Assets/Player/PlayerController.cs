@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
     public List<FirePointController> firePoints = new List<FirePointController>(); //発射地点のリスト
 
     [Header("ゲーム用パラメータ")]
-    public static bool isGameover = false;
+    public static bool IsGameover { get; private set; } = false;
     public GameObject gameoverUI;
     public float moveSpeed = 10.0f;
     public float slowMoveSpeed = 3.0f;
@@ -122,7 +122,7 @@ public class PlayerController : MonoBehaviour
             GetSkill("Junior", 4, 1);
             Debug.Log("pressed L");
         }
-        if (!isControllLocked)
+        if (!isControllLocked && !IsGameover && !SkillSystemOnOff.IsCheckingSkill) //時が停まってないときにする処理(操作等)
         {
             //低速移動
             float currentSpeed;
@@ -474,7 +474,7 @@ public class PlayerController : MonoBehaviour
 
     public void Gameover()
     {
-        isGameover = true;
+        IsGameover = true;
         Time.timeScale = 0;
         gameoverUI.SetActive(true);
         Debug.Log("Gameover");

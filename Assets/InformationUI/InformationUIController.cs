@@ -16,6 +16,8 @@ public class InformationUIController : MonoBehaviour
 
     public TextMeshProUGUI scoreText;
 
+    public TextMeshProUGUI skillPointText;
+
     public Slider bossHPSlider;
     public GameObject titleLogo;
 
@@ -38,6 +40,7 @@ public class InformationUIController : MonoBehaviour
         UpdateLivesDisplay(playerController.life);
         UpdateSpecialsDisplay(playerController.supecialSkillUsesLeft);
         UpdateScoreDisplay(0);
+        UpdateSkillPoint(0);
         ShowBossHP(false, 0f);
     }
 
@@ -74,6 +77,11 @@ public class InformationUIController : MonoBehaviour
     public void UpdateScoreDisplay(int currentScore)
     {
         scoreText.text = $"Score: {currentScore:D7}";
+    }
+
+    public void UpdateSkillPoint(int currentSkillPoint)
+    {
+        skillPointText.text = $"Skill Point: {currentSkillPoint:D5}";
     }
 
     public void ShowBossHP(bool show, float currentBossHealthRatio = 0f)

@@ -23,13 +23,13 @@ public class PlayerHitbox : MonoBehaviour
             {
                 playerController.StartBlinkEffect();
             }
-            playerController.life -= 1;
-            if (playerController.life < 0)
+            if (playerController.life <= 0)
             {
                 playerController.Gameover();
             }
             else
             {
+                playerController.life -= 1;
                 InformationUIController.Instance.UpdateLivesDisplay(playerController.life);
             }
         }

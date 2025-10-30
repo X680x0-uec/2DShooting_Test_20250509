@@ -8,6 +8,8 @@ public class SkillSystemOnOff : MonoBehaviour {
 	[SerializeField]
 	public GameObject skillSystem;
 
+	public static bool IsCheckingSkill { get; private set; } = false;
+
 
 	//　最初にフォーカスするゲームオブジェクト
 	[SerializeField]
@@ -16,16 +18,18 @@ public class SkillSystemOnOff : MonoBehaviour {
 	// Update is called once per frame
 	int opencount = 0;
 	void Update () {
-		if (Input.GetKeyDown("q"))
+		if (Input.GetKeyDown("q") && !PlayerController.IsGameover)
 		{
 			if (opencount%2 == 0)
 			{
 				Time.timeScale = 0f;
+				IsCheckingSkill = true;
 				opencount += 1;
 			}
             else
             {
 				Time.timeScale = 1f;
+				IsCheckingSkill = false;
 				opencount += 1;
             }
 			skillSystem.GetComponent<SkillSystem>().SetText();

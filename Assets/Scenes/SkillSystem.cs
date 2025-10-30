@@ -62,11 +62,13 @@ public class SkillSystem : MonoBehaviour
 	public void TakeSkillPoint(int point)
 	{
 		skillPoint += point;
+		InformationUIController.Instance.UpdateSkillPoint(skillPoint);
 	}
 	//　スキルポイントを減らす
 	public void SetSkillPoint(int point)
 	{
 		skillPoint -= point;
+		InformationUIController.Instance.UpdateSkillPoint(skillPoint);
 	}
 	//　スキルポイントを取得
 	public int GetSkillPoint()
