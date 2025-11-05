@@ -3,44 +3,62 @@ using System.Collections;
 
 public class SineWaveAttack : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform firePoint;
-    [SerializeField] private float fireInterval = 0.4f;
-    [SerializeField] private float fireYRange = 1.0f;
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float frequency = 3f;
-    [SerializeField] private float amplitude = 0.5f;
+    [Header("弾の設定")]
+    public GameObject bulletPrefab; // 弾のプレハブ
+    public Transform firePoint;     // 発射位置
+    public float fireInterval = 0.2f; // 発射間隔
+    public float amplitude = 1f;    // 振幅（上下の幅）
+    public float frequency = 2f;    // 周波数（波の速さ）
+    public float bulletSpeed = 5f;  // 弾の進む速さ
+    public float fireRangeY = 2f;   // 発射位置のY座標のランダム範囲
 
-    private Coroutine attackRoutine;
+    private bool isAttacking = false;
 
-    private void Start()
+    void Start()
     {
-        enabled = false;
+        enabled = false; // AttackCycleに制御させるので最初は無効
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
-        attackRoutine = StartCoroutine(Attack());
+        if (!isAttacking)
+            StartCoroutine(Attack());
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
-        if (attackRoutine != null)
-            StopCoroutine(attackRoutine);
+        StopAllCoroutines();
+        isAttacking = false;
     }
 
-    private IEnumerator Attack()
+    IEnumerator Attack()
     {
-        while (true)
+        isAttacking = true;
+
+        while (enabled)
         {
-            Vector3 spawnPos = firePoint.position;
-            spawnPos.y += Random.Range(-fireYRange, fireYRange);
+            if (bulletPrefab != null && firePoint != null)
+            {
+                // 発射位置をランダムに上下させる
+                Vector3 spawnPos = firePoint.position;
+                spawnPos.y += Random.Range(-fireRangeY, fireRangeY);
 
-            GameObject bulletObj = Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
-            SineWaveBullet bullet = bulletObj.GetComponent<SineWaveBullet>();
-            bullet.SetWave(Vector2.left, speed, frequency, amplitude);
+                // 弾を生成
+                GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
+
+                // 弾に波の情報を渡す（位相を -π〜π の範囲でランダムに）
+                float phase = Random.Range(-Mathf.PI, Mathf.PI);
+
+                SineWaveBullet sine = bullet.GetComponent<SineWaveBullet>();
+                if (sine != null)
+                {
+                    sine.SetWave(Vector2.left, bulletSpeed, amplitude, frequency, phase);
+                }
+            }
 
             yield return new WaitForSeconds(fireInterval);
         }
+
+        isAttacking = false;
     }
 }
