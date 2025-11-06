@@ -25,10 +25,10 @@ public class ZakoHP : MonoBehaviour
     {
         currentHP = maxHP;
 
-        // SkillSystem が未設定なら自動取得
+        // SkillSystem が未設定なら自動取得（非アクティブも含む）
         if (skillSystem == null)
         {
-            skillSystem = FindFirstObjectByType<SkillSystem>(FindObjectsInactive.Include);
+            skillSystem = Object.FindFirstObjectByType<SkillSystem>(FindObjectsInactive.Include);
             if (skillSystem == null)
                 Debug.LogError("SkillSystem が見つかりません");
         }
@@ -110,7 +110,8 @@ public class ZakoHP : MonoBehaviour
     {
         if (uiCanvas == null)
         {
-            uiCanvas = FindObjectOfType<Canvas>();
+            // 非推奨警告を回避
+            uiCanvas = Object.FindFirstObjectByType<Canvas>();
             if (uiCanvas == null)
             {
                 GameObject canvasGO = new GameObject("ScorePopupCanvas");
