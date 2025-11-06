@@ -8344,6 +8344,7 @@ MonoBehaviour:
   - {fileID: 171292221}
   - {fileID: 1884338033}
   - {fileID: 1162383345}
+  - {fileID: 1694545972}
 --- !u!4 &1594260889
 Transform:
   m_ObjectHideFlags: 0
@@ -8621,7 +8622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canSpawn: 1
-  enemyPrefab: {fileID: 897482044735212471, guid: 396073350095d7744b66a3871face2a2, type: 3}
+  enemyPrefab: {fileID: 9068652259859495959, guid: 46ceae41878488c419a47bfd9a837920, type: 3}
   spawnInterval: 5
   minY: -1
   maxY: 5
