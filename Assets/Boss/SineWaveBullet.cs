@@ -4,26 +4,31 @@ public class SineWaveBullet : MonoBehaviour
 {
     private Vector2 direction;
     private float speed;
-    private float frequency;
     private float amplitude;
-    private Vector3 startPos;
-    private float time;
+    private float frequency;
+    private float phase; // 位相
 
-    public void SetWave(Vector2 dir, float spd, float freq, float amp)
+    private float startY;
+    private float lifetime = 10f;
+
+    public void SetWave(Vector2 dir, float spd, float amp, float freq, float ph)
     {
         direction = dir.normalized;
         speed = spd;
-        frequency = freq;
         amplitude = amp;
-        startPos = transform.position;
-        time = 0f;
+        frequency = freq;
+        phase = ph;
+
+        startY = transform.position.y;
+
+        Destroy(gameObject, lifetime);
     }
 
-    private void Update()
+    void Update()
     {
-        time += Time.deltaTime;
-        Vector2 perp = new Vector2(-direction.y, direction.x);
-        Vector3 offset = perp * Mathf.Sin(time * frequency) * amplitude;
-        transform.position = startPos + (Vector3)(direction * speed * time) + offset;
+        // 左方向に移動しつつ、上下に正弦波運動
+        float newY = startY + Mathf.Sin(Time.time * frequency + phase) * amplitude;
+        transform.position += (Vector3)(direction * speed * Time.deltaTime);
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 }
