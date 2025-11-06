@@ -33,9 +33,16 @@ public class PlayerController : MonoBehaviour
     public Slider specialCountdownBar;
     public CircleCollider2D hitboxCollider;
     public float blinkInterval = 0.1f; //点滅間隔
+    public GameObject explosionPrefab;
     private SpriteRenderer playerSpriteRenderer;
     private Color originalPlayerColor;
     private Vector2 screenBounds; //画面端の位置
+
+    [Header("登場演出")]
+    public float entryTargetX = -6f;
+    public float entrySmoothTime = 0.5f;
+    private bool isEntering = true;
+    private Vector3 entryVelocity = Vector3.zero;
 
     [Header("自機弾関連")]
     //メインショット
@@ -121,6 +128,10 @@ public class PlayerController : MonoBehaviour
             specialCountdownBar.gameObject.SetActive(false);
         }
 
+        //登場演出用
+        transform.position = new Vector3(-screenBounds.x - 2f, 0, 0);
+        isEntering = true;
+
         //初期メインショット
         AddOption(normalMainOptionPrefab, new Vector2(0f, 0f));
     }
@@ -141,7 +152,18 @@ public class PlayerController : MonoBehaviour
             GetSkill("Passive", 1, 1);
             Debug.Log("pressed L");
         }
-        if (!isControllLocked && !IsGameover && !SkillSystemOnOff.IsCheckingSkill) //時が停まってないときにする処理(操作等)
+        if (isEntering) //登場処理
+        {
+            Vector3 targetPosition = new Vector3(entryTargetX, transform.position.y, transform.position.z);
+
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref entryVelocity, entrySmoothTime);
+            if (Vector3.Distance(transform.position, targetPosition) < 0.05f)
+            {
+                isEntering = false;
+            }
+            return;
+        }
+        if (!isControllLocked && !IsGameover && !SkillSystemOnOff.IsCheckingSkill) //通常時にする処理(操作等)
         {
             //低速移動
             float currentSpeed;
@@ -246,6 +268,7 @@ public class PlayerController : MonoBehaviour
                 {
                     case 1:
                         life += 1;
+                        InformationUIController.Instance.UpdateLivesDisplay(life);
                         if (passiveAbilities.Contains(PassiveAbility.Revenge))
                         {
                             _attackMultipliers.Remove(AttackBuffSource.Revenge);
@@ -253,6 +276,7 @@ public class PlayerController : MonoBehaviour
                         break;
                     case 2:
                         life += 1;
+                        InformationUIController.Instance.UpdateLivesDisplay(life);
                         if (passiveAbilities.Contains(PassiveAbility.Revenge))
                         {
                             _attackMultipliers.Remove(AttackBuffSource.Revenge);
@@ -260,6 +284,7 @@ public class PlayerController : MonoBehaviour
                         break;
                     case 3:
                         life += 1;
+                        InformationUIController.Instance.UpdateLivesDisplay(life);
                         if (passiveAbilities.Contains(PassiveAbility.Revenge))
                         {
                             _attackMultipliers.Remove(AttackBuffSource.Revenge);
@@ -626,6 +651,8 @@ public class PlayerController : MonoBehaviour
     {
         IsGameover = true;
         Time.timeScale = 0;
+        playerSpriteRenderer.enabled = false;
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         StartCoroutine(BlinkGameoverUICoroutine());
         Debug.Log("Gameover");
     }
