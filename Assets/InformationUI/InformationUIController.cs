@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 using System.Collections.Generic;
 
 public class InformationUIController : MonoBehaviour
@@ -15,6 +16,9 @@ public class InformationUIController : MonoBehaviour
     private List<GameObject> activeSpecialIcons = new List<GameObject>();
 
     public TextMeshProUGUI scoreText;
+    public int playerScore = 0;
+    private int currentDisplayedScore = 0;
+    private Coroutine scoreCoroutine;
 
     public TextMeshProUGUI skillPointText;
 
@@ -74,9 +78,38 @@ public class InformationUIController : MonoBehaviour
         }
     }
 
-    public void UpdateScoreDisplay(int currentScore)
+    public void UpdateScoreDisplay(int targetScore)
     {
-        scoreText.text = $"Score: {currentScore:D7}";
+        playerScore += targetScore;
+        if (scoreCoroutine != null)
+        {
+            StopCoroutine(scoreCoroutine);
+        }
+        scoreCoroutine = StartCoroutine(ScoreRollCoroutine(playerScore));
+    }
+
+    private IEnumerator ScoreRollCoroutine(int targetScore)
+    {
+        float duration = 0.2f;
+        float elapsed = 0f;
+
+        int startScore = playerScore;
+
+        while (elapsed < duration)
+        {
+            float progress = elapsed / duration;
+
+            int rollingScore = (int)Mathf.Lerp((float)startScore, (float)targetScore, progress);
+            scoreText.text = $"Score: {rollingScore:D7}";
+
+            elapsed += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        currentDisplayedScore = targetScore;
+        scoreText.text = $"Score: {currentDisplayedScore:D7}";
+
+        scoreCoroutine = null;
     }
 
     public void UpdateSkillPoint(int currentSkillPoint)

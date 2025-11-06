@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
@@ -8,31 +9,40 @@ public enum SpecialSkillType
     Empty,
     Laser,
     Vanish,
-    Bomb,
-    TimeStop,
-    CounterAttack
+    Invincible
 }
 
 public enum PassiveAbility
 {
-    FastAttack
+    FastAttack,
+    Revenge
 }
 
 public enum AttackBuffSource
 {
     Normal,
-    FastAttack
+    FastAttack,
+    Revenge
 }
 
 public class PlayerController : MonoBehaviour
 {
     [Header("ビジュアル")]
     public float screenEdgeDistance = 0.3f;
-    public float uiAreaHeight = 2.0f;
+    public float uiAreaHeight = 2f;
+    public Slider specialCountdownBar;
     public CircleCollider2D hitboxCollider;
     public float blinkInterval = 0.1f; //点滅間隔
+    public GameObject explosionPrefab;
     private SpriteRenderer playerSpriteRenderer;
+    private Color originalPlayerColor;
     private Vector2 screenBounds; //画面端の位置
+
+    [Header("登場演出")]
+    public float entryTargetX = -6f;
+    public float entrySmoothTime = 0.5f;
+    private bool isEntering = true;
+    private Vector3 entryVelocity = Vector3.zero;
 
     [Header("自機弾関連")]
     //メインショット
@@ -53,8 +63,8 @@ public class PlayerController : MonoBehaviour
     [Header("ゲーム用パラメータ")]
     public static bool IsGameover { get; private set; } = false;
     public GameObject gameoverUI;
-    public float moveSpeed = 10.0f;
-    public float slowMoveSpeed = 3.0f;
+    public float moveSpeed = 10f;
+    public float slowMoveSpeed = 3f;
     private Dictionary<AttackBuffSource, float> _attackMultipliers = new Dictionary<AttackBuffSource, float>();
     public int life = 5;
     public SpecialSkillType currentSkill = SpecialSkillType.Empty; //セット中のスキル
@@ -62,29 +72,41 @@ public class PlayerController : MonoBehaviour
     public int supecialSkillUsesLeft = 0;
     private bool isUsingSpecialSkill = false;
     private bool isInvincible = false;
-    public float invincibilityDuration = 2.0f; //被弾時無敵の長さ
+    public float invincibilityDuration = 2f; //被弾時無敵の長さ
     private bool isControllLocked = false;
     public float controlLockDuration = 0.2f; //被弾時操作不能時間の長さ
 
     [Header("特殊スキル用")]
     public GameObject laserPrefab;
-    public float laserDuration = 4.0f;
-    public float laserDurationMultiplier = 1.0f;
+    public float laserDuration = 3f;
+    public float laserDurationMultiplier = 1f;
     public GameObject debrisSpawnerPrefab;
     public float vanishDamage = 1000f;
     public float vanishShakeDuration = 0.5f;
     public float vanishShakeMagnitude = 0.1f;
     private CameraShaker cameraShaker;
+    public float invincibleSkillDuration = 5f;
+    public float invincibleSkillDurationMultiplier = 1f;
+    public bool IsInvincibleBySpecialSkill { get; private set; } = false;
+
+    [Header("パッシブアビリティ用")]
+    public float fastAttackMultiplier = 1.3f;
+    public float revengeAttackMultiplier = 1.7f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         //端の座標を取得
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        
         Transform visualChild = transform.Find("Visual");
         if (visualChild != null)
         {
             playerSpriteRenderer = visualChild.GetComponent<SpriteRenderer>();
+            if (playerSpriteRenderer != null)
+            {
+                originalPlayerColor = playerSpriteRenderer.color;
+            }
         }
         else
         {
@@ -100,6 +122,15 @@ public class PlayerController : MonoBehaviour
                 Debug.LogWarning("CameraShaker.Instance が見つかりませんでした");
             }
         }
+
+        if (specialCountdownBar != null)
+        {
+            specialCountdownBar.gameObject.SetActive(false);
+        }
+
+        //登場演出用
+        transform.position = new Vector3(-screenBounds.x - 2f, 0, 0);
+        isEntering = true;
 
         //初期メインショット
         AddOption(normalMainOptionPrefab, new Vector2(0f, 0f));
@@ -118,11 +149,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             //任意の処理を割り込ませる用(Lキー)
-            GetSkill("Junior", 2, 1);
-            GetSkill("Junior", 4, 1);
+            GetSkill("Passive", 1, 1);
             Debug.Log("pressed L");
         }
-        if (!isControllLocked && !IsGameover && !SkillSystemOnOff.IsCheckingSkill) //時が停まってないときにする処理(操作等)
+        if (isEntering) //登場処理
+        {
+            Vector3 targetPosition = new Vector3(entryTargetX, transform.position.y, transform.position.z);
+
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref entryVelocity, entrySmoothTime);
+            if (Vector3.Distance(transform.position, targetPosition) < 0.05f)
+            {
+                isEntering = false;
+            }
+            return;
+        }
+        if (!isControllLocked && !IsGameover && !SkillSystemOnOff.IsCheckingSkill) //通常時にする処理(操作等)
         {
             //低速移動
             float currentSpeed;
@@ -139,7 +180,7 @@ public class PlayerController : MonoBehaviour
                 currentSpeed = moveSpeed;
                 if (passiveAbilities.Contains(PassiveAbility.FastAttack))
                 {
-                    _attackMultipliers[AttackBuffSource.FastAttack] = 2.0f;
+                    _attackMultipliers[AttackBuffSource.FastAttack] = fastAttackMultiplier;
                 }
             }
             // 左右入力の取得
@@ -191,6 +232,9 @@ public class PlayerController : MonoBehaviour
                                 currentSkill = SpecialSkillType.Laser;
                                 break;
                             case 2:
+                                laserDurationMultiplier = 1.2f;
+                                break;
+                            case 3:
                                 laserDurationMultiplier = 1.5f;
                                 break;
                         }
@@ -201,6 +245,49 @@ public class PlayerController : MonoBehaviour
                             case 1:
                                 currentSkill = SpecialSkillType.Vanish;
                                 break;
+                        }
+                        break;
+                    case 2:
+                        switch (level)
+                        {
+                            case 1:
+                                currentSkill = SpecialSkillType.Invincible;
+                                break;
+                            case 2:
+                                invincibleSkillDurationMultiplier = 1.4f;
+                                break;
+                            case 3:
+                                invincibleSkillDurationMultiplier = 2f;
+                                break;
+                        }
+                        break;
+                }
+                break;
+            case "HP":
+                switch (level)
+                {
+                    case 1:
+                        life += 1;
+                        InformationUIController.Instance.UpdateLivesDisplay(life);
+                        if (passiveAbilities.Contains(PassiveAbility.Revenge))
+                        {
+                            _attackMultipliers.Remove(AttackBuffSource.Revenge);
+                        }
+                        break;
+                    case 2:
+                        life += 1;
+                        InformationUIController.Instance.UpdateLivesDisplay(life);
+                        if (passiveAbilities.Contains(PassiveAbility.Revenge))
+                        {
+                            _attackMultipliers.Remove(AttackBuffSource.Revenge);
+                        }
+                        break;
+                    case 3:
+                        life += 1;
+                        InformationUIController.Instance.UpdateLivesDisplay(life);
+                        if (passiveAbilities.Contains(PassiveAbility.Revenge))
+                        {
+                            _attackMultipliers.Remove(AttackBuffSource.Revenge);
                         }
                         break;
                 }
@@ -225,6 +312,10 @@ public class PlayerController : MonoBehaviour
                     case 0:
                         passiveAbilities.Add(PassiveAbility.FastAttack);
                         break;
+                    case 1:
+                        passiveAbilities.Add(PassiveAbility.Revenge);
+                        CheckAndChangeToRevengeMode();
+                        break;
                 }
                 break;
             case "Shot":
@@ -234,7 +325,10 @@ public class PlayerController : MonoBehaviour
                         switch (level)
                         {
                             case 1:
-                                ChangeOptionFireRateMultiplierByTag("MainOption", 0.5f);
+                                ChangeOptionFireRateMultiplierByTag("MainOption", 0.7f);
+                                break;
+                            case 2:
+                                ChangeOptionFireRateMultiplierByTag("MainOption", 0.3f);
                                 break;
                         }
                         break;
@@ -366,6 +460,15 @@ public class PlayerController : MonoBehaviour
         return finalMultiplier;
     }
 
+    public void CheckAndChangeToRevengeMode()
+    {
+        if (life == 0 && passiveAbilities.Contains(PassiveAbility.Revenge))
+        {
+            _attackMultipliers[AttackBuffSource.Revenge] = revengeAttackMultiplier;
+            Debug.Log("リベンジモードになりました");
+        }
+    }
+
     void UseSpecialSkill()
     {
         isUsingSpecialSkill = true;
@@ -379,6 +482,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case SpecialSkillType.Vanish:
                 StartCoroutine(VanishCoroutine());
+                break;
+            case SpecialSkillType.Invincible:
+                StartCoroutine(InvincibleSkillCoroutine());
                 break;
         }
     }
@@ -399,8 +505,31 @@ public class PlayerController : MonoBehaviour
             yield break;
         }
 
-        yield return new WaitForSeconds(laserDuration * laserDurationMultiplier); //持続時間待機
+        if (specialCountdownBar != null)
+        {
+            specialCountdownBar.gameObject.SetActive(true);
+            specialCountdownBar.value = 1f;
+        }
 
+        float maxLaserDuration = laserDuration * laserDurationMultiplier;
+        float elapsedLaserDuration = 0f;
+
+        while (elapsedLaserDuration < maxLaserDuration)
+        {
+            float ratio = 1.0f - (elapsedLaserDuration / maxLaserDuration);
+            if (specialCountdownBar != null)
+            {
+                specialCountdownBar.value = ratio;
+            }
+
+            elapsedLaserDuration += Time.deltaTime;
+            yield return null;
+        }
+
+        if (specialCountdownBar != null)
+        {
+            specialCountdownBar.gameObject.SetActive(false);
+        }
         laserScript.StartDisappearAnimation();
         isUsingSpecialSkill = false;
     }
@@ -433,6 +562,52 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(vanishShakeDuration);
 
+        isUsingSpecialSkill = false;
+    }
+
+    private IEnumerator InvincibleSkillCoroutine()
+    {
+        if (specialCountdownBar != null)
+        {
+            specialCountdownBar.gameObject.SetActive(true);
+            specialCountdownBar.value = 1f;
+        }
+
+        IsInvincibleBySpecialSkill = true;
+
+        float maxInvincibleSkillDuration = invincibleSkillDuration * invincibleSkillDurationMultiplier;
+        float elapsedInvincibleSkillDuration = 0f;
+        float hue = 0f;
+
+        while (elapsedInvincibleSkillDuration < maxInvincibleSkillDuration)
+        {
+            float ratio = 1.0f - (elapsedInvincibleSkillDuration / maxInvincibleSkillDuration);
+            if (specialCountdownBar != null)
+            {
+                specialCountdownBar.value = ratio;
+            }
+
+            //色替え
+            if (playerSpriteRenderer != null)
+            {
+                hue = (Time.time * 1f) % 1f;
+                Color rainbowColor = Color.HSVToRGB(hue, 0.4f, 1f);
+                playerSpriteRenderer.color = rainbowColor;
+            }
+
+            elapsedInvincibleSkillDuration += Time.deltaTime;
+            yield return null;
+        }
+
+        if (specialCountdownBar != null)
+        {
+            specialCountdownBar.gameObject.SetActive(false);
+        }
+        if (playerSpriteRenderer != null)
+        {
+            playerSpriteRenderer.color = originalPlayerColor;
+        }
+        IsInvincibleBySpecialSkill = false;
         isUsingSpecialSkill = false;
     }
 
@@ -476,7 +651,26 @@ public class PlayerController : MonoBehaviour
     {
         IsGameover = true;
         Time.timeScale = 0;
-        gameoverUI.SetActive(true);
+        playerSpriteRenderer.enabled = false;
+        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        StartCoroutine(BlinkGameoverUICoroutine());
         Debug.Log("Gameover");
+    }
+    public IEnumerator BlinkGameoverUICoroutine()
+    {
+        bool isActive = false;
+        while (true)
+        {
+            if (isActive)
+            {
+                isActive = false;
+            }
+            else
+            {
+                isActive = true;
+            }
+            gameoverUI.SetActive(isActive);
+            yield return new WaitForSecondsRealtime(0.5f);
+        }
     }
 }
