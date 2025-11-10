@@ -8,20 +8,31 @@ public class InformationUIController : MonoBehaviour
 {
     public PlayerController playerController;
 
+    [Header("ライフ")]
     public GameObject lifeIconPrefab;
     public RectTransform lifeIconsParent;
-    public GameObject specialIconPrefab;
-    public RectTransform specialIconsParent;
     private List<GameObject> activeLifeIcons = new List<GameObject>();
-    private List<GameObject> activeSpecialIcons = new List<GameObject>();
 
+    [Header("エネルギー")]
+    public GameObject energyIconPrefab;
+    public RectTransform energyIconsParent;
+    public Sprite fullEnergySprite;
+    public Sprite emptyEnergySprite;
+    public Color fullEnergyColor = Color.red;
+    public Color pendingEnergyColor = Color.yellow;
+    public Color shortageEnergyColor = Color.gray;
+    private List<Image> energyIcons = new List<Image>();
+
+    [Header("スコア")]
     public TextMeshProUGUI scoreText;
     public int playerScore = 0;
     private int currentDisplayedScore = 0;
     private Coroutine scoreCoroutine;
 
+    [Header("スキルポイント")]
     public TextMeshProUGUI skillPointText;
 
+    [Header("ボスHPとタイトルロゴ")]
     public Slider bossHPSlider;
     public GameObject titleLogo;
 
@@ -42,10 +53,19 @@ public class InformationUIController : MonoBehaviour
     void Start()
     {
         UpdateLivesDisplay(playerController.life);
-        UpdateSpecialsDisplay(playerController.supecialSkillUsesLeft);
         UpdateScoreDisplay(0);
         UpdateSkillPoint(0);
         ShowBossHP(false, 0f);
+    }
+
+    public void InitializeEnergyGauge(int maxEnergy)
+    {
+        for (int i = 0; i < maxEnergy; i++)
+        {
+            GameObject iconObj = Instantiate(energyIconPrefab, energyIconsParent);
+            Image iconImage = iconObj.GetComponent<Image>();
+            energyIcons.Add(iconImage);
+        }
     }
 
     public void UpdateLivesDisplay(int currentLives)
@@ -63,18 +83,28 @@ public class InformationUIController : MonoBehaviour
         }
     }
 
-    public void UpdateSpecialsDisplay(int currentSpecials)
+    public void UpdateEnergyDisplay(int currentEnergy, int cost)
     {
-        foreach (GameObject icon in activeSpecialIcons)
-        {
-            Destroy(icon);
-        }
-        activeSpecialIcons.Clear();
+        bool isShortage = currentEnergy < cost;
 
-        for (int i = 0; i < currentSpecials; i++)
+        for (int i = 0; i < energyIcons.Count; i++)
         {
-            GameObject newIcon = Instantiate(specialIconPrefab, specialIconsParent);
-            activeSpecialIcons.Add(newIcon);
+            Image icon = energyIcons[i];
+
+            if (i >= currentEnergy) //消費済みエネルギー
+            {
+                icon.sprite = emptyEnergySprite;
+            }
+            else if (i >= currentEnergy - cost) //次消費予定のエネルギー
+            {
+                icon.sprite = fullEnergySprite;
+                icon.color = isShortage ? shortageEnergyColor : pendingEnergyColor;
+            }
+            else //未消費エネルギー
+            {
+                icon.sprite = fullEnergySprite;
+                icon.color = isShortage ? shortageEnergyColor : fullEnergyColor;
+            }
         }
     }
 

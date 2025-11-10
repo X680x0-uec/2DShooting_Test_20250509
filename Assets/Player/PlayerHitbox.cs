@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerHitbox : MonoBehaviour
 {
@@ -28,21 +29,8 @@ public class PlayerHitbox : MonoBehaviour
             }
             else
             {
-                //被弾時の処理を後で追加
-                if (playerController != null)
-                {
-                    playerController.StartBlinkEffect();
-                }
-                if (playerController.life <= 0)
-                {
-                    playerController.Gameover();
-                }
-                else
-                {
-                    playerController.life -= 1;
-                    playerController.CheckAndChangeToRevengeMode();
-                    InformationUIController.Instance.UpdateLivesDisplay(playerController.life);
-                }
+                //被弾
+                playerController.ApplyDamage();
             }
         }
     }

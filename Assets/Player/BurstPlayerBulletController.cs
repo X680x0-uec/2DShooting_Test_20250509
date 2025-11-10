@@ -22,7 +22,6 @@ public class BurstPlayerBulletController : PlayerBulletController
             if (zakoHP != null)
             {
                 zakoHP.TakeDamage(finalDamage);
-                InformationUIController.Instance.UpdateScoreDisplay(Mathf.CeilToInt(finalDamage/4));
             }
             else
             {
@@ -38,7 +37,6 @@ public class BurstPlayerBulletController : PlayerBulletController
             if (bossHP != null)
             {
                 bossHP.TakeDamage(finalDamage);
-                InformationUIController.Instance.UpdateScoreDisplay(Mathf.CeilToInt(finalDamage/4));
             }
             else
             {

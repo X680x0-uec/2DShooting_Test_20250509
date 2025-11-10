@@ -47,3 +47,4 @@ MonoBehaviour:
   debrisPrefab: {fileID: 522808097891380464, guid: a0721483267e315418a4bd83b30bbdda, type: 3}
   debrisCount: 7
   debrisSpawnRadius: 0.5
+  debrisSpawnSound: {fileID: 8300000, guid: 1c80db0fe2b6de14cacaff49b4dc21e2, type: 3}

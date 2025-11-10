@@ -101,7 +101,6 @@ public class Laser : MonoBehaviour
                 else
                 {
                     enemy.TakeDamage(damage);
-                    InformationUIController.Instance.UpdateScoreDisplay((int)(damage/2));
                 }
             }
             nextDamageTime = Time.time + damageInterval;
@@ -118,7 +117,6 @@ public class Laser : MonoBehaviour
                 else
                 {
                     enemy.TakeDamage(damage);
-                    InformationUIController.Instance.UpdateScoreDisplay(Mathf.CeilToInt(damage/4));
                 }
             }
             nextDamageTime = Time.time + damageInterval;
