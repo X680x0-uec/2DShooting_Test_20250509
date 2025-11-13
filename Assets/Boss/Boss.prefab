@@ -288,7 +288,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325983007289264143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4d0e8de9fb30694ba93d2285a4979fe, type: 3}
   m_Name: 
@@ -310,7 +310,6 @@ MonoBehaviour:
   skillSystem: {fileID: 0}
   maxHP: 10000
   pointValue: 100
-  manager: {fileID: 0}
 --- !u!1 &1443088904025980944
 GameObject:
   m_ObjectHideFlags: 0

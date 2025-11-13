@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class BossHP : MonoBehaviour
 {
+    public PlayerController player;
     public SkillSystem skillSystem;
     public float maxHP = 100;
     private float currentHP;
     public int pointValue = 100;
+    public int bossScore = 200000;
 
     // 無敵状態フラグ
     public bool IsInvincible { get; private set; } = false;
@@ -47,11 +49,15 @@ public class BossHP : MonoBehaviour
     void BossDie()
     {
         skillSystem.TakeSkillPoint(pointValue);
-        EnemyWaveManager manager = FindObjectOfType<EnemyWaveManager>();
+        InformationUIController.Instance.UpdateScoreDisplay(bossScore);
+        
+        EnemyWaveManager manager = FindAnyObjectByType<EnemyWaveManager>();
         if (manager != null)
         {
             manager.OnBossDefeated();
         }
+
+        player.OnBossDefeated();
 
         Destroy(gameObject);
     }

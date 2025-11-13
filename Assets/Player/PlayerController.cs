@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
     public float invincibilityDuration = 2f; //被弾時無敵の長さ
     private bool isControllLocked = false;
     public float controlLockDuration = 0.2f; //被弾時操作不能時間の長さ
+    private bool isNoHit = true;
 
     [Header("特殊スキル用")]
     public GameObject laserPrefab;
@@ -546,6 +547,10 @@ public class PlayerController : MonoBehaviour
     public void ApplyDamage()
     {
         StartBlinkEffect();
+        if (isNoHit)
+        {
+            isNoHit = false;
+        }
         if (life <= 0)
         {
             Gameover();
@@ -736,6 +741,28 @@ public class PlayerController : MonoBehaviour
         {
             hitboxCollider.enabled = true;
         }
+    }
+
+    public void OnBossDefeated()
+    {
+        if (stageNumber >= maxStageNumber)
+        {
+            GameClear();
+        }
+        else
+        {
+            ChangeStage();
+        }
+    }
+
+    private void GameClear()
+    {
+        //
+    }
+    
+    private void ChangeStage()
+    {
+        stageNumber += 1;
     }
 
     public void Gameover()

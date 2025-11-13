@@ -59,7 +59,12 @@ public class ZakoHP : MonoBehaviour
 
         if (currentHP <= 0)
         {
+            InformationUIController.Instance.UpdateScoreDisplay((int)(Mathf.CeilToInt((damage+currentHP)/4)));
             Die();
+        }
+        else
+        {
+            InformationUIController.Instance.UpdateScoreDisplay((int)(Mathf.CeilToInt(damage/4)));
         }
     }
 
@@ -88,9 +93,10 @@ public class ZakoHP : MonoBehaviour
     // スコアポップアップ表示
         ShowScorePopup();
 
-    // スキルポイント付与
+        // スキルポイント付与
         if (skillSystem != null)
             skillSystem.TakeSkillPoint(pointValue);
+            InformationUIController.Instance.UpdateScoreDisplay(pointValue*4);
 
     // 敵本体削除（音に関係なく削除される）
         Destroy(gameObject);

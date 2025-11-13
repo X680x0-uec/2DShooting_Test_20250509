@@ -11315,11 +11315,86 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stage1Spawns:
-  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+  - enemyPrefab: {fileID: 8518096576828694939, guid: 44934512b7ec0fe48a8d53e38b1d2240, type: 3}
     spawnPosition: {x: 9, y: 0}
-    spawnTime: 1
+    spawnTime: 3
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 46ceae41878488c419a47bfd9a837920, type: 3}
+    spawnPosition: {x: 9, y: 0}
+    spawnTime: 3
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 46ceae41878488c419a47bfd9a837920, type: 3}
+    spawnPosition: {x: 9, y: 2}
+    spawnTime: 3
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 46ceae41878488c419a47bfd9a837920, type: 3}
+    spawnPosition: {x: 9, y: -2}
+    spawnTime: 3
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 46ceae41878488c419a47bfd9a837920, type: 3}
+    spawnPosition: {x: 9, y: 4}
+    spawnTime: 3
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 46ceae41878488c419a47bfd9a837920, type: 3}
+    spawnPosition: {x: 9, y: 1}
+    spawnTime: 6
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 46ceae41878488c419a47bfd9a837920, type: 3}
+    spawnPosition: {x: 9, y: 4}
+    spawnTime: 6
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 46ceae41878488c419a47bfd9a837920, type: 3}
+    spawnPosition: {x: 9, y: -2}
+    spawnTime: 6
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 018e23af14ee80643a539680c7b5d270, type: 3}
+    spawnPosition: {x: 9, y: 2}
+    spawnTime: 6
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 018e23af14ee80643a539680c7b5d270, type: 3}
+    spawnPosition: {x: 9, y: 0}
+    spawnTime: 6
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: 4}
+    spawnTime: 8
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: 3}
+    spawnTime: 8
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: 1}
+    spawnTime: 8
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: -2}
+    spawnTime: 12
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: -1}
+    spawnTime: 8
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: -2}
+    spawnTime: 8
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: 4}
+    spawnTime: 10
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: -2}
+    spawnTime: 8
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: -2}
+    spawnTime: 8
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: -2}
+    spawnTime: 8
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: -2}
+    spawnTime: 10
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: 4}
+    spawnTime: 12
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: 3}
+    spawnTime: 12
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: 1}
+    spawnTime: 12
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: -1}
+    spawnTime: 12
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: -2}
+    spawnTime: 12
   stage1Boss: {fileID: 1325983007289264143, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
-  stage1BossTime: 5
+  stage1BossTime: 15
   stage2Spawns:
   - enemyPrefab: {fileID: 0}
     spawnPosition: {x: 0, y: 0}
@@ -15546,8 +15621,8 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 60, y: 60}
   m_Spacing: {x: 0, y: 0}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+  m_Constraint: 1
+  m_ConstraintCount: 18
 --- !u!114 &939113163
 MonoBehaviour:
   m_ObjectHideFlags: 0
