@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BeamAttack : MonoBehaviour
 {
+    [Header("攻撃設定")]
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float fireInterval = 0.2f;
@@ -11,32 +12,56 @@ public class BeamAttack : MonoBehaviour
 
     private Coroutine attackRoutine;
 
-    private void Start()
+    private void Awake()
     {
-        enabled = false; // 起動時は無効
+        // StartではなくAwakeで制御（Startでenabled=falseにするとOnEnableが呼ばれない場合がある）
+        enabled = false;
     }
 
     private void OnEnable()
     {
+        Debug.Log("[BeamAttack] Enabled!");
+
+        // もし以前のCoroutineが残っていれば安全に停止してから再開
+        if (attackRoutine != null)
+        {
+            StopCoroutine(attackRoutine);
+        }
+
         attackRoutine = StartCoroutine(Attack());
     }
 
     private void OnDisable()
     {
+        Debug.Log("[BeamAttack] Disabled!");
+
         if (attackRoutine != null)
+        {
             StopCoroutine(attackRoutine);
+            attackRoutine = null;
+        }
     }
 
     private IEnumerator Attack()
     {
         while (true)
         {
-            Vector3 spawnPos = firePoint.position;
-            spawnPos.y += Random.Range(-fireYRange, fireYRange); // Yをランダム化
+            if (bulletPrefab != null && firePoint != null)
+            {
+                Vector3 spawnPos = firePoint.position;
+                spawnPos.y += Random.Range(-fireYRange, fireYRange); // Yをランダム化
 
-            GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.linearVelocity = Vector2.left * bulletSpeed; // ← 左方向
+                GameObject bullet = Instantiate(bulletPrefab, spawnPos, Quaternion.identity);
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                if (rb != null)
+                {
+                    rb.linearVelocity = Vector2.left * bulletSpeed; // ← 左方向
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[BeamAttack] bulletPrefab または firePoint が設定されていません。");
+            }
 
             yield return new WaitForSeconds(fireInterval);
         }

@@ -3,29 +3,44 @@ using UnityEngine;
 
 public class SplitAttack : MonoBehaviour
 {
-    public GameObject parentBulletPrefab;
-    public Transform firePoint;
-    public float fireInterval = 2f;
+    [Header("攻撃設定")]
+    [SerializeField] private GameObject parentBulletPrefab;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float fireInterval = 2f;
 
     private Coroutine attackRoutine;
 
-    void Start()
+    private void Awake()
     {
-        enabled = false; // AttackCycleが制御
+        // Awakeで無効化（StartでやるとOnEnableが動かないケースがある）
+        enabled = false;
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
+        Debug.Log("[SplitAttack] Enabled!");
+
+        // 以前のコルーチンが残っている可能性を排除
+        if (attackRoutine != null)
+        {
+            StopCoroutine(attackRoutine);
+        }
+
         attackRoutine = StartCoroutine(FireRoutine());
     }
 
-    void OnDisable()
+    private void OnDisable()
     {
+        Debug.Log("[SplitAttack] Disabled!");
+
         if (attackRoutine != null)
+        {
             StopCoroutine(attackRoutine);
+            attackRoutine = null;
+        }
     }
 
-    IEnumerator FireRoutine()
+    private IEnumerator FireRoutine()
     {
         while (true)
         {
@@ -33,7 +48,13 @@ public class SplitAttack : MonoBehaviour
             {
                 Instantiate(parentBulletPrefab, firePoint.position, Quaternion.identity);
             }
+            else
+            {
+                Debug.LogWarning("[SplitAttack] parentBulletPrefab または firePoint が設定されていません。");
+            }
+
             yield return new WaitForSeconds(fireInterval);
         }
     }
 }
+

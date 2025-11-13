@@ -6,6 +6,7 @@ public class BossFloating : MonoBehaviour
     public float frequency = 1f;   // 周期（揺れる速さ）
 
     private Vector3 startPos;
+    private bool isPaused = false; // ← 無敵中に止めるフラグ
 
     void Start()
     {
@@ -14,7 +15,15 @@ public class BossFloating : MonoBehaviour
 
     void Update()
     {
+        if (isPaused) return; // 無敵中は処理をスキップ
+
         float newY = startPos.y + Mathf.Sin(Time.time * frequency) * amplitude;
         transform.position = new Vector3(startPos.x, newY, startPos.z);
+    }
+
+    // 無敵状態中に呼ぶメソッド
+    public void SetPaused(bool pause)
+    {
+        isPaused = pause;
     }
 }

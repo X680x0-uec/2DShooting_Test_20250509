@@ -127,6 +127,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 464828010888321612, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+      propertyPath: waves.Array.data[0].triggerHpPercent
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 464828010888321612, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+      propertyPath: waves.Array.data[1].triggerHpPercent
+      value: 4000
+      objectReference: {fileID: 0}
+    - target: {fileID: 464828010888321612, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+      propertyPath: waves.Array.data[2].triggerHpPercent
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464828010888321612, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+      propertyPath: waves.Array.data[1].nextWaveThreshold
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 464828010888321612, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+      propertyPath: waves.Array.data[2].nextWaveThreshold
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1325983007289264143, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
       propertyPath: m_Name
       value: Boss
@@ -290,10 +310,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillSystem: {fileID: 0}
   maxHP: 10000
-  pointValue: 1000
+  pointValue: 100
+--- !u!1 &2011069572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2011069574}
+  - component: {fileID: 2011069573}
+  m_Layer: 0
+  m_Name: ExploionEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2011069573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011069572}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3704756349b6cf449224e93355b65fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionSprites:
+  - {fileID: 901854622, guid: 23ff952d7d9bfcb48bc7609540e13a12, type: 3}
+  - {fileID: -482372970, guid: 23ff952d7d9bfcb48bc7609540e13a12, type: 3}
+  - {fileID: -247124051, guid: 23ff952d7d9bfcb48bc7609540e13a12, type: 3}
+  - {fileID: 1887441583, guid: 23ff952d7d9bfcb48bc7609540e13a12, type: 3}
+  - {fileID: -232386803007193280, guid: 23ff952d7d9bfcb48bc7609540e13a12, type: 3}
+  - {fileID: 1695322780777025674, guid: 23ff952d7d9bfcb48bc7609540e13a12, type: 3}
+  - {fileID: -1005692367, guid: 23ff952d7d9bfcb48bc7609540e13a12, type: 3}
+  - {fileID: 1214210503, guid: 23ff952d7d9bfcb48bc7609540e13a12, type: 3}
+  frameInterval: 0.1
+  destroyAfterPlay: 1
+--- !u!4 &2011069574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2011069572}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.5476537, y: 3.1648192, z: -0.12828502}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 364801659}
   - {fileID: 155976372}
+  - {fileID: 2011069574}
