@@ -731,7 +731,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171292220}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55caa1ccef23ea84fbc3210a1af87772, type: 3}
   m_Name: 
@@ -2783,6 +2783,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716745913}
   m_CullTransparentMesh: 1
+--- !u!1 &731144659
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 731144661}
+  - component: {fileID: 731144660}
+  m_Layer: 0
+  m_Name: Stagemanager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &731144660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731144659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f392453bcdb4fc142a3535aedb77fbb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stage1Spawns:
+  - enemyPrefab: {fileID: 9068652259859495959, guid: 22550cc46ad7bc2488f61806af00ae13, type: 3}
+    spawnPosition: {x: 9, y: 0}
+    spawnTime: 1
+  stage1Boss: {fileID: 1325983007289264143, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+  stage1BossTime: 5
+  stage2Spawns:
+  - enemyPrefab: {fileID: 0}
+    spawnPosition: {x: 0, y: 0}
+    spawnTime: 0
+  stage2Boss: {fileID: 1325983007289264143, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+  stage2BossTime: 5
+  stage3Spawns: []
+  stage3Boss: {fileID: 1325983007289264143, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
+  stage3BossTime: 5
+--- !u!4 &731144661
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731144659}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.3771848, y: -0.4377537, z: -0.00046489714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &737834315
 GameObject:
   m_ObjectHideFlags: 0
@@ -2886,7 +2945,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748803945}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55caa1ccef23ea84fbc3210a1af87772, type: 3}
   m_Name: 
@@ -5018,7 +5077,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162383344}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55caa1ccef23ea84fbc3210a1af87772, type: 3}
   m_Name: 
@@ -7816,7 +7875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438d13ae519d12349813c65a33ce162c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 20
+  timeLimit: 60
   bossPrefab: {fileID: 1325983007289264143, guid: 5f39aac3a488e5e48b0d3813e0ac71f4, type: 3}
   bossSpawnPosition: {x: 6, y: 0}
   enemySpawners:
@@ -8192,7 +8251,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1724975766}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55caa1ccef23ea84fbc3210a1af87772, type: 3}
   m_Name: 
@@ -9606,7 +9665,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884338032}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55caa1ccef23ea84fbc3210a1af87772, type: 3}
   m_Name: 
@@ -11017,3 +11076,4 @@ SceneRoots:
   - {fileID: 1884338034}
   - {fileID: 1162383346}
   - {fileID: 180253831}
+  - {fileID: 731144661}
