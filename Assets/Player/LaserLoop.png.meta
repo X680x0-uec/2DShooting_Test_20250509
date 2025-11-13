@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: aa18eeffbdd547645a7e26fea3005f8a
+guid: ecec921afb8ebc446ae1425720710275
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6645347785136643727
-    second: CursorFrame_0
+      213: 8117616903480516750
+    second: LaserLoop_0
+  - first:
+      213: 1162426137529154808
+    second: LaserLoop_1
+  - first:
+      213: -9175423953443254631
+    second: LaserLoop_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CursorFrame_0
+      name: LaserLoop_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 520
+        height: 270
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1716002e56bf6c3a0800000000000000
-      internalID: -6645347785136643727
+      spriteID: e80a9a2909197a070800000000000000
+      internalID: 8117616903480516750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserLoop_1
+      rect:
+        serializedVersion: 2
+        x: 520
+        y: 0
+        width: 520
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fcfd0dc964c12010800000000000000
+      internalID: 1162426137529154808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LaserLoop_2
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 0
+        width: 520
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99e876f17885aa080800000000000000
+      internalID: -9175423953443254631
       vertices: []
       indices: 
       edges: []
@@ -125,7 +175,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 229cc7d704829a44ab224771495d2dc9
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CursorFrame_0: -6645347785136643727
+      LaserLoop_0: 8117616903480516750
+      LaserLoop_1: 1162426137529154808
+      LaserLoop_2: -9175423953443254631
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -29959,7 +29959,7 @@ MonoBehaviour:
   moveSpeed: 10
   slowMoveSpeed: 4
   life: 3
-  currentSkill: 2
+  currentSkill: 1
   maxSpecialSkillEnergy: 30
   specialSkillEnergy: 30
   invincibilityDuration: 2

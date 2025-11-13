@@ -29,7 +29,9 @@ public class PlayerController : MonoBehaviour
 {
     [Header("管理情報")]
     public RankingScreenController rankingScreen;
-    public static bool IsGameover { get; private set; } = false;
+    public static bool IsGameOverOrGameClear { get; private set; } = false;
+    public int maxStageNumber = 2;
+    private int stageNumber = 1;
 
     [Header("効果音")]
     public AudioClip appearSound;
@@ -195,7 +197,7 @@ public class PlayerController : MonoBehaviour
             }
             return;
         }
-        if (!isControllLocked && !IsGameover && !SkillSystemOnOff.IsCheckingSkill) //通常時にする処理(操作等)
+        if (!isControllLocked && !IsGameOverOrGameClear && !SkillSystemOnOff.IsCheckingSkill) //通常時にする処理(操作等)
         {
             //低速移動
             float currentSpeed;
@@ -577,7 +579,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator LaserCoroutine()
     {
         SoundManager.Instance.PlaySound(laserSound);
-        Vector3 laserPosition = transform.position + new Vector3(13, 0, 0);
+        Vector3 laserPosition = transform.position + new Vector3(8.9f, 0, 0);
         GameObject laserObject = Instantiate(laserPrefab, laserPosition, Quaternion.identity);
 
         laserObject.transform.SetParent(this.transform); //レーザーをプレイヤーの子オブジェクト化
@@ -616,7 +618,7 @@ public class PlayerController : MonoBehaviour
         {
             specialCountdownBar.gameObject.SetActive(false);
         }
-        laserScript.StartDisappearAnimation();
+        laserScript.TriggerEndAnimation();
         isUsingSpecialSkill = false;
     }
 
@@ -738,11 +740,11 @@ public class PlayerController : MonoBehaviour
 
     public void Gameover()
     {
-        IsGameover = true;
+        IsGameOverOrGameClear = true;
         Time.timeScale = 0;
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         SoundManager.Instance.PlaySound(explosionByGameOverSound, 0.7f);
-        StartCoroutine(DelayAppearingRankingScreen(InformationUIController.Instance.playerScore, "Died in Stage1"));
+        StartCoroutine(DelayAppearingRankingScreen(InformationUIController.Instance.playerScore, $"DIED IN STAGE{stageNumber}"));
         Debug.Log("Gameover");
 
         playerSpriteRenderer.enabled = false;

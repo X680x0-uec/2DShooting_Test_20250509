@@ -1,92 +1,58 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(Animator))]
 public class Laser : MonoBehaviour
 {
     public float damage = 1f;
     public float damageInterval = 0.1f;
-    public float appearDuration = 0.1f;
-    public float disappearDuration = 0.15f;
+    
     public GameObject debrisSpawnerPrefab;
     private PlayerController playerController;
 
-    private SpriteRenderer spriteRenderer;
+    private Animator anim;
     private BoxCollider2D boxCollider;
-    private Vector3 originalScale;
 
     // このレーザーに触れている敵を管理するリスト
     private System.Collections.Generic.List<ZakoHP> zakosInRange = new System.Collections.Generic.List<ZakoHP>();
     private System.Collections.Generic.List<BossHP> bossesInRange = new System.Collections.Generic.List<BossHP>();
     private float nextDamageTime;
 
-    private IEnumerator Start()
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
+
+        boxCollider.enabled = false;
+        this.enabled = false;
+    }
+
+    void Start()
     {
         playerController = GetComponentInParent<PlayerController>();
         damage *= playerController.GetAttackMultiplier();
+    }
 
-        spriteRenderer = GetComponent<SpriteRenderer>();
-        boxCollider = GetComponent<BoxCollider2D>();
-        originalScale = transform.localScale;
-
-        boxCollider.enabled = false;
-
-        yield return StartCoroutine(AppearAnimation());
-
+    public void ActivateDamage() //アニメーションから呼ぶ
+    {
         boxCollider.enabled = true;
+        this.enabled = true;
     }
 
-    private IEnumerator AppearAnimation()
+    public void TriggerEndAnimation() //playerから呼ぶ
     {
-        float timer = 0f;
-        while (timer < appearDuration)
-        {
-            float progress = timer / appearDuration;
-
-            float currentYScale = Mathf.Lerp(0, originalScale.y, progress);
-            transform.localScale = new Vector3(originalScale.x, currentYScale, originalScale.z);
-
-            Color color = spriteRenderer.color;
-            color.a = Mathf.Lerp(0, 0.8f, progress);
-            spriteRenderer.color = color;
-
-            timer += Time.deltaTime;
-            yield return null; //1フレーム待機
-        }
-        transform.localScale = originalScale;
-        Color finalColor = spriteRenderer.color;
-        finalColor.a = 0.8f;
-        spriteRenderer.color = finalColor;
-    }
-
-    public void StartDisappearAnimation()
-    {
-        StopAllCoroutines();
-        StartCoroutine(DisappearAnimation());
-    }
-
-    private IEnumerator DisappearAnimation()
-    {
-        boxCollider.enabled = false;
         this.enabled = false;
+        boxCollider.enabled = false;
 
-        float timer = 0f;
-        while (timer < disappearDuration)
-        {
-            float progress = timer / disappearDuration;
-            float currentYScale = Mathf.Lerp(originalScale.y, 0, progress);
-            transform.localScale = new Vector3(originalScale.x, currentYScale, originalScale.z);
-            Color color = spriteRenderer.color;
-            color.a = Mathf.Lerp(0.8f, 0, progress);
-            spriteRenderer.color = color;
+        anim.SetTrigger("EndLaser");
+    }
 
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
+    public void DestroySelf() //アニメーションから呼ぶ
+    {
         Destroy(gameObject);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (zakosInRange.Count >= 1 && Time.time >= nextDamageTime)
