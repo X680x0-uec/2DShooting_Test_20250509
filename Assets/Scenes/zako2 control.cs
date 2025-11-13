@@ -1,69 +1,72 @@
 using UnityEngine;
-using System.Collections; // コルーチンを使用するために必要な名前空間
+using System.Collections;
 
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] GameObject hammer; // ハンマーのGameObjectを参照するための変数
-    [SerializeField] private float throwIntervalSec = 1; // ハンマーを投げる間隔（秒）
-    [SerializeField] private float throwForce = 10; // ハンマーを投げる力
-    [SerializeField] private float throwAngleDeg = 120; // ハンマーを投げる角度（度）
-    [SerializeField] private float hammerSize = 0.5f; // ハンマーのサイズ
-    [SerializeField] private float destroyDelaySec = 0.03f; // ハンマーが着弾してから破壊されるまでの遅延時間（秒）
+    [Header("ハンマー設定")]
+    [SerializeField] private GameObject hammer;      // ハンマープレハブ
+    [SerializeField] private float throwIntervalSec = 1f;  // 投げる間隔
+    [SerializeField] private float throwSpeed = 10f;       // 飛ぶ速度
+    [SerializeField] private float hammerSize = 0.5f;      // ハンマーのサイズ
+    [SerializeField] private float destroyDelaySec = 0.03f; // ハンマー消滅までの遅延
+
+    private Transform player;
 
     void Start()
     {
-        // ハンマーを投げるコルーチンを開始
-        if (hammer == null) // hammerが設定されていない場合
+        // タグ "Player" からプレイヤー取得
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
         {
-            Debug.LogError("ハンマーのプレハブが設定されていません。Inspectorで設定してください。");
-            return; // コルーチンを開始しない
+            player = playerObj.transform;
         }
-        if (throwIntervalSec <= 0) // throwIntervalSecが0以下の場合
+        else
         {
-            Debug.LogError("ハンマーを投げる間隔は0より大きい値に設定してください。");
-            return; // コルーチンを開始しない
+            Debug.LogError("タグ 'Player' のオブジェクトが見つかりません。");
+            return;
         }
+
+        if (hammer == null)
+        {
+            Debug.LogError("ハンマープレハブが設定されていません。");
+            return;
+        }
+
         StartCoroutine(ThrowHammerCoroutine());
     }
 
     IEnumerator ThrowHammerCoroutine()
     {
-        while (true) // 無限ループ
+        while (true)
         {
-            
-            // ハンマーを投げる力を計算
-            float throwAngleRad = throwAngleDeg * Mathf.Deg2Rad; // 角度をラジアンに変換
-            Vector3 throwDirection = new Vector3(Mathf.Cos(throwAngleRad), Mathf.Sin(throwAngleRad),0); // 投げる方向を計算
+            // 投げる瞬間のプレイヤー位置
+            Vector2 targetPos = player.position;
+            Vector2 spawnPos = transform.position;
 
-            // ハンマーを生成 Instantiateは指定したプレハブをシーンに生成するためのメソッドで、第一引数に生成するプレハブ、第二引数に生成位置、第三引数に生成時の回転(クオータニオン)を指定します。今回は第二引数をtransform.position、第三引数をQuaternion.identityに設定して、敵の位置に回転なし(0,0,0)で生成します。生成したオブジェクトへの参照がhammerInstanceに格納されます。
+            // 方向ベクトル
+            Vector2 direction = (targetPos - spawnPos).normalized;
+
+            // ハンマー生成
             GameObject hammerInstance = Instantiate(hammer, transform.position, Quaternion.identity);
-            // 生成したハンマーのRigidbody2Dコンポーネントを取得
-            Rigidbody2D rb = hammerInstance.GetComponent<Rigidbody2D>();
-            if (rb != null) // hammerにRigidbody2Dコンポーネントが存在する場合
-            {
-                // ハンマーに力を加える
-                rb.AddForce(throwDirection * throwForce, ForceMode2D.Impulse);
-            }
-            else // hammerにRigidbody2Dコンポーネントが存在しない場合
-            {
-                Debug.LogError("ハンマーに Rigidbody2D コンポーネントが見つかりません。");
-            }
-
-            // ハンマーのサイズを設定
             hammerInstance.transform.localScale = new Vector3(hammerSize, hammerSize, 1);
 
-            // ハンマーについているHammerControllerコンポーネントを取得
-            HammerController hc = hammerInstance.GetComponent<HammerController>();
-            if (hc != null) // hammerにHammerControllerコンポーネントが存在する場合
+            Rigidbody2D rb = hammerInstance.GetComponent<Rigidbody2D>();
+            if (rb != null)
             {
-                hc.delaySec = destroyDelaySec; // ハンマーの破壊までの遅延時間を設定
+                rb.gravityScale = 0f;                  // 重力無効
+                rb.linearVelocity = direction * throwSpeed;  // 直線で飛ばす
             }
-            else // hammerにHammerControllerコンポーネントが存在しない場合
+            else
             {
-                Debug.LogError("ハンマーに HammerController コンポーネントが見つかりません。");
+                Debug.LogError("ハンマーに Rigidbody2D コンポーネントがありません。");
             }
 
-            // 指定した間隔だけ待機
+            HammerController hc = hammerInstance.GetComponent<HammerController>();
+            if (hc != null)
+            {
+                hc.delaySec = destroyDelaySec;
+            }
+
             yield return new WaitForSeconds(throwIntervalSec);
         }
     }
