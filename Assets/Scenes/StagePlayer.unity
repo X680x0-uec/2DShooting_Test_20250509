@@ -1958,9 +1958,9 @@ MonoBehaviour:
   energyIconsParent: {fileID: 942032706}
   fullEnergySprite: {fileID: 21300000, guid: 6e7fe5a43e50ae4458df1f066c95eee8, type: 3}
   emptyEnergySprite: {fileID: 21300000, guid: 181979f271bbd904e8e7751fb91719fa, type: 3}
-  fullEnergyColor: {r: 1, g: 0, b: 0, a: 1}
-  pendingEnergyColor: {r: 1, g: 0.20553625, b: 0, a: 1}
-  shortageEnergyColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+  fullEnergyColor: {r: 1, g: 1, b: 1, a: 1}
+  pendingEnergyColor: {r: 1, g: 0.76350385, b: 0.6179246, a: 1}
+  shortageEnergyColor: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 1}
   scoreText: {fileID: 1920451607}
   playerScore: 0
   skillPointText: {fileID: 1904885290}
@@ -29959,7 +29959,7 @@ MonoBehaviour:
   moveSpeed: 10
   slowMoveSpeed: 4
   life: 3
-  currentSkill: 3
+  currentSkill: 2
   maxSpecialSkillEnergy: 30
   specialSkillEnergy: 30
   invincibilityDuration: 2

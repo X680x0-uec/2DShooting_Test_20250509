@@ -94,6 +94,7 @@ public class InformationUIController : MonoBehaviour
             if (i >= currentEnergy) //消費済みエネルギー
             {
                 icon.sprite = emptyEnergySprite;
+                icon.color = isShortage ? shortageEnergyColor : fullEnergyColor;
             }
             else if (i >= currentEnergy - cost) //次消費予定のエネルギー
             {
