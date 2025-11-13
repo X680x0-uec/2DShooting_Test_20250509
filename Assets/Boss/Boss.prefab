@@ -17,7 +17,9 @@ GameObject:
   - component: {fileID: 5395264677763948492}
   - component: {fileID: 2379427655563717707}
   - component: {fileID: 1333853148750643159}
-  - component: {fileID: -1348775087283153077}
+  - component: {fileID: 464828010888321612}
+  - component: {fileID: -3378437755338949516}
+  - component: {fileID: -3962848656716512075}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -176,14 +178,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325983007289264143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 165ccb3fd1454a44fb9faf851eef685e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 8824334380347525752, guid: 0a614ce04fab7364ca67b324fde03cb7, type: 3}
   firePoint: {fileID: 6138129888054285702}
-  fireInterval: 1
+  fireInterval: 1.5
   bulletSpeed: 8
   fireYRange: 4
 --- !u!114 &2384978534018410308
@@ -193,14 +195,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325983007289264143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9107669bcfe203c44896bc9c56a7f131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentBulletPrefab: {fileID: 5243889332449948923, guid: 6d2bd768d1a5ec84a99e6fcdba41d82b, type: 3}
   firePoint: {fileID: 6138129888054285702}
-  fireInterval: 2
+  fireInterval: 5
 --- !u!114 &5395264677763948492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,14 +210,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325983007289264143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc7082157f2f5984bb2914eb24ff2bef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5517393421743947134, guid: fcbf72fbeee01f9478caa1a37c3fd218, type: 3}
   firePoint: {fileID: 6138129888054285702}
-  fireInterval: 1.5
+  fireInterval: 2
   amplitude: 4
   frequency: 1.5
   bulletSpeed: 3
@@ -227,7 +229,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325983007289264143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be8f5c331a5b0db478a9ee1b3d804c90, type: 3}
   m_Name: 
@@ -251,7 +253,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 1
   frequency: 1
---- !u!114 &-1348775087283153077
+--- !u!114 &464828010888321612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325983007289264143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8514cb3574e151a499084afd257d9532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - attackPatterns:
+    - {fileID: 2260542940211503421}
+    - {fileID: 2384978534018410308}
+    triggerHpPercent: 7000
+  - attackPatterns:
+    - {fileID: 2260542940211503421}
+    - {fileID: 5395264677763948492}
+    triggerHpPercent: 4000
+  - attackPatterns:
+    - {fileID: 2384978534018410308}
+    - {fileID: 5395264677763948492}
+    triggerHpPercent: 0
+  waveTransitionDelay: 3
+--- !u!114 &-3378437755338949516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325983007289264143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4d0e8de9fb30694ba93d2285a4979fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damagePerTick: 250
+  interval: 1
+--- !u!114 &-3962848656716512075
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -263,9 +305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb48747a2c04b0747a3ce3bf8428e273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillSystem: {fileID: 0}
-  maxHP: 5000
-  pointValue: 100
+  maxHP: 10000
+  invincibleDuration: 2
+  blinkInterval: 0.1
+  explosionPrefab: {fileID: 0}
+  waveManager: {fileID: 0}
 --- !u!1 &1443088904025980944
 GameObject:
   m_ObjectHideFlags: 0

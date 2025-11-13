@@ -1,0 +1,1030 @@
+fileFormatVersion: 2
+guid: 23ff952d7d9bfcb48bc7609540e13a12
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7441473350075412662
+    second: bakuhatu256x256_0
+  - first:
+      213: 5085808592268217874
+    second: bakuhatu256x256_1
+  - first:
+      213: 1182811539253029434
+    second: bakuhatu256x256_2
+  - first:
+      213: 2714448524838521078
+    second: bakuhatu256x256_3
+  - first:
+      213: 596257725882147449
+    second: bakuhatu256x256_4
+  - first:
+      213: -178037477636926202
+    second: bakuhatu256x256_5
+  - first:
+      213: -8984178735381739896
+    second: bakuhatu256x256_6
+  - first:
+      213: -5999073088566706724
+    second: bakuhatu256x256_7
+  - first:
+      213: -232386803007193280
+    second: bakuhatu256x256_8
+  - first:
+      213: 1695322780777025674
+    second: bakuhatu256x256_9
+  - first:
+      213: -3813081722021128864
+    second: bakuhatu256x256_10
+  - first:
+      213: -3564401151771510335
+    second: bakuhatu256x256_11
+  - first:
+      213: 1708073576685103307
+    second: bakuhatu256x256_12
+  - first:
+      213: -5377701514259084544
+    second: bakuhatu256x256_13
+  - first:
+      213: 1519068464043328092
+    second: bakuhatu256x256_14
+  - first:
+      213: 8726257120668662
+    second: bakuhatu256x256_15
+  - first:
+      213: 1250697861403108161
+    second: bakuhatu256x256_16
+  - first:
+      213: -8399455877096682865
+    second: bakuhatu256x256_17
+  - first:
+      213: 2750298517245542103
+    second: bakuhatu256x256_18
+  - first:
+      213: 9201842392793235962
+    second: bakuhatu256x256_19
+  - first:
+      213: 7130116521481063750
+    second: bakuhatu256x256_20
+  - first:
+      213: -420361679911415239
+    second: bakuhatu256x256_21
+  - first:
+      213: -5899181230584898807
+    second: bakuhatu256x256_22
+  - first:
+      213: -2205833630926094251
+    second: bakuhatu256x256_23
+  - first:
+      213: 2013915033657075155
+    second: bakuhatu256x256_24
+  - first:
+      213: -2525799051087944821
+    second: bakuhatu256x256_25
+  - first:
+      213: 5915198939001108432
+    second: bakuhatu256x256_26
+  - first:
+      213: -780983536890608998
+    second: bakuhatu256x256_27
+  - first:
+      213: 7745091678857185443
+    second: bakuhatu256x256_28
+  - first:
+      213: 8798773546883005926
+    second: bakuhatu256x256_29
+  - first:
+      213: -4552836041179193321
+    second: bakuhatu256x256_30
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bakuhatu256x256_0
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 367
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b0f7c4d59c654760800000000000000
+      internalID: 7441473350075412662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_1
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 355
+        width: 18
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21ec6c908fb649640800000000000000
+      internalID: 5085808592268217874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_2
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 303
+        width: 86
+        height: 110
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a3ae86104d03a6010800000000000000
+      internalID: 1182811539253029434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_3
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 283
+        width: 194
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f845143d88aba520800000000000000
+      internalID: 2714448524838521078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_4
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 267
+        width: 230
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 972a9c91e35564800800000000000000
+      internalID: 596257725882147449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_5
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 319
+        width: 38
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6059ebc7bdb778df0800000000000000
+      internalID: -178037477636926202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_6
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 335
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88604f65a09c15380800000000000000
+      internalID: -8984178735381739896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_7
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 271
+        width: 30
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd30667fc20fbca0800000000000000
+      internalID: -5999073088566706724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_8
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 11
+        width: 222
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04f74441f6566ccf0800000000000000
+      internalID: -232386803007193280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_9
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 7
+        width: 234
+        height: 234
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8097df361ff68710800000000000000
+      internalID: 1695322780777025674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_10
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 191
+        width: 86
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 065556b5066351bc0800000000000000
+      internalID: -3813081722021128864
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_11
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 215
+        width: 50
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c97aa79904b88ec0800000000000000
+      internalID: -3564401151771510335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_12
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 191
+        width: 34
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc8eb844edb44b710800000000000000
+      internalID: 1708073576685103307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_13
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 191
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00bc18e07f09e55b0800000000000000
+      internalID: -5377701514259084544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_14
+      rect:
+        serializedVersion: 2
+        x: 647
+        y: 127
+        width: 62
+        height: 86
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c520dcc38b0d41510800000000000000
+      internalID: 1519068464043328092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_15
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 171
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fb65ef0c700f1000800000000000000
+      internalID: 8726257120668662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_16
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 79
+        width: 34
+        height: 70
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 143e546141f5b5110800000000000000
+      internalID: 1250697861403108161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_17
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 55
+        width: 42
+        height: 102
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8ac51bc1632f6b80800000000000000
+      internalID: -8399455877096682865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_18
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 67
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7de34b20ee50b2620800000000000000
+      internalID: 2750298517245542103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_19
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 103
+        width: 38
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af1429d17e283bf70800000000000000
+      internalID: 9201842392793235962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_20
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 51
+        width: 26
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64dc506033343f260800000000000000
+      internalID: 7130116521481063750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_21
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 83
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 93291bf77439a2af0800000000000000
+      internalID: -420361679911415239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_22
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 59
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90bd55d0de5e12ea0800000000000000
+      internalID: -5899181230584898807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_23
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 59
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5504a0beffd4361e0800000000000000
+      internalID: -2205833630926094251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_24
+      rect:
+        serializedVersion: 2
+        x: 799
+        y: 59
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d5e2fc8d0dd2fb10800000000000000
+      internalID: 2013915033657075155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_25
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 43
+        width: 26
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8362e1352f82fcd0800000000000000
+      internalID: -2525799051087944821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_26
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 59
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d7bdee4812071250800000000000000
+      internalID: 5915198939001108432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_27
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 0
+        width: 118
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a92053c6c936925f0800000000000000
+      internalID: -780983536890608998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_28
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 31
+        width: 42
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a8cd1fb8d71c7b60800000000000000
+      internalID: 7745091678857185443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_29
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 11
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6edb0194ce58b1a70800000000000000
+      internalID: 8798773546883005926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_30
+      rect:
+        serializedVersion: 2
+        x: 823
+        y: 35
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7102be41eb311d0c0800000000000000
+      internalID: -4552836041179193321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_31
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 293
+        width: 156
+        height: 132
+      alignment: 9
+      pivot: {x: 0.5141345, y: 0.6670449}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36773fc51a313df488c6552c0b6cff93
+      internalID: 901854622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_32
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 273
+        width: 167
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b21e868904b8ae44a9df2ef73f544081
+      internalID: -482372970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_33
+      rect:
+        serializedVersion: 2
+        x: 502
+        y: 270
+        width: 239
+        height: 238
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cc04e66e818ea84baac4e661f513c22
+      internalID: -247124051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_34
+      rect:
+        serializedVersion: 2
+        x: 767
+        y: 192
+        width: 257
+        height: 313
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 3, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecfc1b67615d755488098a907e69b197
+      internalID: 1887441583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_35
+      rect:
+        serializedVersion: 2
+        x: 505
+        y: 0
+        width: 260
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96e5f1e083bc4dc48b5ce7e7cc8747c6
+      internalID: -1005692367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bakuhatu256x256_36
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 24
+        width: 80
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce8dc02eb26f8814c99bef2ecc9bb35d
+      internalID: 1214210503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ae4e9c122189ad34188cd9b869030847
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bakuhatu256x256_31: 901854622
+      bakuhatu256x256_32: -482372970
+      bakuhatu256x256_33: -247124051
+      bakuhatu256x256_34: 1887441583
+      bakuhatu256x256_35: -1005692367
+      bakuhatu256x256_36: 1214210503
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
