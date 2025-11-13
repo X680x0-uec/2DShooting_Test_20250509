@@ -35,6 +35,7 @@ public class BossHP : MonoBehaviour
 
         currentHP -= damage;
         Debug.Log($"[BossHP] 現在HP: {currentHP}/{maxHP}");
+        InformationUIController.Instance.UpdateBossHP(currentHP/maxHP);
 
         if (currentHP <= 0)
         {
@@ -46,6 +47,12 @@ public class BossHP : MonoBehaviour
     void BossDie()
     {
         skillSystem.TakeSkillPoint(pointValue);
+        EnemyWaveManager manager = FindObjectOfType<EnemyWaveManager>();
+        if (manager != null)
+        {
+            manager.OnBossDefeated();
+        }
+
         Destroy(gameObject);
     }
 

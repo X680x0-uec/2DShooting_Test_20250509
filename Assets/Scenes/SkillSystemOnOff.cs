@@ -18,7 +18,7 @@ public class SkillSystemOnOff : MonoBehaviour {
 	// Update is called once per frame
 	int opencount = 0;
 	void Update () {
-		if (Input.GetKeyDown("q") && !PlayerController.IsGameover)
+		if (Input.GetKeyDown("q") && !PlayerController.IsGameOverOrGameClear)
 		{
 			if (opencount%2 == 0)
 			{

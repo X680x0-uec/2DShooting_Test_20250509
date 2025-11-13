@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0dca752d545d4c745877c65eb6f23e33
+guid: f472f48923dc98f4aad27419cad98516
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5980797584277433404
-    second: spacialskill_gray_0
+      213: -6183253227720761209
+    second: title1920x1080_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spacialskill_gray_0
+      name: title1920x1080_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 1
-        width: 60
-        height: 62
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4c311a3e840fffca0800000000000000
-      internalID: -5980797584277433404
+      spriteID: 780aa6d13fba03aa0800000000000000
+      internalID: -6183253227720761209
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      spacialskill_gray_0: -5980797584277433404
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
