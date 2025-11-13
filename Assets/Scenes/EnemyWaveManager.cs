@@ -19,7 +19,6 @@ public class EnemyWaveManager : MonoBehaviour
     public float stage3BossTime = 30f;
 
     private int currentStage = 1;
-    private bool isSpawning = false;
     private bool bossStarted = false;
 
     void Start()
@@ -48,7 +47,6 @@ public class EnemyWaveManager : MonoBehaviour
 
     IEnumerator SpawnEnemies(EnemySpawnData[] spawnList)
     {
-        isSpawning = true;
         float timer = 0f;
         int nextIndex = 0;
 
@@ -66,7 +64,6 @@ public class EnemyWaveManager : MonoBehaviour
             yield return null;
         }
 
-        isSpawning = false;
         Debug.Log("ステージ" + currentStage + "の雑魚を全て出しました。");
     }
 
@@ -85,7 +82,8 @@ public class EnemyWaveManager : MonoBehaviour
     {
         if (bossPrefab != null)
         {
-            Instantiate(bossPrefab, new Vector2(0, 0), Quaternion.identity);
+            Instantiate(bossPrefab, new Vector2(8, 0), Quaternion.identity);
+            InformationUIController.Instance.ShowBossHP(true);
             Debug.Log("ステージ" + currentStage + " ボス戦開始！");
         }
         else

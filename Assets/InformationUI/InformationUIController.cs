@@ -148,7 +148,7 @@ public class InformationUIController : MonoBehaviour
         skillPointText.text = $"Skill Point: {currentSkillPoint:D5}";
     }
 
-    public void ShowBossHP(bool show, float currentBossHealthRatio = 0f)
+    public void ShowBossHP(bool show, float currentBossHealthRatio = 1f)
     {
         bossHPSlider.gameObject.SetActive(show);
         titleLogo.SetActive(!show);
