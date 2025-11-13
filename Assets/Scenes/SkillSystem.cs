@@ -17,13 +17,17 @@ public enum SkillType
 	Special1,
 	Special2,
 	Special3,
+	Special4,
+	Special5,
+	Special6,
 	Junior1,
 	Junior2,
 	Junior3,
 	Junior4,
 	Junior5,
 	Junior6,
-	Passive1
+	Passive1,
+	Passive2
 };
 
 public class SkillSystem : MonoBehaviour
@@ -85,6 +89,7 @@ public class SkillSystem : MonoBehaviour
 		}
 		if (type == SkillType.Attack2)
 		{
+			Debug.Log("aa");
 			return skills[(int)SkillType.Attack1];
 		}
 		else if (type == SkillType.Attack3)
@@ -107,11 +112,20 @@ public class SkillSystem : MonoBehaviour
 		{
 			return skills[(int)SkillType.Special1];
 		}
+		else if (type == SkillType.Special5)
+		{
+			return skills[(int)SkillType.Special4];
+		}
+		else if (type == SkillType.Special6)
+		{
+			return skills[(int)SkillType.Special5];
+		}
 		else if (type == SkillType.Junior4)
 		{
 			return skills[(int)SkillType.Junior3];
 		}
-		return true;
+		else
+		    return true;
 	}
 	//　スキル毎にボタンのオン・オフをする処理を実行させる
 	void CheckOnOff()

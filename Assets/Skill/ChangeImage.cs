@@ -19,6 +19,7 @@ private int spendPoint;
     {
         if (skillsystem.CanLearnSkill(type,spendPoint))
         {
+            Debug.Log("aaaaa");
             var img = GetComponent<Image>();
             img.sprite = isOn ? _on : _off; // 状態に応じて画像を切り替え
             isOn = true; // 状態を反転;

@@ -20,9 +20,10 @@ public class SkillParam : MonoBehaviour {
     //　スキル情報
     [SerializeField]
     private string skillInformation;
-    //　スキル情報を載せるテキストUI
-    [SerializeField]
-    private Text text;
+	//　スキル情報を載せるテキストUI
+	[SerializeField]
+	private Text text;
+	public ChangeImage image;
  
 	// Use this for initialization
 	void Start () {
@@ -38,6 +39,8 @@ public class SkillParam : MonoBehaviour {
 		}
 		//　スキルを覚えられるかどうかチェック
 		if (skillSystem.CanLearnSkill (type, spendPoint)) {
+
+			image.ChangeImageSprite();
 			//　スキルを覚えさせる
 			skillSystem.LearnSkill (type, spendPoint);
  
@@ -56,6 +59,9 @@ public class SkillParam : MonoBehaviour {
 				case SkillType.Special1: skillSystem.player.GetSkill("Special", 0, 1); break;
 				case SkillType.Special2: skillSystem.player.GetSkill("Special", 0, 2); break;
 				case SkillType.Special3: skillSystem.player.GetSkill("Special", 1, 1); break;
+				case SkillType.Special4: skillSystem.player.GetSkill("Special", 2, 1); break;
+				case SkillType.Special5: skillSystem.player.GetSkill("Special", 2, 2); break;
+				case SkillType.Special6: skillSystem.player.GetSkill("Special", 2, 3); break;
 				case SkillType.Junior1: skillSystem.player.GetSkill("Junior", 0, 1); break;
 				case SkillType.Junior2: skillSystem.player.GetSkill("Junior", 1, 1); break;
 				case SkillType.Junior3: skillSystem.player.GetSkill("Junior", 2, 1); break;
@@ -63,6 +69,7 @@ public class SkillParam : MonoBehaviour {
 				case SkillType.Junior5: skillSystem.player.GetSkill("Junior", 3, 1); break;
 				case SkillType.Junior6: skillSystem.player.GetSkill("Junior", 4, 1); break;
 				case SkillType.Passive1: skillSystem.player.GetSkill("Passive", 0, 1); break;
+				case SkillType.Passive2: skillSystem.player.GetSkill("Passive", 1, 1); break;
 			}
 			
  
