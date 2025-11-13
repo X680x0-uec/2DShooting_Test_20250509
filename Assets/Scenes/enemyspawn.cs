@@ -1,36 +1,30 @@
 using UnityEngine;
-using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
     public bool canSpawn = true;
     public GameObject enemyPrefab;
     public float spawnInterval = 5f;
-    
-    // 出現位置の範囲（例: x座標を -10 ～ 10 にする）
+
     public float minY = -3f;
     public float maxY = 3f;
     public float fixedX = 9f;
     public float fixedZ = 0f;
 
-    void Start()
-    {
-        StartCoroutine(SpawnEnemyRoutine());
-    }
+    private float timer;
 
-    IEnumerator SpawnEnemyRoutine()
+    void Update()
     {
-        while (true)
+        if (!canSpawn) return;
+
+        timer += Time.deltaTime;
+
+        if (timer >= spawnInterval)
         {
-            SpawnEnemy();
-            yield return new WaitForSeconds(spawnInterval);
+            float randomY = Random.Range(minY, maxY);
+            Vector3 spawnPosition = new Vector3(fixedX, randomY, fixedZ);
+            Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+            timer = 0f;
         }
-    }
-
-    void SpawnEnemy()
-    {
-        float randomY = Random.Range(minY, maxY);
-        Vector3 spawnPosition = new Vector3(fixedX, randomY, fixedZ);
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
     }
 }

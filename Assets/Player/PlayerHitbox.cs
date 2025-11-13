@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerHitbox : MonoBehaviour
 {
@@ -16,15 +17,21 @@ public class PlayerHitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Zako") || other.CompareTag("EnemyBullet"))
+        if (other.CompareTag("Zako") || other.CompareTag("EnemyBullet") || other.CompareTag("Boss"))
         {
-            //被弾時の処理を後で追加
-            if (playerController != null)
+            if (playerController.IsInvincibleBySpecialSkill)
             {
-                playerController.StartBlinkEffect();
+                if (other.CompareTag("EnemyBullet"))
+                {
+                    Instantiate(playerController.debrisSpawnerPrefab, other.transform.position, Quaternion.identity);
+                    Destroy(other.gameObject);
+                }
             }
-            playerController.life -= 1;
-            Debug.Log("life:" + playerController.life);
+            else
+            {
+                //被弾
+                playerController.ApplyDamage();
+            }
         }
     }
 }

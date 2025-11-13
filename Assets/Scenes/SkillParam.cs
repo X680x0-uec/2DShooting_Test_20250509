@@ -20,9 +20,10 @@ public class SkillParam : MonoBehaviour {
     //　スキル情報
     [SerializeField]
     private string skillInformation;
-    //　スキル情報を載せるテキストUI
-    [SerializeField]
-    private Text text;
+	//　スキル情報を載せるテキストUI
+	[SerializeField]
+	private Text text;
+	public ChangeImage image;
  
 	// Use this for initialization
 	void Start () {
@@ -38,10 +39,39 @@ public class SkillParam : MonoBehaviour {
 		}
 		//　スキルを覚えられるかどうかチェック
 		if (skillSystem.CanLearnSkill (type, spendPoint)) {
+
+			image.ChangeImageSprite();
 			//　スキルを覚えさせる
 			skillSystem.LearnSkill (type, spendPoint);
  
 			ChangeButtonColor (new Color(0f, 0f, 1f, 1f));
+
+			switch (type)
+			{
+				case SkillType.HP1: skillSystem.player.GetSkill("HP", 0, 1); break;
+				case SkillType.HP2: skillSystem.player.GetSkill("HP", 0, 2); break;
+				case SkillType.HP3: skillSystem.player.GetSkill("HP", 0, 3); break;
+				case SkillType.Attack1: skillSystem.player.GetSkill("Attack", 0, 1); break;
+				case SkillType.Attack2: skillSystem.player.GetSkill("Attack", 0, 2); break;
+				case SkillType.Attack3: skillSystem.player.GetSkill("Attack", 0, 3); break;
+				case SkillType.Shot1: skillSystem.player.GetSkill("Shot", 0, 1); break;
+				case SkillType.Shot2: skillSystem.player.GetSkill("Shot", 0, 2); break;
+				case SkillType.Special1: skillSystem.player.GetSkill("Special", 0, 1); break;
+				case SkillType.Special2: skillSystem.player.GetSkill("Special", 0, 2); break;
+				case SkillType.Special3: skillSystem.player.GetSkill("Special", 1, 1); break;
+				case SkillType.Special4: skillSystem.player.GetSkill("Special", 2, 1); break;
+				case SkillType.Special5: skillSystem.player.GetSkill("Special", 2, 2); break;
+				case SkillType.Special6: skillSystem.player.GetSkill("Special", 2, 3); break;
+				case SkillType.Junior1: skillSystem.player.GetSkill("Junior", 0, 1); break;
+				case SkillType.Junior2: skillSystem.player.GetSkill("Junior", 1, 1); break;
+				case SkillType.Junior3: skillSystem.player.GetSkill("Junior", 2, 1); break;
+				case SkillType.Junior4: skillSystem.player.GetSkill("Junior", 2, 2); break;
+				case SkillType.Junior5: skillSystem.player.GetSkill("Junior", 3, 1); break;
+				case SkillType.Junior6: skillSystem.player.GetSkill("Junior", 4, 1); break;
+				case SkillType.Passive1: skillSystem.player.GetSkill("Passive", 0, 1); break;
+				case SkillType.Passive2: skillSystem.player.GetSkill("Passive", 1, 1); break;
+			}
+			
  
 			text.text = skillTitle + "を覚えた";
 		} else {

@@ -13,6 +13,16 @@ public class BossHP : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
+
+        if (skillSystem == null)
+        {
+            skillSystem = FindFirstObjectByType<SkillSystem>(FindObjectsInactive.Include);
+
+            if (skillSystem == null)
+            {
+                Debug.LogError("SkillSystem が見つかりません");
+            }
+        }
     }
 
     public float CurrentHP => currentHP;

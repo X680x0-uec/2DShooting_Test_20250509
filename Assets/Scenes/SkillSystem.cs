@@ -11,9 +11,23 @@ public enum SkillType
 	HP3,
 	Attack1,
 	Attack2,
-	Speed1,
-	Speed2,
-	special
+	Attack3,
+	Shot1,
+	Shot2,
+	Special1,
+	Special2,
+	Special3,
+	Special4,
+	Special5,
+	Special6,
+	Junior1,
+	Junior2,
+	Junior3,
+	Junior4,
+	Junior5,
+	Junior6,
+	Passive1,
+	Passive2
 };
 
 public class SkillSystem : MonoBehaviour
@@ -52,11 +66,13 @@ public class SkillSystem : MonoBehaviour
 	public void TakeSkillPoint(int point)
 	{
 		skillPoint += point;
-	}	
+		InformationUIController.Instance.UpdateSkillPoint(skillPoint);
+	}
 	//　スキルポイントを減らす
 	public void SetSkillPoint(int point)
 	{
 		skillPoint -= point;
+		InformationUIController.Instance.UpdateSkillPoint(skillPoint);
 	}
 	//　スキルポイントを取得
 	public int GetSkillPoint()
@@ -71,7 +87,45 @@ public class SkillSystem : MonoBehaviour
 		{
 			return false;
 		}
-		return true;
+		if (type == SkillType.Attack2)
+		{
+			Debug.Log("aa");
+			return skills[(int)SkillType.Attack1];
+		}
+		else if (type == SkillType.Attack3)
+		{
+			return skills[(int)SkillType.Attack2];
+		}
+		else if (type == SkillType.HP3)
+		{
+			return skills[(int)SkillType.HP2];
+		}
+		else if (type == SkillType.HP2)
+		{
+			return skills[(int)SkillType.HP1];
+		}
+		else if (type == SkillType.Shot2)
+		{
+			return skills[(int)SkillType.Shot1];
+		}
+		else if (type == SkillType.Special2)
+		{
+			return skills[(int)SkillType.Special1];
+		}
+		else if (type == SkillType.Special5)
+		{
+			return skills[(int)SkillType.Special4];
+		}
+		else if (type == SkillType.Special6)
+		{
+			return skills[(int)SkillType.Special5];
+		}
+		else if (type == SkillType.Junior4)
+		{
+			return skills[(int)SkillType.Junior3];
+		}
+		else
+		    return true;
 	}
 	//　スキル毎にボタンのオン・オフをする処理を実行させる
 	void CheckOnOff()
@@ -82,7 +136,7 @@ public class SkillSystem : MonoBehaviour
 		}
 	}
 
-	void SetText()
+	public void SetText()
 	{
 		skillText.text = "スキルポイント：" + skillPoint;
 	}
