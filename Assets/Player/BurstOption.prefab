@@ -105,3 +105,4 @@ MonoBehaviour:
   fireRateMultiplier: 1
   wayCount: 1
   spreadAngle: 30
+  fireSound: {fileID: 0}

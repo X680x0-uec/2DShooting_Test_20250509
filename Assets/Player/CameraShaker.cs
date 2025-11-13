@@ -42,7 +42,7 @@ public class CameraShaker : MonoBehaviour
 
             transform.localPosition = new Vector3(originalPosition.x + x, originalPosition.y + y, originalPosition.z);
 
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null; //1フレーム待機
         }
 

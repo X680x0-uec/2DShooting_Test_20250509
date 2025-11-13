@@ -27,22 +27,41 @@ public enum AttackBuffSource
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("管理情報")]
+    public RankingScreenController rankingScreen;
+    public static bool IsGameOverOrGameClear { get; private set; } = false;
+    public int maxStageNumber = 2;
+    private int stageNumber = 1;
+
+    [Header("効果音")]
+    public AudioClip appearSound;
+    public AudioClip explosionByGameOverSound;
+    public AudioClip damage1Sound;
+    public AudioClip damage2Sound;
+    public AudioClip cannotUseSound;
+    public AudioClip vanishSound;
+    public AudioClip laserSound;
+    public AudioClip invincibleSound;
+
     [Header("ビジュアル")]
     public float screenEdgeDistance = 0.3f;
     public float uiAreaHeight = 2f;
     public Slider specialCountdownBar;
+    public SpriteRenderer hitboxSpriteRenderer;
     public CircleCollider2D hitboxCollider;
     public float blinkInterval = 0.1f; //点滅間隔
     public GameObject explosionPrefab;
     private SpriteRenderer playerSpriteRenderer;
     private Color originalPlayerColor;
     private Vector2 screenBounds; //画面端の位置
+    private Coroutine energyCountUpCoroutine;
 
     [Header("登場演出")]
     public float entryTargetX = -6f;
     public float entrySmoothTime = 0.5f;
     private bool isEntering = true;
     private Vector3 entryVelocity = Vector3.zero;
+    private bool isInsideScreenEntering = false;
 
     [Header("自機弾関連")]
     //メインショット
@@ -60,16 +79,16 @@ public class PlayerController : MonoBehaviour
 
     public List<FirePointController> firePoints = new List<FirePointController>(); //発射地点のリスト
 
-    [Header("ゲーム用パラメータ")]
-    public static bool IsGameover { get; private set; } = false;
-    public GameObject gameoverUI;
+    [Header("基本パラメータ")]
     public float moveSpeed = 10f;
     public float slowMoveSpeed = 3f;
     private Dictionary<AttackBuffSource, float> _attackMultipliers = new Dictionary<AttackBuffSource, float>();
     public int life = 5;
     public SpecialSkillType currentSkill = SpecialSkillType.Empty; //セット中のスキル
+    private Dictionary<SpecialSkillType, int> skillEnergyCosts;
     public HashSet<PassiveAbility> passiveAbilities = new HashSet<PassiveAbility>();
-    public int supecialSkillUsesLeft = 0;
+    public int maxSpecialSkillEnergy = 30;
+    public int specialSkillEnergy = 0;
     private bool isUsingSpecialSkill = false;
     private bool isInvincible = false;
     public float invincibilityDuration = 2f; //被弾時無敵の長さ
@@ -128,6 +147,16 @@ public class PlayerController : MonoBehaviour
             specialCountdownBar.gameObject.SetActive(false);
         }
 
+        //各スキルの消費コストを設定
+        skillEnergyCosts = new Dictionary<SpecialSkillType, int>();
+        skillEnergyCosts.Add(SpecialSkillType.Laser, 10);
+        skillEnergyCosts.Add(SpecialSkillType.Vanish, 6);
+        skillEnergyCosts.Add(SpecialSkillType.Invincible, 7);
+
+        specialSkillEnergy = maxSpecialSkillEnergy;
+        InformationUIController.Instance.InitializeEnergyGauge(maxSpecialSkillEnergy);
+        InformationUIController.Instance.UpdateEnergyDisplay(specialSkillEnergy, skillEnergyCosts[currentSkill]);
+
         //登場演出用
         transform.position = new Vector3(-screenBounds.x - 2f, 0, 0);
         isEntering = true;
@@ -149,7 +178,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
         {
             //任意の処理を割り込ませる用(Lキー)
-            GetSkill("Passive", 1, 1);
+            InformationUIController.Instance.UpdateScoreDisplay(100000);
             Debug.Log("pressed L");
         }
         if (isEntering) //登場処理
@@ -157,13 +186,18 @@ public class PlayerController : MonoBehaviour
             Vector3 targetPosition = new Vector3(entryTargetX, transform.position.y, transform.position.z);
 
             transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref entryVelocity, entrySmoothTime);
+            if (!isInsideScreenEntering && transform.position.x > -screenBounds.x)
+            {
+                SoundManager.Instance.PlaySound(appearSound);
+                isInsideScreenEntering = true;
+            }
             if (Vector3.Distance(transform.position, targetPosition) < 0.05f)
             {
                 isEntering = false;
             }
             return;
         }
-        if (!isControllLocked && !IsGameover && !SkillSystemOnOff.IsCheckingSkill) //通常時にする処理(操作等)
+        if (!isControllLocked && !IsGameOverOrGameClear && !SkillSystemOnOff.IsCheckingSkill) //通常時にする処理(操作等)
         {
             //低速移動
             float currentSpeed;
@@ -203,7 +237,7 @@ public class PlayerController : MonoBehaviour
             }
 
             //スキル発動
-            if (Input.GetButtonDown("Special") && supecialSkillUsesLeft > 0 && !isUsingSpecialSkill && currentSkill != SpecialSkillType.Empty)
+            if (Input.GetButtonDown("Special") && !isUsingSpecialSkill && currentSkill != SpecialSkillType.Empty)
             {
                 UseSpecialSkill();
             }
@@ -229,7 +263,7 @@ public class PlayerController : MonoBehaviour
                         switch (level)
                         {
                             case 1:
-                                currentSkill = SpecialSkillType.Laser;
+                                ChangeSpecialSkill(SpecialSkillType.Laser);
                                 break;
                             case 2:
                                 laserDurationMultiplier = 1.2f;
@@ -243,7 +277,7 @@ public class PlayerController : MonoBehaviour
                         switch (level)
                         {
                             case 1:
-                                currentSkill = SpecialSkillType.Vanish;
+                                ChangeSpecialSkill(SpecialSkillType.Vanish);
                                 break;
                         }
                         break;
@@ -251,7 +285,7 @@ public class PlayerController : MonoBehaviour
                         switch (level)
                         {
                             case 1:
-                                currentSkill = SpecialSkillType.Invincible;
+                                ChangeSpecialSkill(SpecialSkillType.Invincible);
                                 break;
                             case 2:
                                 invincibleSkillDurationMultiplier = 1.4f;
@@ -389,6 +423,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void ChangeSpecialSkill(SpecialSkillType newSpecialSkillType)
+    {
+        currentSkill = newSpecialSkillType;
+        InformationUIController.Instance.UpdateEnergyDisplay(specialSkillEnergy, skillEnergyCosts[currentSkill]);
+    }
+
     public void AddOption(GameObject optionPrefab, Vector2 relativePosition, Transform parentTransform = null)
     {
         if (parentTransform == null)
@@ -471,27 +511,75 @@ public class PlayerController : MonoBehaviour
 
     void UseSpecialSkill()
     {
-        isUsingSpecialSkill = true;
-        supecialSkillUsesLeft--;
-        InformationUIController.Instance.UpdateSpecialsDisplay(supecialSkillUsesLeft);
+        int cost = skillEnergyCosts[currentSkill];
 
-        switch (currentSkill)
+        if (specialSkillEnergy >= cost)
         {
-            case SpecialSkillType.Laser:
-                StartCoroutine(LaserCoroutine());
-                break;
-            case SpecialSkillType.Vanish:
-                StartCoroutine(VanishCoroutine());
-                break;
-            case SpecialSkillType.Invincible:
-                StartCoroutine(InvincibleSkillCoroutine());
-                break;
+            if (energyCountUpCoroutine != null)
+            {
+                StopCoroutine(energyCountUpCoroutine);
+            }
+            isUsingSpecialSkill = true;
+            specialSkillEnergy -= cost;
+            InformationUIController.Instance.UpdateEnergyDisplay(specialSkillEnergy, cost);
+
+            switch (currentSkill)
+            {
+                case SpecialSkillType.Laser:
+                    StartCoroutine(LaserCoroutine());
+                    break;
+                case SpecialSkillType.Vanish:
+                    StartCoroutine(VanishCoroutine());
+                    break;
+                case SpecialSkillType.Invincible:
+                    StartCoroutine(InvincibleSkillCoroutine());
+                    break;
+            }
         }
+        else
+        {
+            SoundManager.Instance.PlaySound(cannotUseSound);
+            Debug.Log("エネルギー不足");
+        }
+    }
+
+    public void ApplyDamage()
+    {
+        StartBlinkEffect();
+        if (life <= 0)
+        {
+            Gameover();
+        }
+        else
+        {
+            life -= 1;
+            SoundManager.Instance.PlaySound(damage1Sound);
+            CheckAndChangeToRevengeMode();
+            InformationUIController.Instance.UpdateLivesDisplay(life);
+
+            energyCountUpCoroutine = StartCoroutine(SpecialSkillEnergyCountUpCoroutine(specialSkillEnergy));
+            specialSkillEnergy = maxSpecialSkillEnergy;
+        }
+    }
+
+    private IEnumerator SpecialSkillEnergyCountUpCoroutine(int currentEnergy)
+    {
+        int countingUpEnergy = currentEnergy;
+        while (countingUpEnergy < maxSpecialSkillEnergy)
+        {
+            countingUpEnergy++;
+            InformationUIController.Instance.UpdateEnergyDisplay(countingUpEnergy, skillEnergyCosts[currentSkill]);
+            yield return new WaitForSeconds(0.05f);
+        }
+        InformationUIController.Instance.UpdateEnergyDisplay(specialSkillEnergy, skillEnergyCosts[currentSkill]);
+        
+        energyCountUpCoroutine = null;
     }
 
     private IEnumerator LaserCoroutine()
     {
-        Vector3 laserPosition = transform.position + new Vector3(13, 0, 0);
+        SoundManager.Instance.PlaySound(laserSound);
+        Vector3 laserPosition = transform.position + new Vector3(8.9f, 0, 0);
         GameObject laserObject = Instantiate(laserPrefab, laserPosition, Quaternion.identity);
 
         laserObject.transform.SetParent(this.transform); //レーザーをプレイヤーの子オブジェクト化
@@ -530,12 +618,13 @@ public class PlayerController : MonoBehaviour
         {
             specialCountdownBar.gameObject.SetActive(false);
         }
-        laserScript.StartDisappearAnimation();
+        laserScript.TriggerEndAnimation();
         isUsingSpecialSkill = false;
     }
 
     private IEnumerator VanishCoroutine()
     {
+        SoundManager.Instance.PlaySound(vanishSound);
         if (cameraShaker != null)
         {
             cameraShaker.ShakeCamera(vanishShakeDuration, vanishShakeMagnitude);
@@ -567,6 +656,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator InvincibleSkillCoroutine()
     {
+        SoundManager.Instance.PlaySound(invincibleSound);
         if (specialCountdownBar != null)
         {
             specialCountdownBar.gameObject.SetActive(true);
@@ -631,6 +721,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(controlLockDuration); //被弾時に一瞬動けなくする
         isControllLocked = false;
         float invincibleEndTime = Time.time + invincibilityDuration - controlLockDuration;
+        SoundManager.Instance.PlaySound(damage2Sound);
 
         //無敵時間待機
         while (Time.time < invincibleEndTime)
@@ -649,28 +740,21 @@ public class PlayerController : MonoBehaviour
 
     public void Gameover()
     {
-        IsGameover = true;
+        IsGameOverOrGameClear = true;
         Time.timeScale = 0;
-        playerSpriteRenderer.enabled = false;
         Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        StartCoroutine(BlinkGameoverUICoroutine());
+        SoundManager.Instance.PlaySound(explosionByGameOverSound, 0.7f);
+        StartCoroutine(DelayAppearingRankingScreen(InformationUIController.Instance.playerScore, $"DIED IN STAGE{stageNumber}"));
         Debug.Log("Gameover");
+
+        playerSpriteRenderer.enabled = false;
+        hitboxSpriteRenderer.enabled = false;
+        hitboxCollider.enabled = false;
+        specialCountdownBar.gameObject.SetActive(false);
     }
-    public IEnumerator BlinkGameoverUICoroutine()
+    public IEnumerator DelayAppearingRankingScreen(int score, string progress)
     {
-        bool isActive = false;
-        while (true)
-        {
-            if (isActive)
-            {
-                isActive = false;
-            }
-            else
-            {
-                isActive = true;
-            }
-            gameoverUI.SetActive(isActive);
-            yield return new WaitForSecondsRealtime(0.5f);
-        }
+        yield return new WaitForSecondsRealtime(2f);
+        rankingScreen.ShowScreen(score, progress);
     }
 }

@@ -20,7 +20,6 @@ public class PlayerBulletController : MonoBehaviour
             if (zakoHP != null)
             {
                 zakoHP.TakeDamage(finalDamage);
-                InformationUIController.Instance.UpdateScoreDisplay(Mathf.CeilToInt(finalDamage/4));
             }
             else
             {
@@ -35,7 +34,6 @@ public class PlayerBulletController : MonoBehaviour
             if (bossHP != null)
             {
                 bossHP.TakeDamage(finalDamage);
-                InformationUIController.Instance.UpdateScoreDisplay(Mathf.CeilToInt(finalDamage/4));
             }
             else
             {

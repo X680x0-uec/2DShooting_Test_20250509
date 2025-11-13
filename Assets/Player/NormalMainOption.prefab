@@ -47,3 +47,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1264366309223929868, guid: 02df45f4990ac9a45859a75f1881d424, type: 3}
   fireRate: 0.2
   fireRateMultiplier: 1
+  wayCount: 1
+  spreadAngle: 30
+  fireSound: {fileID: 8300000, guid: 24d6534b3260069468a8c3d72a6eaafa, type: 3}

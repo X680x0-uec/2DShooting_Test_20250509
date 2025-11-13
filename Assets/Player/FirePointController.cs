@@ -14,6 +14,9 @@ public class FirePointController : MonoBehaviour
     protected float nextFireTime = 0f;
     protected PlayerController playerController;
 
+    [Header("効果音")]
+    public AudioClip fireSound;
+
     void Start()
     {
         playerController = GetComponentInParent<PlayerController>();
@@ -51,6 +54,7 @@ public class FirePointController : MonoBehaviour
                 if (bulletScript != null && playerController != null)
                 {
                     bulletScript.Initialize(playerController.GetAttackMultiplier());
+                    SoundManager.Instance.PlaySound(fireSound, 0.02f);
                 }
             }
         }
