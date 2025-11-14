@@ -27,7 +27,9 @@ public enum SkillType
 	Junior5,
 	Junior6,
 	Passive1,
-	Passive2
+	Passive2,
+	Shot3,
+	Special7
 };
 
 public class SkillSystem : MonoBehaviour
@@ -89,7 +91,6 @@ public class SkillSystem : MonoBehaviour
 		}
 		if (type == SkillType.Attack2)
 		{
-			Debug.Log("aa");
 			return skills[(int)SkillType.Attack1];
 		}
 		else if (type == SkillType.Attack3)

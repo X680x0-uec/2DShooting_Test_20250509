@@ -71,6 +71,8 @@ public class SkillParam : MonoBehaviour {
 				case SkillType.Junior6: skillSystem.player.GetSkill("Junior", 4, 1); break;
 				case SkillType.Passive1: skillSystem.player.GetSkill("Passive", 0, 1); break;
 				case SkillType.Passive2: skillSystem.player.GetSkill("Passive", 1, 1); break;
+				case SkillType.Shot3: skillSystem.player.GetSkill("Shot", 0, 3); break;
+				case SkillType.Special7: skillSystem.player.GetSkill("Special", 0, 3); break;
 			}
 			
  
