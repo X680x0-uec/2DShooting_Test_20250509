@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SkillNode : MonoBehaviour
@@ -22,6 +23,9 @@ public class SkillNode : MonoBehaviour
     {
         button = GetComponent<Button>();
         image = GetComponent<Image>();
+
+        if (button != null)
+            button.interactable = false;
     }
 
     public void Select()
@@ -54,9 +58,9 @@ public class SkillNode : MonoBehaviour
     public void Press()
     {
         if (button != null)
-    {
-        button.onClick.Invoke(); // ← これでUIクリックと同じ処理が走る
-    }
+        {
+            button.onClick.Invoke(); // ← これでUIクリックと同じ処理が走る
+        }
         else if (skillParam != null)
             skillParam.OnClick();
     }
