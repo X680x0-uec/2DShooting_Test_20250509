@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Collections;
 
 public class BossHP : MonoBehaviour
 {
-    public PlayerController player;
+    public GameObject explosionPrefab;
+    public AudioClip explosionSound;
     public SkillSystem skillSystem;
     public float maxHP = 100;
     private float currentHP;
@@ -11,6 +13,7 @@ public class BossHP : MonoBehaviour
 
     // 無敵状態フラグ
     public bool IsInvincible { get; private set; } = false;
+    public bool IsInvincibleByDeathEffect { get; private set; } = false;
 
     void Start()
     {
@@ -33,34 +36,72 @@ public class BossHP : MonoBehaviour
     // ダメージを受ける関数
     public void TakeDamage(float damage)
     {
-        if (IsInvincible) return; // 無敵時はダメージ無効
+        if (IsInvincible || IsInvincibleByDeathEffect) return; // 無敵時はダメージ無効
 
         currentHP -= damage;
         Debug.Log($"[BossHP] 現在HP: {currentHP}/{maxHP}");
-        InformationUIController.Instance.UpdateBossHP(currentHP/maxHP);
 
         if (currentHP <= 0)
         {
-            BossDie();
+            InformationUIController.Instance.UpdateScoreDisplay((int)(Mathf.CeilToInt((damage+currentHP)/4)));
+            InformationUIController.Instance.UpdateBossHP(0f);
+            StartCoroutine(BossDieCoroutine());
+        }
+        else
+        {
+            InformationUIController.Instance.UpdateScoreDisplay((int)(Mathf.CeilToInt(damage/4)));
+            InformationUIController.Instance.UpdateBossHP(currentHP/maxHP);
         }
     }
 
     // ボス死亡処理
-    void BossDie()
+    public IEnumerator BossDieCoroutine()
     {
         skillSystem.TakeSkillPoint(pointValue);
         InformationUIController.Instance.UpdateScoreDisplay(bossScore);
-        
+        IsInvincibleByDeathEffect = true;
+
+        PlayerController player = FindAnyObjectByType<PlayerController>();
+        if (player != null)
+        {
+            player.StartBossDeathEffect();
+        }
+
+        //ここに演出を入れる
+        for (int i = 0; i < 10; i++)
+        {
+            Vector3 randomOffset = (Vector3)Random.insideUnitCircle * 2f;
+            Instantiate(explosionPrefab, transform.position + randomOffset, Quaternion.identity);
+            SoundManager.Instance.PlaySound(explosionSound, 0.5f);
+            yield return new WaitForSeconds(0.3f);
+        }
+        yield return new WaitForSeconds(2f);
+
+        //演出はここまで
+
+        if (player != null)
+        {
+            player.OnBossDefeated();
+        }
         EnemyWaveManager manager = FindAnyObjectByType<EnemyWaveManager>();
         if (manager != null)
         {
             manager.OnBossDefeated();
         }
-
-        player.OnBossDefeated();
-
+        
+        DeleteAllEnemyBullets();
         Destroy(gameObject);
     }
+
+    public void DeleteAllEnemyBullets()
+{
+    GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+
+    foreach (GameObject bullet in enemyBullets)
+    {
+        Destroy(bullet);
+    }
+}
 
     // 無敵状態切り替え
     public void SetInvincible(bool invincible)

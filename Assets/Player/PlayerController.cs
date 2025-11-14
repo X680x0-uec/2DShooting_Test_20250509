@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     [Header("管理情報")]
     public RankingScreenController rankingScreen;
     public static bool IsGameOverOrGameClear { get; private set; } = false;
-    public int maxStageNumber = 2;
+    public int maxStageNumber = 1;
     private int stageNumber = 1;
 
     [Header("効果音")]
@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("パッシブアビリティ用")]
     public float fastAttackMultiplier = 1.3f;
-    public float revengeAttackMultiplier = 1.7f;
+    public float revengeAttackMultiplier = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -237,8 +237,12 @@ public class PlayerController : MonoBehaviour
                 Shoot();
             }
 
+            if (currentSkill == SpecialSkillType.Empty)
+            {
+                SoundManager.Instance.PlaySound(cannotUseSound);
+            }
             //スキル発動
-            if (Input.GetButtonDown("Special") && !isUsingSpecialSkill && currentSkill != SpecialSkillType.Empty)
+            else if (Input.GetButtonDown("Special") && !isUsingSpecialSkill)
             {
                 UseSpecialSkill();
             }
@@ -331,13 +335,13 @@ public class PlayerController : MonoBehaviour
                 switch (level)
                 {
                     case 1:
-                        _attackMultipliers[AttackBuffSource.Normal] = 1.15f;
+                        _attackMultipliers[AttackBuffSource.Normal] = 1.2f;
                         break;
                     case 2:
-                        _attackMultipliers[AttackBuffSource.Normal] = 1.3f;
+                        _attackMultipliers[AttackBuffSource.Normal] = 1.5f;
                         break;
                     case 3:
-                        _attackMultipliers[AttackBuffSource.Normal] = 1.5f;
+                        _attackMultipliers[AttackBuffSource.Normal] = 2f;
                         break;
                 }
                 break;
@@ -363,6 +367,9 @@ public class PlayerController : MonoBehaviour
                                 ChangeOptionFireRateMultiplierByTag("MainOption", 0.7f);
                                 break;
                             case 2:
+                                ChangeOptionFireRateMultiplierByTag("MainOption", 0.5f);
+                                break;
+                            case 3:
                                 ChangeOptionFireRateMultiplierByTag("MainOption", 0.3f);
                                 break;
                         }
@@ -743,6 +750,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void StartBossDeathEffect()
+    {
+        hitboxCollider.enabled = false;
+    }
+
     public void OnBossDefeated()
     {
         if (stageNumber >= maxStageNumber)
@@ -757,12 +769,33 @@ public class PlayerController : MonoBehaviour
 
     private void GameClear()
     {
-        //
+        IsGameOverOrGameClear = true;
+        if (isNoHit)
+        {
+            StartCoroutine(DelayAppearingRankingScreenWithClear(InformationUIController.Instance.playerScore, "NO HIT CLEAR"));
+        }
+        else
+        {
+            StartCoroutine(DelayAppearingRankingScreenWithClear(InformationUIController.Instance.playerScore, "ALL CLEAR"));
+        }
+        Debug.Log("GameClear");
+    }
+
+    public IEnumerator DelayAppearingRankingScreenWithClear(int score, string progress)
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        Time.timeScale = 0;
+        rankingScreen.ShowScreen(score, progress);
     }
     
     private void ChangeStage()
     {
         stageNumber += 1;
+        hitboxCollider.enabled = true;
+        transform.position = new Vector3(-screenBounds.x - 2f, 0, 0);
+        isEntering = true;
+        isInsideScreenEntering = false;
+        Debug.Log("Stage changed");
     }
 
     public void Gameover()
