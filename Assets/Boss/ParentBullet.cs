@@ -11,6 +11,9 @@ public class ParentBullet : MonoBehaviour
     public float splitTime = 3f;
     public float destroyDelay = 0.5f;
 
+    [Header("SE設定")]
+    public AudioClip splitSE;    // ← 分裂時のサウンド
+
     private Rigidbody2D rb;
     private bool hasSplit = false;
 
@@ -18,6 +21,8 @@ public class ParentBullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = Vector2.left * speed; // 左向きに発射
+
+        // splitTime 秒後に分裂
         Invoke(nameof(Split), splitTime);
     }
 
@@ -33,6 +38,12 @@ public class ParentBullet : MonoBehaviour
     {
         if (hasSplit) return;
         hasSplit = true;
+
+        // ★ 分裂SEを再生
+        if (splitSE != null && SoundManager.Instance != null)
+        {
+            SoundManager.Instance.PlaySound(splitSE, 0.7f); // ← 音量0.7（適宜調整OK）
+        }
 
         // 左方向（180度）を中心に扇状に発射
         float startAngle = 180f - (childSpreadAngle / 2f);
