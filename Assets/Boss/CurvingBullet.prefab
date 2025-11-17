@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 3283852480340578477}
   - component: {fileID: 7256843189841731650}
   - component: {fileID: 8116189035838353772}
-  - component: {fileID: 7373685581411473746}
+  - component: {fileID: -6603532973693818710}
   - component: {fileID: 800273910615404351}
   - component: {fileID: 704163793695717936}
-  - component: {fileID: -6184532925646885727}
+  - component: {fileID: -3053948465866708130}
   m_Layer: 0
-  m_Name: BounceBullet
+  m_Name: CurvingBullet
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayerID: -3985927
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0e4aaafa2e5a4854c9a2d11e4ac6fdb3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e55a5feb20936640a7d615339d28edb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -119,7 +119,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &7373685581411473746
+--- !u!58 &-6603532973693818710
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,7 +154,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.15
+  m_Radius: 0.06
 --- !u!114 &800273910615404351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a46fda6da81a94c9c76da35f8ac076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  margin: 2
+  margin: 4
   uiAreaHeight: 2
 --- !u!114 &704163793695717936
 MonoBehaviour:
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d85d8810d1a0c944a286b34c0a505e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6184532925646885727
+--- !u!114 &-3053948465866708130
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,11 +190,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4336462115506528984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c418feb16a1afc14098e888496bd94a7, type: 3}
+  m_Script: {fileID: 11500000, guid: 77f47b1686ab0a146a782108324b2671, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shrapnelPrefab: {fileID: 4336462115506528984, guid: fb1b67716b6762b4eb348d45e9ca6e80, type: 3}
-  shrapnelCount: 16
-  minBurstSpeed: 2
-  maxBurstSpeed: 5
-  uiAreaHeight: 2
+  curveStrength: 32

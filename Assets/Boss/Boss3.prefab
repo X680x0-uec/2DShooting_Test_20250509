@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: -3962848656716512075}
   - component: {fileID: 2249711459387770881}
   - component: {fileID: 351480521518702844}
+  - component: {fileID: -1562066024919812294}
+  - component: {fileID: -5214282866624631207}
   m_Layer: 0
   m_Name: Boss3
   m_TagString: Boss
@@ -198,6 +200,7 @@ MonoBehaviour:
   waves:
   - attackPatterns:
     - {fileID: 2249711459387770881}
+    - {fileID: -5214282866624631207}
     nextWaveThreshold: 0.9
   - attackPatterns:
     - {fileID: 351480521518702844}
@@ -256,6 +259,38 @@ MonoBehaviour:
   bounceBulletPrefab: {fileID: 4336462115506528984, guid: 40940d232a751ed4aa25675625709137, type: 3}
   fireInterval: 0.7
   bulletSpeed: 7
+--- !u!114 &-1562066024919812294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325983007289264143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb1092d4737859147a0ab8f4b1a58a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 4336462115506528984, guid: 40f7e02b3501aef4eabe8630236dcbba, type: 3}
+  fireInterval: 0.7
+  bulletSpeed: 5
+  fireOffset: {x: -3, y: -0.3}
+--- !u!114 &-5214282866624631207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325983007289264143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fa051316844285478b6490a453966ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curvingBulletPrefab: {fileID: 4336462115506528984, guid: 091690695c97b7a4fa01b8b33eb5b64a, type: 3}
+  fireInterval: 1
+  bulletSpeed: 7
+  wayCount: 48
 --- !u!1 &1443088904025980944
 GameObject:
   m_ObjectHideFlags: 0

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SkillVanish_0: 7786102860037467015
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

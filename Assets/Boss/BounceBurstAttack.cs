@@ -12,8 +12,8 @@ public class BounceBurstAttack : MonoBehaviour
     // 45度方向のベクトル (正規化済み)
     private Vector2[] directions = new Vector2[]
     {
-        new Vector2(-1, 1).normalized,
-        new Vector2(-1, -1).normalized,
+        new Vector2(-2, 1).normalized,
+        new Vector2(-2, -1).normalized,
     };
 
     private void Awake()

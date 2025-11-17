@@ -11,12 +11,11 @@ GameObject:
   - component: {fileID: 3283852480340578477}
   - component: {fileID: 7256843189841731650}
   - component: {fileID: 8116189035838353772}
-  - component: {fileID: 7373685581411473746}
+  - component: {fileID: -6603532973693818710}
   - component: {fileID: 800273910615404351}
   - component: {fileID: 704163793695717936}
-  - component: {fileID: -6184532925646885727}
   m_Layer: 0
-  m_Name: BounceBullet
+  m_Name: BossCommonBullet3
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86,7 +85,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -119,7 +118,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &7373685581411473746
+--- !u!58 &-6603532973693818710
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,20 +180,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d85d8810d1a0c944a286b34c0a505e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6184532925646885727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336462115506528984}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c418feb16a1afc14098e888496bd94a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shrapnelPrefab: {fileID: 4336462115506528984, guid: fb1b67716b6762b4eb348d45e9ca6e80, type: 3}
-  shrapnelCount: 16
-  minBurstSpeed: 2
-  maxBurstSpeed: 5
-  uiAreaHeight: 2

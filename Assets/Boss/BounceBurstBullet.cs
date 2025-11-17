@@ -10,9 +10,22 @@ public class BounceBurstBullet : MonoBehaviour
     [SerializeField] private float minBurstSpeed = 2f;
     [SerializeField] private float maxBurstSpeed = 5f;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    [SerializeField] private float uiAreaHeight = 2f;
+    private Vector2 screenBounds;
+    private bool hasBurst = false;
+
+    void Start()
     {
-        if (other.CompareTag("Wall"))
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+    }
+
+    void Update()
+    {
+        if (hasBurst) return;
+
+        Vector2 currentPosition = transform.position;
+
+        if (Mathf.Abs(currentPosition.x) > screenBounds.x || currentPosition.y > screenBounds.y || currentPosition.y < -screenBounds.y + uiAreaHeight)
         {
             Burst();
         }
@@ -20,7 +33,14 @@ public class BounceBurstBullet : MonoBehaviour
 
     private void Burst()
     {
-        if (shrapnelPrefab == null) return;
+        if (hasBurst) return;
+        hasBurst = true;
+
+        if (shrapnelPrefab == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         for (int i = 0; i < shrapnelCount; i++)
         {
