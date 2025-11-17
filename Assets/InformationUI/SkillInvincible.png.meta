@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f472f48923dc98f4aad27419cad98516
+guid: 75612f8004cbf4a44a6128d811c73f77
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6183253227720761209
-    second: title1920x1080_0
+      213: 4903936814980941555
+    second: SkillInvincible_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: title1920x1080_0
+      name: SkillInvincible_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1920
-        height: 1080
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 780aa6d13fba03aa0800000000000000
-      internalID: -6183253227720761209
+      spriteID: 3f646e11d884e0440800000000000000
+      internalID: 4903936814980941555
       vertices: []
       indices: 
       edges: []
@@ -134,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      title1920x1080_0: -6183253227720761209
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

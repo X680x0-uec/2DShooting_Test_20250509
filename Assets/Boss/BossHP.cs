@@ -11,6 +11,8 @@ public class BossHP : MonoBehaviour
     public int pointValue = 100;
     public int bossScore = 200000;
 
+    private SpriteRenderer bossSpriteRenderer;
+
     // 無敵状態フラグ
     public bool IsInvincible { get; private set; } = false;
     public bool IsInvincibleByDeathEffect { get; private set; } = false;
@@ -18,6 +20,8 @@ public class BossHP : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
+
+        bossSpriteRenderer = GetComponent<SpriteRenderer>();
 
         if (skillSystem == null)
         {
@@ -61,7 +65,7 @@ public class BossHP : MonoBehaviour
         InformationUIController.Instance.UpdateScoreDisplay(bossScore);
         IsInvincibleByDeathEffect = true;
 
-        PlayerController player = FindAnyObjectByType<PlayerController>();
+        PlayerController player = FindFirstObjectByType<PlayerController>();
         if (player != null)
         {
             player.StartBossDeathEffect();
@@ -75,7 +79,12 @@ public class BossHP : MonoBehaviour
             SoundManager.Instance.PlaySound(explosionSound, 0.5f);
             yield return new WaitForSeconds(0.3f);
         }
-        yield return new WaitForSeconds(2f);
+
+        DeleteAllEnemyBullets();
+        bossSpriteRenderer.enabled = false;
+        player.StartExit();
+        
+        yield return new WaitForSeconds(3f);
 
         //演出はここまで
 
@@ -89,19 +98,19 @@ public class BossHP : MonoBehaviour
             manager.OnBossDefeated();
         }
         
-        DeleteAllEnemyBullets();
+        
         Destroy(gameObject);
     }
 
     public void DeleteAllEnemyBullets()
-{
-    GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-
-    foreach (GameObject bullet in enemyBullets)
     {
-        Destroy(bullet);
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+
+        foreach (GameObject bullet in enemyBullets)
+        {
+            Destroy(bullet);
+        }
     }
-}
 
     // 無敵状態切り替え
     public void SetInvincible(bool invincible)
