@@ -15,7 +15,7 @@ public class PlayerHitbox : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerStay2D(Collider2D other)
     {
         if (other.CompareTag("Zako") || other.CompareTag("EnemyBullet") || other.CompareTag("Boss"))
         {
@@ -26,6 +26,15 @@ public class PlayerHitbox : MonoBehaviour
                     Instantiate(playerController.debrisSpawnerPrefab, other.transform.position, Quaternion.identity);
                     Destroy(other.gameObject);
                 }
+            }
+            else if (playerController.IsJustShielding)
+            {
+                if (other.CompareTag("EnemyBullet"))
+                {
+                    Instantiate(playerController.debrisSpawnerPrefab, other.transform.position, Quaternion.identity);
+                    Destroy(other.gameObject);
+                }
+                playerController.ActivateJustShieldBarrier();
             }
             else
             {

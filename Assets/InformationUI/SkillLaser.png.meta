@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0e4aaafa2e5a4854c9a2d11e4ac6fdb3
+guid: 971b13716732aee49a4453331537eb4c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3735575460116934900
-    second: "\u7121\u984C621_20251005115929_0"
+      213: 4239895955491986009
+    second: SkillLaser_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u7121\u984C621_20251005115929_0"
+      name: SkillLaser_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f0bfebc61e67d330800000000000000
-      internalID: 3735575460116934900
+      spriteID: 95a17b758e227da30800000000000000
+      internalID: 4239895955491986009
       vertices: []
       indices: 
       edges: []
@@ -125,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u7121\u984C621_20251005115929_0": 3735575460116934900
+      SkillLaser_0: 4239895955491986009
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

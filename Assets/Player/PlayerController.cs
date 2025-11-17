@@ -9,13 +9,17 @@ public enum SpecialSkillType
     Empty,
     Laser,
     Vanish,
-    Invincible
+    Invincible,
+    JustShield,
+    Bomb
 }
 
 public enum PassiveAbility
 {
     FastAttack,
-    Revenge
+    Revenge,
+    DamageGuard,
+    FocusRegen
 }
 
 public enum AttackBuffSource
@@ -42,6 +46,12 @@ public class PlayerController : MonoBehaviour
     public AudioClip vanishSound;
     public AudioClip laserSound;
     public AudioClip invincibleSound;
+    public AudioClip changeSpecialSkillSound;
+    public AudioClip justShieldSound;
+    public AudioClip activateBarrierSound;
+    public AudioClip shootBombProjectileSound;
+    public AudioClip damageGuardSound;
+    public AudioClip focusRegenSound;
 
     [Header("ビジュアル")]
     public float screenEdgeDistance = 0.3f;
@@ -62,6 +72,13 @@ public class PlayerController : MonoBehaviour
     private bool isEntering = true;
     private Vector3 entryVelocity = Vector3.zero;
     private bool isInsideScreenEntering = false;
+
+    [Header("退場演出")]
+    public float exitInitialSpeed = 5f;
+    public float exitAcceleration = 20f;
+    private bool isExiting = false;
+    private float currentExitSpeed;
+    public SkillSystemOnOff skillSystemOnOff;
 
     [Header("自機弾関連")]
     //メインショット
@@ -85,6 +102,7 @@ public class PlayerController : MonoBehaviour
     private Dictionary<AttackBuffSource, float> _attackMultipliers = new Dictionary<AttackBuffSource, float>();
     public int life = 5;
     public SpecialSkillType currentSkill = SpecialSkillType.Empty; //セット中のスキル
+    public List<SpecialSkillType> possessedSpecialSkills = new List<SpecialSkillType>();
     private Dictionary<SpecialSkillType, int> skillEnergyCosts;
     public HashSet<PassiveAbility> passiveAbilities = new HashSet<PassiveAbility>();
     public int maxSpecialSkillEnergy = 30;
@@ -95,6 +113,7 @@ public class PlayerController : MonoBehaviour
     private bool isControllLocked = false;
     public float controlLockDuration = 0.2f; //被弾時操作不能時間の長さ
     private bool isNoHit = true;
+    private bool isDamagedThisFrame = false;
 
     [Header("特殊スキル用")]
     public GameObject laserPrefab;
@@ -108,10 +127,20 @@ public class PlayerController : MonoBehaviour
     public float invincibleSkillDuration = 5f;
     public float invincibleSkillDurationMultiplier = 1f;
     public bool IsInvincibleBySpecialSkill { get; private set; } = false;
+    public GameObject justShieldPrefab;
+    public float justShieldWindow = 0.3f;
+    public float justShieldBarrierDurationMultiplier = 1f;
+    public bool IsJustShielding { get; private set; } = false;
+    public GameObject bombProjectilePrefab;
+    public float bombDamagePerEnergy = 10f;
+    public float bombDamagePerEnergyMultiplier = 1f;
 
     [Header("パッシブアビリティ用")]
     public float fastAttackMultiplier = 1.3f;
     public float revengeAttackMultiplier = 2f;
+    public float damageGuardChange = 0.2f;
+    public float focusRegenInterval = 3f;
+    private float focusRegenTimer = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -143,6 +172,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //SkillSystemOnOffにアクセス
+        skillSystemOnOff = FindFirstObjectByType<SkillSystemOnOff>(FindObjectsInactive.Include);
+        if (skillSystemOnOff == null)
+        {
+            Debug.LogError("SkillSystemOnOffが見つかりません");
+        }
+
         if (specialCountdownBar != null)
         {
             specialCountdownBar.gameObject.SetActive(false);
@@ -150,17 +186,21 @@ public class PlayerController : MonoBehaviour
 
         //各スキルの消費コストを設定
         skillEnergyCosts = new Dictionary<SpecialSkillType, int>();
+        skillEnergyCosts.Add(SpecialSkillType.Empty, 0);
         skillEnergyCosts.Add(SpecialSkillType.Laser, 10);
         skillEnergyCosts.Add(SpecialSkillType.Vanish, 6);
-        skillEnergyCosts.Add(SpecialSkillType.Invincible, 7);
+        skillEnergyCosts.Add(SpecialSkillType.Invincible, 15);
+        skillEnergyCosts.Add(SpecialSkillType.JustShield, 1);
+        skillEnergyCosts.Add(SpecialSkillType.Bomb, -1);
 
         specialSkillEnergy = maxSpecialSkillEnergy;
         InformationUIController.Instance.InitializeEnergyGauge(maxSpecialSkillEnergy);
         InformationUIController.Instance.UpdateEnergyDisplay(specialSkillEnergy, skillEnergyCosts[currentSkill]);
+        InformationUIController.Instance.UpdateCurrentSkillIcon(currentSkill);
 
         //登場演出用
         transform.position = new Vector3(-screenBounds.x - 2f, 0, 0);
-        isEntering = true;
+        InformationUIController.Instance.ShowStageAnnounce($"STAGE1");
 
         //初期メインショット
         AddOption(normalMainOptionPrefab, new Vector2(0f, 0f));
@@ -172,14 +212,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             //任意の処理を割り込ませる用(Pキー)
-            GetSkill("Junior", 1, 1);
-            GetSkill("Junior", 3, 1);
+            GetSkill("Special", 4, 1);
             Debug.Log("pressed P");
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
             //任意の処理を割り込ませる用(Lキー)
-            InformationUIController.Instance.UpdateScoreDisplay(100000);
+            GetSkill("Passive", 3, 0);
             Debug.Log("pressed L");
         }
         if (isEntering) //登場処理
@@ -196,6 +235,12 @@ public class PlayerController : MonoBehaviour
             {
                 isEntering = false;
             }
+            return;
+        }
+        if (isExiting) //退場処理
+        {
+            currentExitSpeed += exitAcceleration * Time.deltaTime;
+            transform.position += Vector3.right * currentExitSpeed * Time.deltaTime;
             return;
         }
         if (!isControllLocked && !IsGameOverOrGameClear && !SkillSystemOnOff.IsCheckingSkill) //通常時にする処理(操作等)
@@ -231,22 +276,61 @@ public class PlayerController : MonoBehaviour
 
             transform.position = newPosition;
 
+            bool isShooting = false;
             //弾の発射
             if (Input.GetButton("Shoot"))
             {
                 Shoot();
+                isShooting = true;
             }
 
-            if (currentSkill == SpecialSkillType.Empty)
+            //FocusRegen用
+            if (passiveAbilities.Contains(PassiveAbility.FocusRegen))
             {
-                SoundManager.Instance.PlaySound(cannotUseSound);
+                if (moveDirection.magnitude == 0 && !isShooting)
+                {
+                    focusRegenTimer += Time.deltaTime;
+
+                    if (focusRegenTimer >= focusRegenInterval)
+                    {
+                        SoundManager.Instance.PlaySound(focusRegenSound, 0.7f);
+                        if (specialSkillEnergy < maxSpecialSkillEnergy)
+                        {
+                            specialSkillEnergy += 1;
+                            InformationUIController.Instance.UpdateEnergyDisplay(specialSkillEnergy, skillEnergyCosts[currentSkill]);
+                        }
+                        focusRegenTimer = 0f;
+                    }
+                }
+                else
+                {
+                    focusRegenTimer = 0f;
+                }
             }
+
             //スキル発動
-            else if (Input.GetButtonDown("Special") && !isUsingSpecialSkill)
+            if (Input.GetButtonDown("Special"))
             {
-                UseSpecialSkill();
+                if (!isUsingSpecialSkill && currentSkill != SpecialSkillType.Empty)
+                {
+                    UseSpecialSkill();
+                }
+                else
+                {
+                    SoundManager.Instance.PlaySound(cannotUseSound);
+                }
+            }
+
+            if (Input.GetButtonDown("ChangeSpecialSkill"))
+            {
+                ChangeSpecialSkillToNext();
             }
         }
+    }
+
+    void LateUpdate()
+    {
+        isDamagedThisFrame = false;
     }
 
     void Shoot()
@@ -297,6 +381,34 @@ public class PlayerController : MonoBehaviour
                                 break;
                             case 3:
                                 invincibleSkillDurationMultiplier = 2f;
+                                break;
+                        }
+                        break;
+                    case 3:
+                        switch (level)
+                        {
+                            case 1:
+                                ChangeSpecialSkill(SpecialSkillType.JustShield);
+                                break;
+                            case 2:
+                                justShieldBarrierDurationMultiplier = 1.7f;
+                                break;
+                            case 3:
+                                justShieldBarrierDurationMultiplier = 3f;
+                                break;
+                        }
+                        break;
+                    case 4:
+                        switch (level)
+                        {
+                            case 1:
+                                ChangeSpecialSkill(SpecialSkillType.Bomb);
+                                break;
+                            case 2:
+                                bombDamagePerEnergyMultiplier = 1.4f;
+                                break;
+                            case 3:
+                                bombDamagePerEnergyMultiplier = 2f;
                                 break;
                         }
                         break;
@@ -354,6 +466,12 @@ public class PlayerController : MonoBehaviour
                     case 1:
                         passiveAbilities.Add(PassiveAbility.Revenge);
                         CheckAndChangeToRevengeMode();
+                        break;
+                    case 2:
+                        passiveAbilities.Add(PassiveAbility.DamageGuard);
+                        break;
+                    case 3:
+                        passiveAbilities.Add(PassiveAbility.FocusRegen);
                         break;
                 }
                 break;
@@ -433,8 +551,34 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeSpecialSkill(SpecialSkillType newSpecialSkillType)
     {
+        if (!possessedSpecialSkills.Contains(newSpecialSkillType))
+        {
+            possessedSpecialSkills.Add(newSpecialSkillType);
+        }
         currentSkill = newSpecialSkillType;
         InformationUIController.Instance.UpdateEnergyDisplay(specialSkillEnergy, skillEnergyCosts[currentSkill]);
+        InformationUIController.Instance.UpdateCurrentSkillIcon(currentSkill);
+    }
+
+    private void ChangeSpecialSkillToNext()
+    {
+        if (possessedSpecialSkills.Count <= 1)
+        {
+            return;
+        }
+
+        SoundManager.Instance.PlaySound(changeSpecialSkillSound);
+
+        int currentIndex = possessedSpecialSkills.IndexOf(currentSkill);
+
+        if (currentIndex + 1 >= possessedSpecialSkills.Count)
+        {
+            ChangeSpecialSkill(possessedSpecialSkills[0]);
+        }
+        else
+        {
+            ChangeSpecialSkill(possessedSpecialSkills[currentIndex + 1]);
+        }
     }
 
     public void AddOption(GameObject optionPrefab, Vector2 relativePosition, Transform parentTransform = null)
@@ -521,7 +665,30 @@ public class PlayerController : MonoBehaviour
     {
         int cost = skillEnergyCosts[currentSkill];
 
-        if (specialSkillEnergy >= cost)
+        if (cost == -1) //ゲージ全消費スキル用
+        {
+            if (specialSkillEnergy <= 0)
+            {
+                SoundManager.Instance.PlaySound(cannotUseSound);
+                Debug.Log("エネルギー不足");
+                return;
+            }
+
+            if (energyCountUpCoroutine != null)
+            {
+                StopCoroutine(energyCountUpCoroutine);
+            }
+            
+            isUsingSpecialSkill = true;
+            if (currentSkill == SpecialSkillType.Bomb)
+            {
+                Bomb(specialSkillEnergy);
+            }
+
+            specialSkillEnergy = 0;
+            InformationUIController.Instance.UpdateEnergyDisplay(specialSkillEnergy, cost);
+        }
+        else if (specialSkillEnergy >= cost)
         {
             if (energyCountUpCoroutine != null)
             {
@@ -542,6 +709,9 @@ public class PlayerController : MonoBehaviour
                 case SpecialSkillType.Invincible:
                     StartCoroutine(InvincibleSkillCoroutine());
                     break;
+                case SpecialSkillType.JustShield:
+                    StartCoroutine(JustShieldCoroutine());
+                    break;
             }
         }
         else
@@ -553,7 +723,25 @@ public class PlayerController : MonoBehaviour
 
     public void ApplyDamage()
     {
+        if (isDamagedThisFrame)
+        {
+            return;
+        }
+        isDamagedThisFrame = true;
+
         StartBlinkEffect();
+        if (passiveAbilities.Contains(PassiveAbility.DamageGuard))
+        {
+            float chance = Random.Range(0f, 1f);
+            if (chance <= damageGuardChange)
+            {
+                SoundManager.Instance.PlaySound(damageGuardSound);
+                energyCountUpCoroutine = StartCoroutine(SpecialSkillEnergyCountUpCoroutine(specialSkillEnergy));
+                specialSkillEnergy = maxSpecialSkillEnergy;
+                return;
+            }
+        }
+
         if (isNoHit)
         {
             isNoHit = false;
@@ -713,6 +901,118 @@ public class PlayerController : MonoBehaviour
         isUsingSpecialSkill = false;
     }
 
+    private IEnumerator JustShieldCoroutine()
+    {
+        SoundManager.Instance.PlaySound(justShieldSound);
+        IsJustShielding = true;
+        if (specialCountdownBar != null)
+        {
+            specialCountdownBar.gameObject.SetActive(true);
+            specialCountdownBar.value = 1f;
+        }
+
+        float elapsed = 0f;
+        while (elapsed < justShieldWindow)
+        {
+            elapsed += Time.deltaTime;
+            
+            float ratio = 1f - (elapsed / justShieldWindow);
+            if (specialCountdownBar != null)
+            {
+                specialCountdownBar.value = ratio;
+            }
+            yield return null;
+        }
+
+        if (IsJustShielding)
+        {
+            IsJustShielding = false;
+            isUsingSpecialSkill = false;
+            if (specialCountdownBar != null)
+            {
+                specialCountdownBar.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void ActivateJustShieldBarrier()
+    {
+        SoundManager.Instance.PlaySound(activateBarrierSound);
+        IsJustShielding = false;
+
+        float barrierDuration = 1.5f; //コンポーネント取得失敗時用のデフォルト値
+        JustShieldBarrier barrierScript = justShieldPrefab.GetComponent<JustShieldBarrier>();
+        if (barrierScript != null)
+        {
+            barrierDuration = barrierScript.maxSizeDuration;
+        }
+        else
+        {
+            Debug.LogError("JustShieldBarrierスクリプトが見つかりません");
+        }
+
+        GameObject barrier = Instantiate(justShieldPrefab, transform.position, Quaternion.identity);
+        barrier.transform.SetParent(this.transform);
+
+        JustShieldBarrier currentBarrierScript = barrier.GetComponent<JustShieldBarrier>();
+        if (currentBarrierScript != null)
+        {
+            currentBarrierScript.maxSizeDuration = barrierDuration * justShieldBarrierDurationMultiplier;
+        }
+        StartCoroutine(JustShieldUICoroutine(barrierDuration * justShieldBarrierDurationMultiplier));
+    }
+
+    private IEnumerator JustShieldUICoroutine(float duration)
+    {
+        if (specialCountdownBar == null)
+        {
+            yield break;
+        }
+
+        float elapsed = 0f;
+        if (specialCountdownBar != null)
+        {
+            specialCountdownBar.gameObject.SetActive(true);
+            specialCountdownBar.value = 1f;
+        }
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+
+            float ratio = 1f - (elapsed / duration);
+            if (specialCountdownBar != null)
+            {
+                specialCountdownBar.value = ratio;
+            }
+            yield return null;
+        }
+
+        isUsingSpecialSkill = false;
+        if (specialCountdownBar != null)
+        {
+            specialCountdownBar.gameObject.SetActive(false);
+        }
+    }
+
+    private void Bomb(int consumedEnergy)
+    {
+        SoundManager.Instance.PlaySound(shootBombProjectileSound);
+
+        float finalDamage = bombDamagePerEnergy * consumedEnergy * bombDamagePerEnergyMultiplier;
+
+        Vector3 spawnPos = transform.position + transform.right * 1f;
+        GameObject newBombObj = Instantiate(bombProjectilePrefab, spawnPos, Quaternion.identity);
+
+        BombProjectile bombScript = newBombObj.GetComponent<BombProjectile>();
+        if (bombScript != null)
+        {
+            bombScript.Initialize(finalDamage);
+        }
+
+        isUsingSpecialSkill = false;
+    }
+
     public void StartBlinkEffect()
     {
         if (!isInvincible && playerSpriteRenderer != null) //無敵中でなければ開始
@@ -744,7 +1044,7 @@ public class PlayerController : MonoBehaviour
 
         playerSpriteRenderer.enabled = true;
         isInvincible = false;
-        if (hitboxCollider != null)
+        if (hitboxCollider != null && !IsGameOverOrGameClear)
         {
             hitboxCollider.enabled = true;
         }
@@ -753,6 +1053,14 @@ public class PlayerController : MonoBehaviour
     public void StartBossDeathEffect()
     {
         hitboxCollider.enabled = false;
+        IsGameOverOrGameClear = true;
+        skillSystemOnOff.CloseSkillPanel();
+    }
+
+    public void StartExit()
+    {
+        currentExitSpeed = exitInitialSpeed;
+        isExiting = true;
     }
 
     public void OnBossDefeated()
@@ -770,31 +1078,27 @@ public class PlayerController : MonoBehaviour
     private void GameClear()
     {
         IsGameOverOrGameClear = true;
-        if (isNoHit)
-        {
-            StartCoroutine(DelayAppearingRankingScreenWithClear(InformationUIController.Instance.playerScore, "NO HIT CLEAR"));
-        }
-        else
-        {
-            StartCoroutine(DelayAppearingRankingScreenWithClear(InformationUIController.Instance.playerScore, "ALL CLEAR"));
-        }
+        StartCoroutine(DelayAppearingClearText());
         Debug.Log("GameClear");
     }
 
-    public IEnumerator DelayAppearingRankingScreenWithClear(int score, string progress)
+    public IEnumerator DelayAppearingClearText()
     {
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 0;
-        rankingScreen.ShowScreen(score, progress);
+        InformationUIController.Instance.ShowClearAnnounce(isNoHit);
     }
-    
+
     private void ChangeStage()
     {
         stageNumber += 1;
         hitboxCollider.enabled = true;
         transform.position = new Vector3(-screenBounds.x - 2f, 0, 0);
         isEntering = true;
+        isExiting = false;
+        IsGameOverOrGameClear = false;
         isInsideScreenEntering = false;
+        InformationUIController.Instance.ShowStageAnnounce($"STAGE{stageNumber}");
         Debug.Log("Stage changed");
     }
 

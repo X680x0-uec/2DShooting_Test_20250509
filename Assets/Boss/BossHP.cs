@@ -11,6 +11,8 @@ public class BossHP : MonoBehaviour
     public int pointValue = 100;
     public int bossScore = 200000;
 
+    private SpriteRenderer bossSpriteRenderer;
+
     // 無敵状態
     public bool IsInvincible { get; private set; } = false;
     public bool IsInvincibleByDeathEffect { get; private set; } = false;
@@ -21,6 +23,8 @@ public class BossHP : MonoBehaviour
     void Start()
     {
         currentHP = maxHP;
+
+        bossSpriteRenderer = GetComponent<SpriteRenderer>();
 
         if (skillSystem == null)
         {
@@ -70,7 +74,7 @@ public class BossHP : MonoBehaviour
         InformationUIController.Instance.UpdateScoreDisplay(bossScore);
         IsInvincibleByDeathEffect = true;
 
-        PlayerController player = FindAnyObjectByType<PlayerController>();
+        PlayerController player = FindFirstObjectByType<PlayerController>();
         if (player != null)
         {
             player.StartBossDeathEffect();
@@ -85,7 +89,13 @@ public class BossHP : MonoBehaviour
             yield return new WaitForSeconds(0.3f);
         }
 
-        yield return new WaitForSeconds(2f);
+        DeleteAllEnemyBullets();
+        // ★ Destroy の直前でイベントを発火（WaveManager で受け取れる）←弾消し直後に位置を変更
+        OnBossDead?.Invoke();
+        bossSpriteRenderer.enabled = false;
+        player.StartExit();
+        
+        yield return new WaitForSeconds(3f);
 
         if (player != null)
         {
@@ -97,10 +107,7 @@ public class BossHP : MonoBehaviour
             manager.OnBossDefeated();
         }
 
-        DeleteAllEnemyBullets();
-
-        // ★ Destroy の直前でイベントを発火（WaveManager で受け取れる）
-        OnBossDead?.Invoke();
+        DeleteAllEnemyBullets(); //念のためもう一度弾消し
 
         Destroy(gameObject);
     }
