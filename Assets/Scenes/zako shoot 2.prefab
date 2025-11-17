@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 521933462138854120}
   - component: {fileID: -7113181212416310928}
   - component: {fileID: 3453268840752454062}
-  - component: {fileID: -3647979918704441965}
   m_Layer: 0
   m_Name: zako shoot 2
   m_TagString: Zako

@@ -179,8 +179,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2298914d410040848a96093773857247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillSystem: {fileID: 0}
   maxHP: 50
   pointValue: 100
   scorePopupPrefab: {fileID: 4604594199771147335, guid: ee4c5f22f2751f942bb690f0d191654b, type: 3}
   uiCanvas: {fileID: 0}
+  destroyX: -10
+  skillSystem: {fileID: 0}
+  deathSound: {fileID: 8300000, guid: e11ac856fb374594e92e24a1c5baaf85, type: 3}

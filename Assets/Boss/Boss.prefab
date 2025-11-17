@@ -307,9 +307,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb48747a2c04b0747a3ce3bf8428e273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosionPrefab: {fileID: 677315910630919818, guid: 1340cb8715f91ec4491bb25479233285, type: 3}
+  explosionSound: {fileID: 8300000, guid: ec40ec3668614da4da4be0c6d0b29a82, type: 3}
   skillSystem: {fileID: 0}
-  maxHP: 10000
+  maxHP: 2000
   pointValue: 100
+  bossScore: 200000
 --- !u!1 &1443088904025980944
 GameObject:
   m_ObjectHideFlags: 0

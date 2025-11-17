@@ -21,13 +21,10 @@ public class ZakoHP : MonoBehaviour
     [Header("スキルシステム")]
     public SkillSystem skillSystem;
 
-    public AudioClip deathSound;        
-    private AudioSource audioSource;
+    public AudioClip deathSound;
     void Start()
     {
         currentHP = maxHP;
-
-        audioSource = GetComponent<AudioSource>();
 
         // SkillSystem が未設定なら自動取得（非アクティブも含む）
         if (skillSystem == null)
@@ -75,15 +72,9 @@ public class ZakoHP : MonoBehaviour
         Debug.Log("Die() 呼び出し: " + gameObject.name);
 
     // 効果音が設定されていない場合に備える
-        float clipLength = 0f;
         if (deathSound != null)
         {
-        // 一時オブジェクトで音を鳴らす（敵削除に影響されない）
-            GameObject tempAudio = new GameObject("TempAudio");
-            AudioSource tempSource = tempAudio.AddComponent<AudioSource>();
-            tempSource.PlayOneShot(deathSound);
-            clipLength = deathSound.length;
-            Destroy(tempAudio, clipLength);
+            SoundManager.Instance.PlaySound(deathSound, 0.4f);
         }
         else
         {

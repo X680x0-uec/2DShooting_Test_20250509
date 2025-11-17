@@ -18,7 +18,7 @@ public class SkillSystemOnOff : MonoBehaviour {
 	// Update is called once per frame
 	int opencount = 0;
 	void Update () {
-		if (Input.GetKeyDown("q") && !PlayerController.IsGameOverOrGameClear)
+		if (Input.GetButtonDown("OpenSkillPanel") && !PlayerController.IsGameOverOrGameClear)
 		{
 			if (opencount%2 == 0)
 			{
@@ -37,5 +37,15 @@ public class SkillSystemOnOff : MonoBehaviour {
 			EventSystem.current.SetSelectedGameObject(firstSelect);
 		}
 	}
+
+	public void CloseSkillPanel()
+    {
+        Time.timeScale = 1f;
+		IsCheckingSkill = false;
+		opencount = 0;
+		skillSystem.GetComponent<SkillSystem>().SetText();
+		skillSystem.SetActive(false);
+		EventSystem.current.SetSelectedGameObject(firstSelect);
+    }
 }
  
