@@ -11,9 +11,12 @@ public class BossHP : MonoBehaviour
     public int pointValue = 100;
     public int bossScore = 200000;
 
-    // 無敵状態フラグ
+    // 無敵状態
     public bool IsInvincible { get; private set; } = false;
     public bool IsInvincibleByDeathEffect { get; private set; } = false;
+
+    // ★ ボス死亡を外部に知らせるイベント（WaveManager用）
+    public event System.Action OnBossDead;
 
     void Start()
     {
@@ -33,28 +36,34 @@ public class BossHP : MonoBehaviour
     public float CurrentHP => currentHP;
     public float MaxHP => maxHP;
 
-    // ダメージを受ける関数
+    // ダメージ処理
     public void TakeDamage(float damage)
     {
-        if (IsInvincible || IsInvincibleByDeathEffect) return; // 無敵時はダメージ無効
+        if (IsInvincible || IsInvincibleByDeathEffect) return;
 
         currentHP -= damage;
         Debug.Log($"[BossHP] 現在HP: {currentHP}/{maxHP}");
 
         if (currentHP <= 0)
         {
-            InformationUIController.Instance.UpdateScoreDisplay((int)(Mathf.CeilToInt((damage+currentHP)/4)));
+            // スコア更新
+            InformationUIController.Instance.UpdateScoreDisplay(
+                (int)(Mathf.CeilToInt((damage + currentHP) / 4))
+            );
             InformationUIController.Instance.UpdateBossHP(0f);
+
             StartCoroutine(BossDieCoroutine());
         }
         else
         {
-            InformationUIController.Instance.UpdateScoreDisplay((int)(Mathf.CeilToInt(damage/4)));
-            InformationUIController.Instance.UpdateBossHP(currentHP/maxHP);
+            InformationUIController.Instance.UpdateScoreDisplay(
+                (int)(Mathf.CeilToInt(damage / 4))
+            );
+            InformationUIController.Instance.UpdateBossHP(currentHP / maxHP);
         }
     }
 
-    // ボス死亡処理
+    // ボス死亡コルーチン
     public IEnumerator BossDieCoroutine()
     {
         skillSystem.TakeSkillPoint(pointValue);
@@ -67,7 +76,7 @@ public class BossHP : MonoBehaviour
             player.StartBossDeathEffect();
         }
 
-        //ここに演出を入れる
+        // ★死亡演出（爆発を10回）
         for (int i = 0; i < 10; i++)
         {
             Vector3 randomOffset = (Vector3)Random.insideUnitCircle * 2f;
@@ -75,9 +84,8 @@ public class BossHP : MonoBehaviour
             SoundManager.Instance.PlaySound(explosionSound, 0.5f);
             yield return new WaitForSeconds(0.3f);
         }
-        yield return new WaitForSeconds(2f);
 
-        //演出はここまで
+        yield return new WaitForSeconds(2f);
 
         if (player != null)
         {
@@ -88,22 +96,26 @@ public class BossHP : MonoBehaviour
         {
             manager.OnBossDefeated();
         }
-        
+
         DeleteAllEnemyBullets();
+
+        // ★ Destroy の直前でイベントを発火（WaveManager で受け取れる）
+        OnBossDead?.Invoke();
+
         Destroy(gameObject);
     }
 
     public void DeleteAllEnemyBullets()
-{
-    GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-
-    foreach (GameObject bullet in enemyBullets)
     {
-        Destroy(bullet);
-    }
-}
+        GameObject[] enemyBullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
 
-    // 無敵状態切り替え
+        foreach (GameObject bullet in enemyBullets)
+        {
+            Destroy(bullet);
+        }
+    }
+
+    // 無敵切り替え
     public void SetInvincible(bool invincible)
     {
         IsInvincible = invincible;

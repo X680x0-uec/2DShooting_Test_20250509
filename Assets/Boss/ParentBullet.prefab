@@ -172,3 +172,4 @@ MonoBehaviour:
   decelerationRate: 2
   splitTime: 3
   destroyDelay: 0.5
+  splitSE: {fileID: 8300000, guid: c95aa3083c1daf047ab133f354ba9237, type: 3}

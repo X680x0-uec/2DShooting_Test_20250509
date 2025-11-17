@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 154404f74725f1e459a58eb533623b91, type: 3}
+  m_Name: AttackConfig_2
+  m_EditorClassIdentifier: 
+  beamFireInterval: 0.2
+  beamBulletSpeed: 8
+  beamFireYRange: 1
+  splitFireInterval: 2
+  parentChildCount: 6
+  parentChildSpreadAngle: 150
+  parentSpeed: 4
+  parentDecelerationRate: 2
+  parentSplitTime: 3
+  parentDestroyDelay: 0.5
+  parentSplitSE: {fileID: 8300000, guid: c95aa3083c1daf047ab133f354ba9237, type: 3}
+  childSpeed: 6
+  childLifetime: 3
+  sineFireInterval: 0.2
+  sineBulletSpeed: 5
+  sineAmplitude: 1
+  sineFrequency: 2
+  sineFireRangeY: 2
+  sineBulletLifetime: 10
