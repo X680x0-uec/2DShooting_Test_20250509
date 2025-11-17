@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 7726281217446612448}
   - component: {fileID: 1390913408165730660}
   - component: {fileID: 521933462138854120}
+  - component: {fileID: 7785631356717636230}
   - component: {fileID: -7113181212416310928}
-  - component: {fileID: 3453268840752454062}
-  - component: {fileID: -3647979918704441965}
+  - component: {fileID: -8831711616323436323}
   m_Layer: 0
-  m_Name: zako shoot 2
+  m_Name: zako spiral
   m_TagString: Zako
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -155,6 +155,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7785631356717636230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9068652259859495959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 461d35d13870d1c40bbd58d80fe0da5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 7189023727692188884, guid: 276fb175047c9674aa791d94822e68ef, type: 3}
+  bulletSpeed: 5
+  moveSpeed: 2
+  spiralInterval: 0.1
+  angleStep: 20
 --- !u!114 &-7113181212416310928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,30 +184,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2298914d410040848a96093773857247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 6
+  maxHP: 2
   pointValue: 50
   scorePopupPrefab: {fileID: 4604594199771147335, guid: ee4c5f22f2751f942bb690f0d191654b, type: 3}
   uiCanvas: {fileID: 0}
   destroyX: -10
   skillSystem: {fileID: 0}
   deathSound: {fileID: 8300000, guid: fabd4a73c3b81f74aa92a4dc0fd136ad, type: 3}
---- !u!114 &3453268840752454062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9068652259859495959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd9bdbf475aca9479e174a751d5c843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7189023727692188884, guid: 276fb175047c9674aa791d94822e68ef, type: 3}
-  shootInterval: 1
-  bulletAngle: 180
-  moveSpeed: 2
---- !u!82 &-3647979918704441965
+--- !u!82 &-8831711616323436323
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

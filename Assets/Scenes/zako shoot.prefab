@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1390913408165730660}
   - component: {fileID: 521933462138854120}
   - component: {fileID: -7113181212416310928}
-  - component: {fileID: 8995712452129984518}
   - component: {fileID: 3453268840752454062}
   - component: {fileID: -8831711616323436323}
   m_Layer: 0
@@ -175,24 +174,6 @@ MonoBehaviour:
   destroyX: -10
   skillSystem: {fileID: 0}
   deathSound: {fileID: 8300000, guid: fabd4a73c3b81f74aa92a4dc0fd136ad, type: 3}
---- !u!114 &8995712452129984518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9068652259859495959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99605404243bcf84e93197cda681d249, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hammer: {fileID: 7189023727692188884, guid: 1ddfc9553aa56a345b42c4567f1256c4, type: 3}
-  throwIntervalSec: 5
-  throwForce: 10
-  throwAngleDeg: 120
-  hammerSize: 2
-  destroyDelaySec: 0.03
 --- !u!114 &3453268840752454062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +186,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd9bdbf475aca9479e174a751d5c843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  bulletPrefab: {fileID: 7189023727692188884, guid: 276fb175047c9674aa791d94822e68ef, type: 3}
+  shootInterval: 1
+  bulletAngle: 180
+  moveSpeed: 2
 --- !u!82 &-8831711616323436323
 AudioSource:
   m_ObjectHideFlags: 0

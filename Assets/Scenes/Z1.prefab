@@ -10,13 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 2459706726234270531}
   - component: {fileID: 7726281217446612448}
+  - component: {fileID: -5230181791390743488}
   - component: {fileID: 1390913408165730660}
   - component: {fileID: 521933462138854120}
   - component: {fileID: -7113181212416310928}
-  - component: {fileID: 3453268840752454062}
-  - component: {fileID: -3647979918704441965}
+  - component: {fileID: -3354241544651111483}
   m_Layer: 0
-  m_Name: zako shoot 2
+  m_Name: Z1
   m_TagString: Zako
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,6 +92,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-5230181791390743488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9068652259859495959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2b7a138a193a2d418726f80940da55b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 4
+  zigzagAngle: 30
+  phaseTime: 0.5
 --- !u!58 &1390913408165730660
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -174,23 +189,7 @@ MonoBehaviour:
   destroyX: -10
   skillSystem: {fileID: 0}
   deathSound: {fileID: 8300000, guid: fabd4a73c3b81f74aa92a4dc0fd136ad, type: 3}
---- !u!114 &3453268840752454062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9068652259859495959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd9bdbf475aca9479e174a751d5c843, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7189023727692188884, guid: 276fb175047c9674aa791d94822e68ef, type: 3}
-  shootInterval: 1
-  bulletAngle: 180
-  moveSpeed: 2
---- !u!82 &-3647979918704441965
+--- !u!82 &-3354241544651111483
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,7 +202,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: fabd4a73c3b81f74aa92a4dc0fd136ad, type: 3}
   m_Resource: {fileID: 8300000, guid: fabd4a73c3b81f74aa92a4dc0fd136ad, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.37
   m_Pitch: 1
   Loop: 0
   Mute: 0

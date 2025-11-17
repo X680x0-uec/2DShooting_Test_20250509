@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 1390913408165730660}
   - component: {fileID: 521933462138854120}
   - component: {fileID: -7113181212416310928}
-  - component: {fileID: 3453268840752454062}
-  - component: {fileID: -3647979918704441965}
+  - component: {fileID: 3711638581680658510}
+  - component: {fileID: -8831711616323436323}
   m_Layer: 0
-  m_Name: zako shoot 2
+  m_Name: zako homing
   m_TagString: Zako
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,14 +167,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2298914d410040848a96093773857247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 6
+  maxHP: 2
   pointValue: 50
   scorePopupPrefab: {fileID: 4604594199771147335, guid: ee4c5f22f2751f942bb690f0d191654b, type: 3}
   uiCanvas: {fileID: 0}
   destroyX: -10
   skillSystem: {fileID: 0}
   deathSound: {fileID: 8300000, guid: fabd4a73c3b81f74aa92a4dc0fd136ad, type: 3}
---- !u!114 &3453268840752454062
+--- !u!114 &3711638581680658510
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -183,14 +183,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 9068652259859495959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdd9bdbf475aca9479e174a751d5c843, type: 3}
+  m_Script: {fileID: 11500000, guid: e734e1726044b1141bb4f520c92908b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7189023727692188884, guid: 276fb175047c9674aa791d94822e68ef, type: 3}
-  shootInterval: 1
-  bulletAngle: 180
+  bulletSpeed: 3
   moveSpeed: 2
---- !u!82 &-3647979918704441965
+  aimedInterval: 1
+--- !u!82 &-8831711616323436323
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
