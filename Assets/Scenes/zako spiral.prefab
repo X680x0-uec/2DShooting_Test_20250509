@@ -190,7 +190,7 @@ MonoBehaviour:
   uiCanvas: {fileID: 0}
   destroyX: -10
   skillSystem: {fileID: 0}
-  deathSound: {fileID: 8300000, guid: fabd4a73c3b81f74aa92a4dc0fd136ad, type: 3}
+  deathSound: {fileID: 8300000, guid: e11ac856fb374594e92e24a1c5baaf85, type: 3}
 --- !u!82 &-8831711616323436323
 AudioSource:
   m_ObjectHideFlags: 0
@@ -201,7 +201,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: fabd4a73c3b81f74aa92a4dc0fd136ad, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: fabd4a73c3b81f74aa92a4dc0fd136ad, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
