@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using System;
  
 public class SkillParam : MonoBehaviour {
+	public AudioClip getsound;
+	public AudioClip misssound;
     //　スキル管理システム
     [SerializeField]
     private SkillSystem skillSystem;
@@ -38,9 +40,14 @@ public class SkillParam : MonoBehaviour {
 			return;
 		}
 		//　スキルを覚えられるかどうかチェック
+		if (!skillSystem.CanLearnSkill (type, spendPoint))
+        {
+            SoundManager.Instance.PlaySound(misssound);
+        }
 		if (skillSystem.CanLearnSkill (type, spendPoint)) {
 
 			image.ChangeImageSprite();
+			SoundManager.Instance.PlaySound(getsound);
 			//　スキルを覚えさせる
 			skillSystem.LearnSkill(type, spendPoint);
 			InformationUIController.Instance.UpdateScoreDisplay(spendPoint*2);
@@ -73,6 +80,14 @@ public class SkillParam : MonoBehaviour {
 				case SkillType.Passive2: skillSystem.player.GetSkill("Passive", 1, 1); break;
 				case SkillType.Shot3: skillSystem.player.GetSkill("Shot", 0, 3); break;
 				case SkillType.Special7: skillSystem.player.GetSkill("Special", 0, 3); break;
+				case SkillType.Special8: skillSystem.player.GetSkill("Special", 3, 1); break;
+				case SkillType.Special9: skillSystem.player.GetSkill("Special", 3, 2); break;
+				case SkillType.Special10: skillSystem.player.GetSkill("Special", 3, 3); break;
+				case SkillType.Special11: skillSystem.player.GetSkill("Special", 4, 1); break;
+				case SkillType.Special12: skillSystem.player.GetSkill("Special", 4, 2); break;
+				case SkillType.Special13: skillSystem.player.GetSkill("Special", 4, 3); break;
+				case SkillType.Passive3: skillSystem.player.GetSkill("Passive", 2, 0); break;
+				case SkillType.Passive4: skillSystem.player.GetSkill("Passive", 3, 0); break;
 			}
 			
  
