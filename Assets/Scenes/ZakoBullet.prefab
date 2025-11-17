@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 630086894447145415}
   - component: {fileID: 8570990539769442394}
   - component: {fileID: 6689925590985427253}
-  - component: {fileID: 8963290199884090538}
   - component: {fileID: 8509845068926968906}
+  - component: {fileID: 9120957829238122170}
   m_Layer: 0
-  m_Name: zakotama
+  m_Name: ZakoBullet
   m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,20 +117,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 2
---- !u!114 &8963290199884090538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7189023727692188884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c5157a5485ac674e9728a32d2c24f89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delaySec: 0.001
-  destroyX: -10
 --- !u!58 &8509845068926968906
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -167,3 +153,17 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: -0.0033639988, y: 0.0062493845}
   m_Radius: 0.028037738
+--- !u!114 &9120957829238122170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7189023727692188884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efa43ea217f6d244eb2ec0f68477fdbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  angle: 0

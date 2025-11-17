@@ -1,51 +1,50 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class EnemyWaveManager : MonoBehaviour
 {
-    [Header("ステージ1")]
-    public EnemySpawnData[] stage1Spawns;
-    public GameObject stage1Boss;
-    public float stage1BossTime = 30f;
-
-    [Header("ステージ2")]
-    public EnemySpawnData[] stage2Spawns;
-    public GameObject stage2Boss;
-    public float stage2BossTime = 30f;
-
-    [Header("ステージ3")]
-    public EnemySpawnData[] stage3Spawns;
-    public GameObject stage3Boss;
-    public float stage3BossTime = 30f;
-
-    private int currentStage = 1;
+    private GameDataJson gameData;       // 現在のステージデータ
+    private int currentStage = 1;        // 1からスタート
     private bool bossStarted = false;
+
+    private Coroutine enemyCoroutine;
+    private Coroutine bossCoroutine;
+
+    [Header("ステージ切替演出")]
+    public float stageClearDelay = 2.0f;
 
     void Start()
     {
-        StartStage(currentStage);
+        LoadAndStartStage(currentStage);
     }
 
-    void StartStage(int stageNumber)
+    // ステージをロードして開始
+    void LoadAndStartStage(int stageNumber)
     {
-        switch (stageNumber)
+        gameData = StageLoader.LoadGameData(stageNumber);
+
+        if (gameData == null)
         {
-            case 1:
-                StartCoroutine(SpawnEnemies(stage1Spawns));
-                StartCoroutine(StartBossTimer(stage1BossTime, stage1Boss));
-                break;
-            case 2:
-                StartCoroutine(SpawnEnemies(stage2Spawns));
-                StartCoroutine(StartBossTimer(stage2BossTime, stage2Boss));
-                break;
-            case 3:
-                StartCoroutine(SpawnEnemies(stage3Spawns));
-                StartCoroutine(StartBossTimer(stage3BossTime, stage3Boss));
-                break;
+            Debug.LogError($"ステージ{stageNumber} のデータが存在しません。全ステージクリア扱いにします。");
+            return;
         }
+
+        StartStage(gameData.stages[0]);
     }
 
-    IEnumerator SpawnEnemies(EnemySpawnData[] spawnList)
+    void StartStage(StageJson stage)
+    {
+        if (enemyCoroutine != null) StopCoroutine(enemyCoroutine);
+        if (bossCoroutine != null) StopCoroutine(bossCoroutine);
+
+        bossStarted = false;
+        enemyCoroutine = StartCoroutine(SpawnEnemies(stage.enemies));
+        bossCoroutine = StartCoroutine(StartBossTimer(stage.boss.spawnTime, stage.boss));
+    }
+
+    IEnumerator SpawnEnemies(EnemySpawnJson[] spawnList)
     {
         float timer = 0f;
         int nextIndex = 0;
@@ -53,58 +52,103 @@ public class EnemyWaveManager : MonoBehaviour
         while (nextIndex < spawnList.Length)
         {
             timer += Time.deltaTime;
-            EnemySpawnData data = spawnList[nextIndex];
+            EnemySpawnJson data = spawnList[nextIndex];
 
             if (timer >= data.spawnTime)
             {
-                Instantiate(data.enemyPrefab, data.spawnPosition, Quaternion.identity);
+                AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(data.prefabName);
+                yield return handle;
+
+                if (handle.Status == AsyncOperationStatus.Succeeded)
+                {
+                    GameObject enemy = Instantiate(handle.Result, data.spawnPosition, Quaternion.identity);
+                    enemy.tag = "Zako";
+                }
+                else
+                {
+                    Debug.LogWarning("Addressable Prefab not found: " + data.prefabName);
+                }
+
                 nextIndex++;
             }
 
             yield return null;
         }
 
-        Debug.Log("ステージ" + currentStage + "の雑魚を全て出しました。");
+        Debug.Log($"ステージ{currentStage}の雑魚を全て出しました。");
     }
 
-    IEnumerator StartBossTimer(float waitTime, GameObject bossPrefab)
+    IEnumerator StartBossTimer(float waitTime, BossJson bossData)
     {
         yield return new WaitForSeconds(waitTime);
 
         if (!bossStarted)
         {
             bossStarted = true;
-            SpawnBoss(bossPrefab);
+
+            ClearEnemiesAndBullets();
+            StartCoroutine(SpawnBossAddressable(bossData));
         }
     }
 
-    void SpawnBoss(GameObject bossPrefab)
+    IEnumerator SpawnBossAddressable(BossJson bossData)
     {
-        if (bossPrefab != null)
+        AsyncOperationHandle<GameObject> handle = Addressables.LoadAssetAsync<GameObject>(bossData.prefabName);
+        yield return handle;
+
+        if (handle.Status == AsyncOperationStatus.Succeeded)
         {
-            Instantiate(bossPrefab, new Vector2(8, 0), Quaternion.identity);
+            GameObject boss = Instantiate(handle.Result, bossData.spawnPosition, Quaternion.identity);
+            boss.tag = "Boss";
             InformationUIController.Instance.ShowBossHP(true);
-            Debug.Log("ステージ" + currentStage + " ボス戦開始！");
+            Debug.Log($"ステージ{currentStage} ボス戦開始！");
         }
         else
         {
-            Debug.LogWarning("ボスPrefabが設定されていません！");
+            Debug.LogWarning("Addressable Boss Prefab not found: " + bossData.prefabName);
         }
     }
 
-    // ボス撃破時に呼ぶ
+    void ClearEnemiesAndBullets()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zako");
+        foreach (GameObject enemy in enemies) Destroy(enemy);
+
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        foreach (GameObject bullet in bullets) Destroy(bullet);
+
+        Debug.Log("雑魚と弾を消去しました。");
+    }
+
     public void OnBossDefeated()
     {
         bossStarted = false;
-        currentStage++;
 
-        if (currentStage <= 3)
+        if (bossCoroutine != null)
         {
-            StartStage(currentStage);
+            StopCoroutine(bossCoroutine);
+            bossCoroutine = null;
+        }
+
+        InformationUIController.Instance.ShowBossHP(false);
+        StartCoroutine(HandleStageClear());
+    }
+
+    private IEnumerator HandleStageClear()
+    {
+        Debug.Log($"ステージ{currentStage} クリア演出開始");
+        yield return new WaitForSeconds(stageClearDelay);
+
+        currentStage++;
+        if (currentStage <= 3) // 3ステージまで
+        {
+            Debug.Log($"次のステージへ: {currentStage}");
+            LoadAndStartStage(currentStage);
         }
         else
         {
             Debug.Log("全ステージクリア！");
+            // ここでゲームクリア画面に遷移する処理を追加可能
         }
     }
 }

@@ -1,13 +1,30 @@
 using UnityEngine;
 
-public class Enemy2Movement : MonoBehaviour
+public class EnemyShooter : MonoBehaviour
 {
-    public float speed = 2f;
+    public GameObject bulletPrefab;
+    public float shootInterval = 1.0f;
+    public float bulletAngle = 180f; // 弾は左へ
+    public float moveSpeed = 2f;     // 敵が左に動くスピード
+
+    void Start()
+    {
+        InvokeRepeating(nameof(Shoot), 0f, shootInterval);
+    }
 
     void Update()
     {
-        // 左方向に移動（ローカル座標ではなくワールド座標で）
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        // 敵を左へ移動
+        transform.position += Vector3.left * moveSpeed * Time.deltaTime;
     }
-    
+
+    void Shoot()
+    {
+        // 敵の位置から弾を生成
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
+        // 弾の角度を設定
+        EnemyBulletContoroller bulletCtrl = bullet.GetComponent<EnemyBulletContoroller>();
+        bulletCtrl.angle = bulletAngle;
+    }
 }
