@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
  
 public class SkillSystemOnOff : MonoBehaviour {
+	public AudioClip opensound;
 
 	[SerializeField]
 	public GameObject skillSystem;
@@ -22,6 +23,7 @@ public class SkillSystemOnOff : MonoBehaviour {
 		{
 			if (opencount%2 == 0)
 			{
+				SoundManager.Instance.PlaySound(opensound);
 				Time.timeScale = 0f;
 				IsCheckingSkill = true;
 				opencount += 1;

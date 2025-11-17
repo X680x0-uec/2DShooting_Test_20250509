@@ -29,7 +29,15 @@ public enum SkillType
 	Passive1,
 	Passive2,
 	Shot3,
-	Special7
+	Special7,
+	Special8,
+	Special9,
+	Special10,
+	Special11,
+	Special12,
+	Special13,
+	Passive3,
+	Passive4
 };
 
 public class SkillSystem : MonoBehaviour
@@ -109,6 +117,10 @@ public class SkillSystem : MonoBehaviour
 		{
 			return skills[(int)SkillType.Shot1];
 		}
+		else if (type == SkillType.Shot3)
+		{
+			return skills[(int)SkillType.Shot2];
+		}
 		else if (type == SkillType.Special2)
 		{
 			return skills[(int)SkillType.Special1];
@@ -120,6 +132,25 @@ public class SkillSystem : MonoBehaviour
 		else if (type == SkillType.Special6)
 		{
 			return skills[(int)SkillType.Special5];
+		}else if (type == SkillType.Special7)
+		{
+			return skills[(int)SkillType.Special2];
+		}
+		else if (type == SkillType.Special9)
+		{
+			return skills[(int)SkillType.Special8];
+		}
+		else if (type == SkillType.Special10)
+		{
+			return skills[(int)SkillType.Special9];
+		}
+		else if (type == SkillType.Special12)
+		{
+			return skills[(int)SkillType.Special11];
+		}
+		else if (type == SkillType.Special13)
+		{
+			return skills[(int)SkillType.Special12];
 		}
 		else if (type == SkillType.Junior4)
 		{
