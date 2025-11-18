@@ -129,7 +129,7 @@
           "spawnPosition": { "x": 9, "y": -3 }
         },
         {
-          "prefabName": "shot2",
+          "prefabName": "shot",
           "spawnTime": 14.0,
           "spawnPosition": { "x": 9, "y": -2 }
         },
@@ -161,7 +161,7 @@
         {
           "prefabName": "taret",
           "spawnTime": 20.0,
-          "spawnPosition": { "x": 9, "y": 0 }
+          "spawnPosition": { "x": 8, "y": 0 }
         },
         {
           "prefabName": "tossin",
@@ -320,7 +320,7 @@
         {
           "prefabName": "taret",
           "spawnTime": 40.0,
-          "spawnPosition": { "x": 9, "y": 1 }
+          "spawnPosition": { "x": 8, "y": 1 }
         },
         {
           "prefabName": "bonus",
@@ -380,7 +380,7 @@
         {
           "prefabName": "taret",
           "spawnTime": 50.0,
-          "spawnPosition": { "x": 9, "y": 4 }
+          "spawnPosition": { "x": 8, "y": 4 }
         },
         {
           "prefabName": "sin2",
