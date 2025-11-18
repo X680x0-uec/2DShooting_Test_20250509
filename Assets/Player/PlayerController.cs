@@ -939,6 +939,7 @@ public class PlayerController : MonoBehaviour
     {
         SoundManager.Instance.PlaySound(activateBarrierSound);
         IsJustShielding = false;
+        isDamagedThisFrame = true;
 
         float barrierDuration = 1.5f; //コンポーネント取得失敗時用のデフォルト値
         JustShieldBarrier barrierScript = justShieldPrefab.GetComponent<JustShieldBarrier>();

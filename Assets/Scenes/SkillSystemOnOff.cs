@@ -38,6 +38,16 @@ public class SkillSystemOnOff : MonoBehaviour {
 			skillSystem.SetActive(!skillSystem.activeSelf);
 			EventSystem.current.SetSelectedGameObject(firstSelect);
 		}
+		else if (Input.GetButtonDown("Cancel") && opencount%2 == 1 && !PlayerController.IsGameOverOrGameClear)
+		{
+			Time.timeScale = 1f;
+			IsCheckingSkill = false;
+			opencount += 1;
+
+			skillSystem.GetComponent<SkillSystem>().SetText();
+			skillSystem.SetActive(!skillSystem.activeSelf);
+			EventSystem.current.SetSelectedGameObject(firstSelect);
+		}
 	}
 
 	public void CloseSkillPanel()

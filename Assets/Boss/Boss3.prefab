@@ -187,7 +187,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossHP: {fileID: -3962848656716512075}
   bossEnter: {fileID: 0}
-  waves: []
+  waves:
+  - attackPatterns:
+    - {fileID: 2249711459387770881}
+    nextWaveThreshold: 0.9
+  - attackPatterns:
+    - {fileID: 351480521518702844}
+    nextWaveThreshold: 0.7
+  - attackPatterns:
+    - {fileID: 2249711459387770881}
+    - {fileID: -1562066024919812294}
+    nextWaveThreshold: 0.5
+  - attackPatterns:
+    - {fileID: -5214282866624631207}
+    - {fileID: -728042810487549454}
+    nextWaveThreshold: 0.3
+  - attackPatterns:
+    - {fileID: -2765566280978167245}
+    nextWaveThreshold: 0
   attackConfig: {fileID: 0}
   waveTransitionDelay: 3
   postInvincibleDelay: 0.5
@@ -221,7 +238,7 @@ MonoBehaviour:
   explosionPrefab: {fileID: 677315910630919818, guid: 1340cb8715f91ec4491bb25479233285, type: 3}
   explosionSound: {fileID: 8300000, guid: ec40ec3668614da4da4be0c6d0b29a82, type: 3}
   skillSystem: {fileID: 0}
-  maxHP: 3000
+  maxHP: 5000
   pointValue: 2000
   bossScore: 200000
 --- !u!114 &8479171156770897323
@@ -281,7 +298,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4336462115506528984, guid: 391fbdd95b674f74ca11f19b1fe03b82, type: 3}
   fireInterval: 0.5
   bulletSpeed: 5
-  wayCount: 32
+  wayCount: 48
   fireOffsets:
   - {x: 0, y: -1.5}
   - {x: 0, y: 1.5}
@@ -298,7 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounceBulletPrefab: {fileID: 4336462115506528984, guid: 40940d232a751ed4aa25675625709137, type: 3}
-  fireInterval: 0.7
+  fireInterval: 0.5
   bulletSpeed: 7
 --- !u!114 &-1562066024919812294
 MonoBehaviour:
@@ -345,8 +362,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4336462115506528984, guid: fb1b67716b6762b4eb348d45e9ca6e80, type: 3}
-  fireInterval: 0.1
-  bulletSpeed: 5
+  fireInterval: 0.15
+  bulletSpeed: 4
   fireOffset: {x: -3, y: -0.3}
   spreadAngle: 7
 --- !u!114 &-2765566280978167245
