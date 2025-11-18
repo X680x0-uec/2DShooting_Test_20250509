@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5136530818975095110}
   - component: {fileID: 418083069088061884}
   - component: {fileID: 1202162312264260218}
+  - component: {fileID: 3015445863689395409}
   - component: {fileID: 1333853148750643159}
-  - component: {fileID: 464828010888321612}
   - component: {fileID: -3962848656716512075}
+  - component: {fileID: 8479171156770897323}
   - component: {fileID: 2249711459387770881}
   - component: {fileID: 351480521518702844}
   - component: {fileID: -1562066024919812294}
@@ -172,6 +173,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &3015445863689395409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325983007289264143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ec974b1885667b4aad8d1c2b98fd423, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossHP: {fileID: -3962848656716512075}
+  bossEnter: {fileID: 0}
+  waves: []
+  attackConfig: {fileID: 0}
+  waveTransitionDelay: 3
+  postInvincibleDelay: 0.5
+  roarSE: {fileID: 8300000, guid: 26c91567d50f2a74f8018b47fcebc168, type: 3}
 --- !u!114 &1333853148750643159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,29 +206,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 1
   frequency: 1
---- !u!114 &464828010888321612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1325983007289264143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8514cb3574e151a499084afd257d9532, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bossHP: {fileID: -3962848656716512075}
-  waves:
-  - attackPatterns:
-    - {fileID: 351480521518702844}
-    - {fileID: -1562066024919812294}
-    nextWaveThreshold: 0.9
-  - attackPatterns:
-    - {fileID: 351480521518702844}
-    nextWaveThreshold: 0.8
-  waveTransitionDelay: 3
-  postInvincibleDelay: 0.5
 --- !u!114 &-3962848656716512075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,8 +222,50 @@ MonoBehaviour:
   explosionSound: {fileID: 8300000, guid: ec40ec3668614da4da4be0c6d0b29a82, type: 3}
   skillSystem: {fileID: 0}
   maxHP: 3000
-  pointValue: 1000
+  pointValue: 2000
   bossScore: 200000
+--- !u!114 &8479171156770897323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325983007289264143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5297b334dc8da9146afc076820053f7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterOffsetViewportX: 0.2
+  enterDuration: 1.2
+  waitAfterArrive: 0.15
+  useCurve: 0
+  moveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  smoothDampTime: 0.25
+  bossHP: {fileID: 0}
 --- !u!114 &2249711459387770881
 MonoBehaviour:
   m_ObjectHideFlags: 0

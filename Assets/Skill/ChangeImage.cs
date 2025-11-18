@@ -8,12 +8,17 @@ public Sprite _off; // 表示する画像2
 private bool isOn = true;
 
 public SkillSystem skillsystem;
+private SkillParam skillParam;
 
 public SkillType type;
 
-[SerializeField]
 private int spendPoint;
 
+    void Start()
+    {
+        skillParam = GetComponentInParent<SkillParam>();
+        spendPoint = skillParam.spendPoint;
+    }
 
     public void ChangeImageSprite()
     {

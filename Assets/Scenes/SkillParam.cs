@@ -15,7 +15,7 @@ public class SkillParam : MonoBehaviour {
     private SkillType type;
     //　このスキルを覚える為に必要なスキルポイント
     [SerializeField]
-    private int spendPoint;
+    public int spendPoint;
     //　スキルのタイトル
     [SerializeField]
     private string skillTitle;

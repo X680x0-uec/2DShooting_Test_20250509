@@ -134,4 +134,26 @@ public class RankingScreenController : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         isRegistrationComplete = true;
     }
+
+    public void ShowRankingViewOnly()
+    {
+        gameObject.SetActive(true);
+
+        if (yourScorePanel != null)
+        {
+            yourScorePanel.gameObject.SetActive(false);
+        }
+        if (nameInputController != null)
+        {
+            nameInputController.gameObject.SetActive(false);
+        }
+        if (currentNameText != null)
+        {
+            currentNameText.gameObject.SetActive(false);
+        }
+
+        DisplayRanking();
+
+        isRegistrationComplete = true;
+    }
 }
