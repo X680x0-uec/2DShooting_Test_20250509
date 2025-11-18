@@ -5,9 +5,18 @@ public class SkillController : MonoBehaviour
     public AudioClip moveSound;
     public SkillNode startNode;
     private SkillNode currentNode;
+    [Header("対象ノード")]
+    public SkillNode openRightNode;
+    public SkillNode closeRightNode;
+    public SkillNode openLeftNode;
+    public SkillNode closeLeftNode;
+    [Header("対象パネル")]
+    public GameObject rightPanel;
+    public GameObject leftPanel;
 
     private bool isHorizontalAxisInUse = false;
     private bool isVerticalAxisInUse = false;
+    
 
     void Start()
     {
@@ -68,6 +77,7 @@ public class SkillController : MonoBehaviour
         if (dir != Vector2Int.zero)
         {
             SkillNode next = currentNode.GetNextNode(dir);
+            SwitchNode(next);
             if (next != null)
             {
                 currentNode.Deselect();
@@ -80,6 +90,36 @@ public class SkillController : MonoBehaviour
         if (Input.GetButtonDown("Submit"))
         {
             currentNode.Press();
+        }
+    }
+    private void SwitchNode(SkillNode next)
+    {
+        if (next == null || next == currentNode) return;
+        currentNode.Deselect();
+        currentNode = next;
+        currentNode.Select();
+
+        if (rightPanel != null)
+        {
+            if (currentNode == openRightNode)
+            {
+                rightPanel.SetActive(true);
+            }
+            else if (currentNode == closeRightNode)
+            {
+                rightPanel.SetActive(false);
+            }
+        }
+        if (leftPanel != null)
+        {
+            if (currentNode == openLeftNode)
+            {
+                leftPanel.SetActive(true);
+            }
+            else if (currentNode == closeLeftNode)
+            {
+                leftPanel.SetActive(false);
+            }
         }
     }
 }
