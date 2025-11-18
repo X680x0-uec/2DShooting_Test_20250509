@@ -36,7 +36,7 @@
         {
           "prefabName": "taret2",
           "spawnTime": 4.0,
-          "spawnPosition": { "x": 9, "y": 0 }
+          "spawnPosition": { "x": 8, "y": 0 }
         },
         {
           "prefabName": "shot2",
@@ -127,12 +127,12 @@
         {
           "prefabName": "taret2",
           "spawnTime": 13.0,
-          "spawnPosition": { "x": 9, "y": 1 }
+          "spawnPosition": { "x": 8, "y": 1 }
         },
         {
           "prefabName": "taret2",
           "spawnTime": 13.0,
-          "spawnPosition": { "x": 9, "y": 0 }
+          "spawnPosition": { "x": 8, "y": 0 }
         },
         {
           "prefabName": "tossin2",
@@ -297,7 +297,7 @@
         {
           "prefabName": "taret2",
           "spawnTime": 35.0,
-          "spawnPosition": { "x": 9, "y": 0 }
+          "spawnPosition": { "x": 8, "y": 0 }
         },
         {
           "prefabName": "homing",
@@ -327,12 +327,12 @@
         {
           "prefabName": "taret2",
           "spawnTime": 40.0,
-          "spawnPosition": { "x": 9, "y": 1 }
+          "spawnPosition": { "x": 8, "y": 1 }
         },
         {
           "prefabName": "taret2",
           "spawnTime": 40.0,
-          "spawnPosition": { "x": 9, "y": -1 }
+          "spawnPosition": { "x": 8, "y": -1 }
         },
         {
           "prefabName": "homing",
@@ -352,7 +352,7 @@
         {
           "prefabName": "taret2",
           "spawnTime": 45.0,
-          "spawnPosition": { "x": 9, "y": -2 }
+          "spawnPosition": { "x": 8, "y": -2 }
         },
         {
           "prefabName": "spiral",
@@ -417,7 +417,7 @@
         {
           "prefabName": "taret2",
           "spawnTime": 50.0,
-          "spawnPosition": { "x": 9, "y": 2 }
+          "spawnPosition": { "x": 8, "y": 2 }
         },
         {
           "prefabName": "spiral",
