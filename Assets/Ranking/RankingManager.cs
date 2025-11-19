@@ -39,12 +39,11 @@ public class RankingManager : MonoBehaviour
 
             rankingData.scores = new List<ScoreEntry>
         {
-            new ScoreEntry { playerName = "PLAYER1", score = 500000, dateTime = "2025/11/19 00:00", progress = "SAMPLE" },
-            new ScoreEntry { playerName = "PLAYER2", score = 400000, dateTime = "2025/11/19 00:00", progress = "SAMPLE" },
-            new ScoreEntry { playerName = "PLAYER3", score = 300000, dateTime = "2025/11/19 00:00", progress = "SAMPLE" },
-            new ScoreEntry { playerName = "PLAYER4", score = 200000, dateTime = "2025/11/19 00:00", progress = "SAMPLE" },
-            new ScoreEntry { playerName = "PLAYER5", score = 100000, dateTime = "2025/11/19 00:00", progress = "SAMPLE" },
-            new ScoreEntry { playerName = "PLAYER6", score = 50000, dateTime = "2025/11/19 00:00", progress = "SAMPLE" }
+            new ScoreEntry { playerName = "28", score = 3678729, dateTime = "2025/11/19 21:03", progress = "NO SP CLEAR"},
+            new ScoreEntry { playerName = "+", score = 401359, dateTime = "2025/11/19 21:10", progress = "DIED IN STAGE3" },
+            new ScoreEntry { playerName = "SAMPLE1", score = 300000, dateTime = "2025/11/19 00:00", progress = "SAMPLE" },
+            new ScoreEntry { playerName = "SAMPLE2", score = 200000, dateTime = "2025/11/19 00:00", progress = "SAMPLE" },
+            new ScoreEntry { playerName = "SAMPLE3", score = 100000, dateTime = "2025/11/19 00:00", progress = "SAMPLE" }
         };
 
             SaveRanking();
