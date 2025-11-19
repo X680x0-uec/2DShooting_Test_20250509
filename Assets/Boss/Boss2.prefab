@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 1930083074426445842}
   - component: {fileID: 8432658183390166747}
   - component: {fileID: 6889324970288531806}
-  - component: {fileID: 8420850544688162056}
   - component: {fileID: -1158501676343546573}
   m_Layer: 0
   m_Name: Boss2
@@ -266,8 +265,8 @@ MonoBehaviour:
   explosionPrefab: {fileID: 677315910630919818, guid: 1340cb8715f91ec4491bb25479233285, type: 3}
   explosionSound: {fileID: 8300000, guid: ec40ec3668614da4da4be0c6d0b29a82, type: 3}
   skillSystem: {fileID: 0}
-  maxHP: 2000
-  pointValue: 100
+  maxHP: 2500
+  pointValue: 1000
   bossScore: 200000
 --- !u!114 &6889324970288531806
 MonoBehaviour:
@@ -311,24 +310,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   smoothDampTime: 0.25
   bossHP: {fileID: 0}
---- !u!114 &8420850544688162056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2203836821438376128}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb48747a2c04b0747a3ce3bf8428e273, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  explosionPrefab: {fileID: 0}
-  explosionSound: {fileID: 0}
-  skillSystem: {fileID: 0}
-  maxHP: 10000
-  pointValue: 100
-  bossScore: 200000
 --- !u!114 &-1158501676343546573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +340,7 @@ MonoBehaviour:
   attackConfig: {fileID: 11400000, guid: 32cb311e6792fc24c9277b673ee725cb, type: 2}
   waveTransitionDelay: 3
   postInvincibleDelay: 0.5
-  roarSE: {fileID: 0}
+  roarSE: {fileID: 8300000, guid: 26c91567d50f2a74f8018b47fcebc168, type: 3}
 --- !u!1 &7055710196566511007
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +366,7 @@ Transform:
   m_GameObject: {fileID: 7055710196566511007}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
+  m_LocalPosition: {x: -0.6, y: -0.05, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

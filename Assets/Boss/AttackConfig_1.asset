@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154404f74725f1e459a58eb533623b91, type: 3}
   m_Name: AttackConfig_1
   m_EditorClassIdentifier: 
-  beamFireInterval: 1.5
+  beamFireInterval: 1
   beamBulletSpeed: 8
   beamFireYRange: 4
   splitFireInterval: 5

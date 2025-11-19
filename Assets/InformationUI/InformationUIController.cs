@@ -164,6 +164,8 @@ public class InformationUIController : MonoBehaviour
         }
         clearAnnounceText.text = sb.ToString();
 
+        yield return new WaitForSecondsRealtime(clearAnnounceShowInterval);
+
         //ノースペシャルスキルボーナス
         if (isNoSP)
         {
@@ -179,9 +181,17 @@ public class InformationUIController : MonoBehaviour
         yield return new WaitForSecondsRealtime(clearAnnounceShowInterval * 2);
 
         clearAnnounceText.gameObject.SetActive(false);
-        if (isNoHit)
+        if (isNoHit && isNoSP)
+        {
+            rankingScreen.ShowScreen(playerScore, "NO HIT&SP CLEAR");
+        }
+        else if (isNoHit)
         {
             rankingScreen.ShowScreen(playerScore, "NO HIT CLEAR");
+        }
+        else if (isNoSP)
+        {
+            rankingScreen.ShowScreen(playerScore, "NO SP CLEAR");
         }
         else
         {

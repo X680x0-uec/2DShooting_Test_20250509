@@ -242,9 +242,9 @@ MonoBehaviour:
   explosionPrefab: {fileID: 677315910630919818, guid: 1340cb8715f91ec4491bb25479233285, type: 3}
   explosionSound: {fileID: 8300000, guid: ec40ec3668614da4da4be0c6d0b29a82, type: 3}
   skillSystem: {fileID: 0}
-  maxHP: 5000
+  maxHP: 10000
   pointValue: 2000
-  bossScore: 200000
+  bossScore: 300000
 --- !u!114 &8479171156770897323
 MonoBehaviour:
   m_ObjectHideFlags: 0
