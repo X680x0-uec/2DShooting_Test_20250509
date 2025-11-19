@@ -69,11 +69,6 @@
           "spawnPosition": { "x": 9, "y": -2 }
         },
         {
-          "prefabName": "shot2",
-          "spawnTime": 7.0,
-          "spawnPosition": { "x": 9, "y": -3 }
-        },
-        {
           "prefabName": "meteor",
           "spawnTime": 9.0,
           "spawnPosition": { "x": 9, "y": 2 }
@@ -205,7 +200,7 @@
         {
           "prefabName": "homing",
           "spawnTime": 7.0,
-          "spawnPosition": { "x": 9, "y": -3 }
+          "spawnPosition": { "x": 9, "y": -2 }
         },
         {
           "prefabName": "meteor",
@@ -323,9 +318,19 @@
           "spawnPosition": { "x": 8, "y": 1 }
         },
         {
+          "prefabName": "homing",
+          "spawnTime": 41.0,
+          "spawnPosition": { "x": 9, "y": -1 }
+        },
+        {
+          "prefabName": "homing",
+          "spawnTime": 41.0,
+          "spawnPosition": { "x": 9, "y": 1 }
+        },
+        {
           "prefabName": "bonus",
           "spawnTime": 42.0,
-          "spawnPosition": { "x": 9, "y": 5 }
+          "spawnPosition": { "x": 7, "y": 5 }
         },
         {
           "prefabName": "tossin2",
@@ -343,12 +348,12 @@
           "spawnPosition": { "x": 9, "y": -2 }
         },
         {
-          "prefabName": "meteor",
+          "prefabName": "shot2",
           "spawnTime": 43.0,
-          "spawnPosition": { "x": 9, "y": 4 }
+          "spawnPosition": { "x": 9, "y": 3 }
         },
         {
-          "prefabName": "meteor",
+          "prefabName": "shot2",
           "spawnTime": 43.0,
           "spawnPosition": { "x": 9, "y": 1 }
         },
@@ -415,7 +420,7 @@
         {
           "prefabName": "shot2",
           "spawnTime": 52.0,
-          "spawnPosition": { "x": 9, "y": -3 }
+          "spawnPosition": { "x": 9, "y": -1 }
         },
         {
           "prefabName": "tossin2",

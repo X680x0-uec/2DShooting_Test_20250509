@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4265606685567738152}
   - component: {fileID: 5305143867196396525}
   m_Layer: 0
-  m_Name: taret 1
+  m_Name: taret 2
   m_TagString: Zako
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7189023727692188884, guid: 276fb175047c9674aa791d94822e68ef, type: 3}
   bulletSpeed: 5
-  fireInterval: 0.5
+  fireInterval: 0.3
   bulletLifetime: 5
   moveAmplitude: 3
-  moveSpeed: 2
+  moveSpeed: 3

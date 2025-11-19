@@ -186,6 +186,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7189023727692188884, guid: 276fb175047c9674aa791d94822e68ef, type: 3}
-  shootInterval: 1
+  shootInterval: 0.5
   bulletAngle: 180
   moveSpeed: 2
