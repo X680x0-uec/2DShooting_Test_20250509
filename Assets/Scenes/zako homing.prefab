@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2298914d410040848a96093773857247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 2
+  maxHP: 4
   pointValue: 50
   scorePopupPrefab: {fileID: 4604594199771147335, guid: ee4c5f22f2751f942bb690f0d191654b, type: 3}
   uiCanvas: {fileID: 0}
