@@ -352,7 +352,7 @@ MonoBehaviour:
   curvingBulletPrefab: {fileID: 4336462115506528984, guid: 091690695c97b7a4fa01b8b33eb5b64a, type: 3}
   fireInterval: 1
   bulletSpeed: 7
-  wayCount: 32
+  wayCount: 40
 --- !u!114 &-728042810487549454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4336462115506528984, guid: fb1b67716b6762b4eb348d45e9ca6e80, type: 3}
-  fireInterval: 0.15
+  fireInterval: 0.1
   bulletSpeed: 4
   fireOffset: {x: -3, y: -0.3}
   spreadAngle: 7

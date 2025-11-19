@@ -136,5 +136,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61005eea0cd934143ad9f23a324cb3fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debrisSpawnerPrefab: {fileID: 7503992474654738393, guid: 8ea62176f3c74c94bb056476bf55f52d, type: 3}
   blastRadius: 4
-  damage: 100
+  damageToDeal: 0

@@ -11,6 +11,7 @@ public class TitleManager : MonoBehaviour
     public RankingScreenController rankingScreen;
     public GameObject backgroundField;
     public GameObject blackImageForRankingScreen;
+    public ManualController manualController;
 
     [Header("効果音")]
     public AudioClip titleCursorSound;
@@ -90,6 +91,22 @@ public class TitleManager : MonoBehaviour
                 rankingScreen.ShowRankingViewOnly();
                 SoundManager.Instance.PlaySound(showRankingSound);
             }
+        }
+    }
+
+    public void OnHowToPlayButton()
+    {
+        if (isTitleAnimationFinished)
+        {
+            if (backgroundField != null)
+        {
+            backgroundField.SetActive(false);
+        }
+
+        if (manualController != null)
+        {
+            manualController.gameObject.SetActive(true);
+        }
         }
     }
 }

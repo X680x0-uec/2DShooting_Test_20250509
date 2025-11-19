@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour
         skillEnergyCosts = new Dictionary<SpecialSkillType, int>();
         skillEnergyCosts.Add(SpecialSkillType.Empty, 0);
         skillEnergyCosts.Add(SpecialSkillType.Laser, 10);
-        skillEnergyCosts.Add(SpecialSkillType.Vanish, 6);
+        skillEnergyCosts.Add(SpecialSkillType.Vanish, 5);
         skillEnergyCosts.Add(SpecialSkillType.Invincible, 15);
         skillEnergyCosts.Add(SpecialSkillType.JustShield, 2);
         skillEnergyCosts.Add(SpecialSkillType.Bomb, -1);

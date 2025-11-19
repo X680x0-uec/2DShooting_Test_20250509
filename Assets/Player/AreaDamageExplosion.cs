@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AreaDamageExplosion : MonoBehaviour
 {
+    public GameObject debrisSpawnerPrefab;
     public float blastRadius = 3f;
     public float damageToDeal = 0f;
 
@@ -31,6 +32,11 @@ public class AreaDamageExplosion : MonoBehaviour
                 {
                     bossHP.TakeDamage(damageToDeal);
                 }
+            }
+            else if (hit.CompareTag("EnemyBullet"))
+            {
+                Instantiate(debrisSpawnerPrefab, hit.transform.position, Quaternion.identity);
+                Destroy(hit.gameObject);
             }
         }
     }
