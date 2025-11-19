@@ -21,7 +21,8 @@ public class InformationUIController : MonoBehaviour
     public float clearAnnounceShowInterval = 1.2f;
     public int clearBonusScore = 1000000;
     public float skillPointBonusMultiplier = 0.0125f;
-    public int noHitBonusScore = 5000000;
+    public int noHitBonusScore = 3000000;
+    public int noSPBonusScore = 2000000;
 
     [Header("ライフ")]
     public GameObject lifeIconPrefab;
@@ -121,17 +122,17 @@ public class InformationUIController : MonoBehaviour
         stageTextCoroutine = null;
     }
 
-    public void ShowClearAnnounce(bool isNoHit)
+    public void ShowClearAnnounce(bool isNoHit, bool isNoSP)
     {
         if (clearAnnounceText == null)
         {
             return;
         }
 
-        StartCoroutine(ClearAnnounceCoroutine(isNoHit));
+        StartCoroutine(ClearAnnounceCoroutine(isNoHit, isNoSP));
     }
 
-    private IEnumerator ClearAnnounceCoroutine(bool isNoHit)
+    private IEnumerator ClearAnnounceCoroutine(bool isNoHit, bool isNoSP)
     {
         clearAnnounceText.gameObject.SetActive(true);
         StringBuilder sb = new StringBuilder();
@@ -160,6 +161,18 @@ public class InformationUIController : MonoBehaviour
         else
         {
             sb.AppendLine("NO HIT BONUS:\n+0");
+        }
+        clearAnnounceText.text = sb.ToString();
+
+        //ノースペシャルスキルボーナス
+        if (isNoSP)
+        {
+            sb.AppendLine($"NO SP BONUS:\n+{noSPBonusScore}");
+            UpdateScoreDisplay(noSPBonusScore);
+        }
+        else
+        {
+            sb.AppendLine("NO SP BONUS:\n+0");
         }
         clearAnnounceText.text = sb.ToString();
 

@@ -33,11 +33,11 @@ public class SkillController : MonoBehaviour
 
         if (!isHorizontalAxisInUse && x != 0)
         {
-            if (x > 0.5f)
+            if (x > 0.001f)
             {
                 dir = Vector2Int.right;
             }
-            else if (x < -0.5f)
+            else if (x < -0.001f)
             {
                 dir = Vector2Int.left;
             }
@@ -51,11 +51,11 @@ public class SkillController : MonoBehaviour
 
         if (!isVerticalAxisInUse && y != 0)
         {
-            if (y > 0.5f)
+            if (y > 0.001f)
             {
                 dir = Vector2Int.up;
             }
-            else if (y < -0.5f)
+            else if (y < -0.001f)
             {
                 dir = Vector2Int.down;
             }

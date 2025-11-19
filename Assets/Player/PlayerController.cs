@@ -113,6 +113,7 @@ public class PlayerController : MonoBehaviour
     private bool isControllLocked = false;
     public float controlLockDuration = 0.2f; //被弾時操作不能時間の長さ
     private bool isNoHit = true;
+    private bool isNoSP = true;
     private bool isDamagedThisFrame = false;
 
     [Header("特殊スキル用")]
@@ -668,6 +669,10 @@ public class PlayerController : MonoBehaviour
             }
             
             isUsingSpecialSkill = true;
+            if (isNoSP)
+            {
+                isNoSP = false;
+            }
             if (currentSkill == SpecialSkillType.Bomb)
             {
                 Bomb(specialSkillEnergy);
@@ -683,6 +688,10 @@ public class PlayerController : MonoBehaviour
                 StopCoroutine(energyCountUpCoroutine);
             }
             isUsingSpecialSkill = true;
+            if (isNoSP)
+            {
+                isNoSP = false;
+            }
             specialSkillEnergy -= cost;
             InformationUIController.Instance.UpdateEnergyDisplay(specialSkillEnergy, cost);
 
@@ -1075,7 +1084,7 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 0;
-        InformationUIController.Instance.ShowClearAnnounce(isNoHit);
+        InformationUIController.Instance.ShowClearAnnounce(isNoHit, isNoSP);
     }
 
     private void ChangeStage()
