@@ -109,4 +109,16 @@ public class TitleManager : MonoBehaviour
         }
         }
     }
+
+    public void OnQuitButton()
+    {
+        if (isTitleAnimationFinished)
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
+        }
+    }
 }
