@@ -5,10 +5,9 @@ using UnityEngine;
 public class BounceBurstBullet : MonoBehaviour
 {
     [SerializeField] private GameObject shrapnelPrefab;
-    [SerializeField] private int shrapnelCount = 16;
+    [SerializeField] private int wayCount = 16;
 
-    [SerializeField] private float minBurstSpeed = 2f;
-    [SerializeField] private float maxBurstSpeed = 5f;
+    [SerializeField] private float bulletSpeed = 2f;
 
     [SerializeField] private float uiAreaHeight = 2f;
     private Vector2 screenBounds;
@@ -42,22 +41,23 @@ public class BounceBurstBullet : MonoBehaviour
             return;
         }
 
-        for (int i = 0; i < shrapnelCount; i++)
-        {
-            float randomAngle = Random.Range(0f, 360f);
-            Vector2 direction = new Vector2(
-                Mathf.Cos(randomAngle * Mathf.Deg2Rad),
-                Mathf.Sin(randomAngle * Mathf.Deg2Rad)
-            );
+        float randomAngle = Random.Range(0f, 360f);
+        float angleStep = 360f / wayCount;
 
-            float randomSpeed = Random.Range(minBurstSpeed, maxBurstSpeed);
+        for (int i = 0; i < wayCount; i++)
+        {
+            float currentAngle = randomAngle + (angleStep * i);
+            Vector2 direction = new Vector2(
+                Mathf.Cos(currentAngle * Mathf.Deg2Rad),
+                Mathf.Sin(currentAngle * Mathf.Deg2Rad)
+            );
 
             GameObject shrapnel = Instantiate(shrapnelPrefab, transform.position, Quaternion.identity);
             
             Rigidbody2D rb = shrapnel.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.linearVelocity = direction * randomSpeed;
+                rb.linearVelocity = direction * bulletSpeed;
             }
         }
 
