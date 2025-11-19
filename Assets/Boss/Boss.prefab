@@ -263,7 +263,7 @@ MonoBehaviour:
     - {fileID: 2384978534018410308}
     - {fileID: 5395264677763948492}
     nextWaveThreshold: 0
-  attackConfig: {fileID: 11400000, guid: 7c510fa73ab14f0438f39e741c722d4e, type: 2}
+  attackConfig: {fileID: 11400000, guid: 32cb311e6792fc24c9277b673ee725cb, type: 2}
   waveTransitionDelay: 3
   postInvincibleDelay: 0.5
   roarSE: {fileID: 8300000, guid: 26c91567d50f2a74f8018b47fcebc168, type: 3}
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1325983007289264143}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4d0e8de9fb30694ba93d2285a4979fe, type: 3}
   m_Name: 
