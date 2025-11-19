@@ -9,9 +9,11 @@ public class BounceBurstAttack : MonoBehaviour
 
     private Coroutine attackRoutine;
 
-    // 45度方向のベクトル (正規化済み)
+    // 飛ばす方向のベクトル (正規化済み)
     private Vector2[] directions = new Vector2[]
     {
+        new Vector2(-4, 1).normalized,
+        new Vector2(-4, -1).normalized,
         new Vector2(-2, 1).normalized,
         new Vector2(-2, -1).normalized,
     };

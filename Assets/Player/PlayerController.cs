@@ -209,18 +209,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            //任意の処理を割り込ませる用(Pキー)
-            GetSkill("Special", 4, 1);
-            Debug.Log("pressed P");
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            //任意の処理を割り込ませる用(Lキー)
-            GetSkill("Passive", 3, 0);
-            Debug.Log("pressed L");
-        }
         if (isEntering) //登場処理
         {
             Vector3 targetPosition = new Vector3(entryTargetX, transform.position.y, transform.position.z);

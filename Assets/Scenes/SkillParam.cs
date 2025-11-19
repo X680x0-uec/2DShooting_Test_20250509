@@ -50,7 +50,6 @@ public class SkillParam : MonoBehaviour {
 			SoundManager.Instance.PlaySound(getsound);
 			//　スキルを覚えさせる
 			skillSystem.LearnSkill(type, spendPoint);
-			InformationUIController.Instance.UpdateScoreDisplay(spendPoint*2);
  
 			ChangeButtonColor (new Color(0f, 0f, 1f, 1f));
 
