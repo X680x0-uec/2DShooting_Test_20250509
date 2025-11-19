@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154404f74725f1e459a58eb533623b91, type: 3}
   m_Name: AttackConfig_2
   m_EditorClassIdentifier: 
-  beamFireInterval: 0.2
+  beamFireInterval: 1.5
   beamBulletSpeed: 8
-  beamFireYRange: 1
-  splitFireInterval: 2
-  parentChildCount: 6
-  parentChildSpreadAngle: 150
+  beamFireYRange: 4
+  splitFireInterval: 3.5
+  parentChildCount: 5
+  parentChildSpreadAngle: 120
   parentSpeed: 4
   parentDecelerationRate: 2
   parentSplitTime: 3
@@ -25,9 +25,9 @@ MonoBehaviour:
   parentSplitSE: {fileID: 8300000, guid: c95aa3083c1daf047ab133f354ba9237, type: 3}
   childSpeed: 6
   childLifetime: 3
-  sineFireInterval: 0.2
-  sineBulletSpeed: 5
-  sineAmplitude: 1
+  sineFireInterval: 4
+  sineBulletSpeed: 1.5
+  sineAmplitude: 4
   sineFrequency: 2
-  sineFireRangeY: 2
-  sineBulletLifetime: 10
+  sineFireRangeY: 4
+  sineBulletLifetime: 15

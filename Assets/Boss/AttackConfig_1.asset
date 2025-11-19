@@ -25,9 +25,9 @@ MonoBehaviour:
   parentSplitSE: {fileID: 8300000, guid: c95aa3083c1daf047ab133f354ba9237, type: 3}
   childSpeed: 5
   childLifetime: 3
-  sineFireInterval: 2
-  sineBulletSpeed: 3
+  sineFireInterval: 4
+  sineBulletSpeed: 2
   sineAmplitude: 2
-  sineFrequency: 3
+  sineFrequency: 6
   sineFireRangeY: 4
   sineBulletLifetime: 10
