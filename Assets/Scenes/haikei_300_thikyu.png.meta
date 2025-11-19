@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      haikei_300_thikyu_0: -536624806919073338
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

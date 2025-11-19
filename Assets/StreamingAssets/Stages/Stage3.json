@@ -500,7 +500,7 @@
       "boss": {
         "prefabName": "Boss3",
         "spawnTime": 60.0,
-        "spawnPosition": { "x": 8, "y": 0 }
+        "spawnPosition": { "x": 8, "y": 1 }
       }
     }
   ]

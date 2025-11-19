@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0910e59ba1b7aa0438206db602c95355, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  damageInterval: 0.1
+  damage: 3
+  damageInterval: 0.2
   debrisSpawnerPrefab: {fileID: 7503992474654738393, guid: 8ea62176f3c74c94bb056476bf55f52d, type: 3}
 --- !u!95 &-6317648136341364931
 Animator:
