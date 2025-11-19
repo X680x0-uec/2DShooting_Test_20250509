@@ -5,8 +5,8 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class EnemyWaveManager : MonoBehaviour
 {
-    private GameDataJson gameData;       // 現在のステージデータ
-    private int currentStage = 1;        // 1からスタート
+    private GameDataJson gameData;
+    private int currentStage = 1;
     private bool bossStarted = false;
 
     private Coroutine enemyCoroutine;
@@ -15,12 +15,48 @@ public class EnemyWaveManager : MonoBehaviour
     [Header("ステージ切替演出")]
     public float stageClearDelay = 2.0f;
 
+    [Header("BGM設定")]
+    public AudioSource bgmSource;
+    public AudioClip stageBGM;
+    public float loopStartTime = 60f; // 1分地点からループ
+    private bool loopStarted = false; // ループ開始済みか
+
     void Start()
     {
+        PlayStageBGM(); // 最初のステージ開始時は最初から再生
         LoadAndStartStage(currentStage);
     }
 
-    // ステージをロードして開始
+    // ステージ開始用BGM再生
+    void PlayStageBGM()
+    {
+        if (bgmSource == null || stageBGM == null) return;
+
+        bgmSource.Stop();
+        bgmSource.clip = stageBGM;
+        bgmSource.time = 0f;      // ステージ開始は最初から
+        bgmSource.loop = false;
+        bgmSource.Play();
+
+        loopStarted = false; // 新ステージなのでループを再設定
+        StartCoroutine(StartLoopFromTime(loopStartTime));
+    }
+
+    // 曲終了後に1分地点から永遠ループ開始
+    private IEnumerator StartLoopFromTime(float startTime)
+    {
+        if (loopStarted) yield break; // すでにループ開始済みなら何もしない
+        loopStarted = true;
+
+        // 曲の終了まで待機
+        yield return new WaitForSeconds(stageBGM.length - startTime);
+
+        bgmSource.Stop();
+        bgmSource.time = startTime;
+        bgmSource.loop = true; // 永遠ループ
+        bgmSource.Play();
+    }
+
     void LoadAndStartStage(int stageNumber)
     {
         gameData = StageLoader.LoadGameData(stageNumber);
@@ -85,7 +121,6 @@ public class EnemyWaveManager : MonoBehaviour
         if (!bossStarted)
         {
             bossStarted = true;
-
             ClearEnemiesAndBullets();
             StartCoroutine(SpawnBossAddressable(bossData));
         }
@@ -111,11 +146,8 @@ public class EnemyWaveManager : MonoBehaviour
 
     void ClearEnemiesAndBullets()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Zako");
-        foreach (GameObject enemy in enemies) Destroy(enemy);
-
-        GameObject[] bullets = GameObject.FindGameObjectsWithTag("EnemyBullet");
-        foreach (GameObject bullet in bullets) Destroy(bullet);
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Zako")) Destroy(enemy);
+        foreach (GameObject bullet in GameObject.FindGameObjectsWithTag("EnemyBullet")) Destroy(bullet);
 
         Debug.Log("雑魚と弾を消去しました。");
     }
@@ -140,15 +172,16 @@ public class EnemyWaveManager : MonoBehaviour
         yield return new WaitForSeconds(stageClearDelay);
 
         currentStage++;
-        if (currentStage <= 3) // 3ステージまで
+        if (currentStage <= 3)
         {
             Debug.Log($"次のステージへ: {currentStage}");
+            PlayStageBGM(); // 新ステージでは最初から再生
             LoadAndStartStage(currentStage);
         }
         else
         {
             Debug.Log("全ステージクリア！");
-            // ここでゲームクリア画面に遷移する処理を追加可能
+            // ゲームクリア画面へ遷移する処理を追加可能
         }
     }
 }
