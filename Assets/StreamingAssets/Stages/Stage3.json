@@ -255,42 +255,42 @@
           "spawnPosition": { "x": 9, "y": 0 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 32.0,
           "spawnPosition": { "x": 9, "y": -2 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 32.0,
           "spawnPosition": { "x": 9, "y": -1 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 32.0,
           "spawnPosition": { "x": 9, "y": 0 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 32.0,
           "spawnPosition": { "x": 9, "y": 1 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 32.0,
           "spawnPosition": { "x": 9, "y": 2 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 32.0,
           "spawnPosition": { "x": 9, "y": 3 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 32.0,
           "spawnPosition": { "x": 9, "y": 4 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 32.0,
           "spawnPosition": { "x": 9, "y": 5 }
         },
@@ -300,12 +300,12 @@
           "spawnPosition": { "x": 8, "y": 0 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 35.0,
           "spawnPosition": { "x": 9, "y": 2 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 35.0,
           "spawnPosition": { "x": 9, "y": -2 }
         },
@@ -330,17 +330,17 @@
           "spawnPosition": { "x": 8, "y": -1 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 40.0,
           "spawnPosition": { "x": 9, "y": -2 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 40.0,
           "spawnPosition": { "x": 9, "y": 3 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 40.0,
           "spawnPosition": { "x": 9, "y": 1 }
         },
@@ -405,7 +405,7 @@
           "spawnPosition": { "x": 9, "y": -3 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 50.0,
           "spawnPosition": { "x": 9, "y": -2 }
         },
@@ -430,37 +430,37 @@
           "spawnPosition": { "x": 9, "y": -2 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 53.0,
           "spawnPosition": { "x": 9, "y": 3 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 53.0,
           "spawnPosition": { "x": 9, "y": 2 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 53.0,
           "spawnPosition": { "x": 9, "y": -2 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 53.0,
           "spawnPosition": { "x": 9, "y": 1 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 53.0,
           "spawnPosition": { "x": 9, "y": -1 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 54.0,
           "spawnPosition": { "x": 9, "y": 1 }
         },
         {
-          "prefabName": "homing",
+          "prefabName": "homing2",
           "spawnTime": 54.0,
           "spawnPosition": { "x": 9, "y": 0 }
         },
