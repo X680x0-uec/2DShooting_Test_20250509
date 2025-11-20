@@ -6,6 +6,7 @@ public class JustShieldBarrier : MonoBehaviour
     public GameObject debrisSpawnerPrefab;
     public float maxSizeDuration = 1.5f;
     public float shrinkDuration = 0.5f;
+    public float appearingBurstRadius = 0.5f;
 
     private Vector3 originalScale;
     private CircleCollider2D circleCollider;
@@ -21,6 +22,18 @@ public class JustShieldBarrier : MonoBehaviour
         originalColliderRadius = circleCollider.radius;
 
         totalDuration = maxSizeDuration + shrinkDuration;
+
+        //最初に周囲を弾消し
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, appearingBurstRadius);
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.CompareTag("EnemyBullet"))
+            {
+                Instantiate(debrisSpawnerPrefab, hit.transform.position, Quaternion.identity);
+                Destroy(hit.gameObject);
+            }
+        }
     }
 
     void Update()
@@ -61,5 +74,11 @@ public class JustShieldBarrier : MonoBehaviour
     public void ChangeMaxSizeDuration(float duration)
     {
         maxSizeDuration = duration;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, appearingBurstRadius);
     }
 }

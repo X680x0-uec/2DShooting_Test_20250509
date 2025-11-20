@@ -138,4 +138,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debrisSpawnerPrefab: {fileID: 7503992474654738393, guid: 8ea62176f3c74c94bb056476bf55f52d, type: 3}
-  duration: 1.5
+  maxSizeDuration: 1.5
+  shrinkDuration: 0.5
+  appearingBurstRadius: 1.5

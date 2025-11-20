@@ -18,6 +18,13 @@ public class SkillSystemOnOff : MonoBehaviour {
  
 	// Update is called once per frame
 	int opencount = 0;
+
+	void Awake()
+    {
+		//確実にIsCheckingSkillを確実にオフに
+        IsCheckingSkill = false;
+    }
+	
 	void Update () {
 		if (Input.GetButtonDown("OpenSkillPanel") && !PlayerController.IsGameOverOrGameClear)
 		{

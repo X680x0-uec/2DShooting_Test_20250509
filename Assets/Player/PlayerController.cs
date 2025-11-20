@@ -143,6 +143,13 @@ public class PlayerController : MonoBehaviour
     public float focusRegenInterval = 3f;
     private float focusRegenTimer = 0f;
 
+    void Awake()
+    {
+        //ゲームオーバーを解除し、時間を動かす
+        IsGameOverOrGameClear = false;
+        Time.timeScale = 1f;
+    }
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

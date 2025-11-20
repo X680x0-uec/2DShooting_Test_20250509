@@ -20,6 +20,12 @@ public class TitleManager : MonoBehaviour
     private GameObject currentSelectedButton;
     private bool isTitleAnimationFinished = false;
 
+    void Awake()
+    {
+        //時間を確実に動かす
+        Time.timeScale = 1f;
+    }
+    
     void Start()
     {
         cursorImage.gameObject.SetActive(false);
